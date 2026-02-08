@@ -1,0 +1,16 @@
+https://github.com/astral-sh/ruff.git
+https://github.com/astral-sh/uv.git
+https://github.com/cjolowicz/nox-poetry
+https://github.com/dynaconf/dynaconf.git
+https://github.com/pandas-dev/pandas.git
+https://github.com/pola-rs/polars.git
+https://github.com/psf/black.git
+https://github.com/pytest-dev/pytest.git
+https://github.com/python-poetry/poetry.git
+https://github.com/python/mypy.git
+https://github.com/unionai-oss/pandera.git
+https://github.com/wntrblm/nox.git
+
+
+
+

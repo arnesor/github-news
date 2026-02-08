@@ -1,0 +1,70 @@
+[project]
+name = "github-news"
+version = "0.1.0"
+description = "Get release news for a list of monitored GitHub repos."
+readme = "README.md"
+authors = [
+    { name = "Arne Sørli", email = "arnesor@users.noreply.github.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "google-genai>=1.62.0",
+    "httpx>=0.28.1",
+    "python-dotenv>=1.2.1",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.19.1",
+    "ruff>=0.15.0",
+]
+
+[project.scripts]
+github-news = "github_news:main"
+
+
+[tool.ruff]
+force-exclude = true  # Apply excludes to pre-commit
+show-fixes = true
+target-version = "py313"  # Minimum Python version supported
+line-length = 88
+
+[tool.ruff.format]
+docstring-code-format = true
+line-ending = "lf"
+
+
+# Ruff rules may be customized as desired: https://docs.astral.sh/ruff/rules/
+[tool.ruff.lint]
+select = [
+    "A",    # prevent using keywords that clobber python builtins
+    "ANN",  # check type annotations
+    "B",    # bugbear: security warnings
+    "D",    # documentation
+    "E",    # pycodestyle
+    "F",    # pyflakes
+    "ISC",  # implicit string concatenation
+    "I",    # sort imports
+    "UP",   # alert you when better syntax is available in your python version
+    "RUF",  # the ruff developer's own rules
+]
+ignore = [
+    "ANN202", # Don't requiere return type annotation for private functions.
+    "ANN401", # Allow type annotation with type Any.
+    "D100",   # Supress undocumented-public-module. Only doc of public api required.
+    "E501",   # Supress line-too-long warnings: trust black's judgement on this one.
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 15
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.pep8-naming]
+classmethod-decorators = ["classmethod", "validator", "root_validator", "pydantic.validator"]
+
+[build-system]
+requires = ["uv_build>=0.10.0,<0.11.0"]
+build-backend = "uv_build"
+
