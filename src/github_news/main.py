@@ -1,10 +1,11 @@
 import asyncio
-from check_releases import check_updates
+
+from github_news.check_releases import check_updates
 
 
 def main() -> None:
     """Entry point for the nightly monitor."""
-    print("Starting Arneso News GitHub Monitor...")
+    print("Starting GitHub News Monitor...")
     try:
         asyncio.run(check_updates())
     except KeyboardInterrupt:

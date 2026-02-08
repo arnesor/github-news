@@ -1,7 +1,7 @@
+import asyncio
 import csv
 import json
 import os
-import asyncio
 from pathlib import Path
 from typing import Any
 
@@ -9,20 +9,21 @@ import httpx
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
-from discord_client import post_forum_message, tags
 
+from github_news.discord_client import post_forum_message, tags
 
 # Load environment variables
 load_dotenv()
 
 # Configuration
-REPO_LIST_FILE = Path("data/repos_list.csv")
-KNOWN_RELEASES_FILE = Path("data/known_releases.json")
-NIGHTLY_REPORT_FILE = Path("data/nightly_report.md")
+DATA_DIR = Path(__file__).parent.parent.parent / "data"
+REPO_LIST_FILE = DATA_DIR / "repos_list.csv"
+KNOWN_RELEASES_FILE = DATA_DIR / "known_releases.json"
+NIGHTLY_REPORT_FILE = DATA_DIR / "nightly_report.md"
 
-GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
-DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL", "")
 
 if not GITHUB_TOKEN:
     print("Error: GITHUB_TOKEN environment variable is not set.")
@@ -211,11 +212,11 @@ async def check_updates() -> None:
     print(f"Checking {len(repos)} repositories...")
 
     async with httpx.AsyncClient() as http_client:
-        tasks = []
+        tasks: list[Any] = []
         tasks.extend(get_latest_release(http_client, repo) for repo in repos)
         results = await asyncio.gather(*tasks)
 
-        for repo, release in zip(repos, results):
+        for repo, release in zip(repos, results, strict=True):
             if not release:
                 continue
 

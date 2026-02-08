@@ -20,7 +20,7 @@ dev = [
 ]
 
 [project.scripts]
-github-news = "github_news:main"
+github-news = "github_news.main:main"
 
 
 [tool.ruff]

@@ -1,3 +1,5 @@
+from typing import Any
+
 import httpx
 
 tags = {
@@ -24,7 +26,7 @@ async def post_forum_message(
         content: The content of the post.
         applied_tags: Optional list of tag IDs to apply.
     """
-    payload = {"content": content, "thread_name": thread_name}
+    payload: dict[str, Any] = {"content": content, "thread_name": thread_name}
     if applied_tags:
         payload["applied_tags"] = applied_tags
 

@@ -1,12 +1,14 @@
 import os
-from google import genai
+
 from dotenv import load_dotenv
+from google import genai
 
 load_dotenv()
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 
 
-def list_models():
+def list_models() -> None:
+    """List available Gemini models."""
     client = genai.Client(api_key=GEMINI_API_KEY)
     try:
         print("Listing models...")
