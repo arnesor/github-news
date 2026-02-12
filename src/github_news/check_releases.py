@@ -2,6 +2,7 @@ import asyncio
 import csv
 import json
 import os
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -19,7 +20,7 @@ load_dotenv()
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
 REPO_LIST_FILE = DATA_DIR / "repos_list.csv"
 KNOWN_RELEASES_FILE = DATA_DIR / "known_releases.json"
-NIGHTLY_REPORT_FILE = DATA_DIR / "nightly_report.md"
+REPORT_FILE = DATA_DIR / "latest_report.md"
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
@@ -103,15 +104,15 @@ def save_known_releases(data: dict[str, str]) -> None:
 
 
 def save_report(report_content: str) -> None:
-    """Save the nightly report to a markdown file.
+    """Save the report to a markdown file.
 
     Args:
         report_content: The content of the report.
     """
-    NIGHTLY_REPORT_FILE.parent.mkdir(parents=True, exist_ok=True)
-    with NIGHTLY_REPORT_FILE.open("w", encoding="utf-8") as f:
+    REPORT_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with REPORT_FILE.open("w", encoding="utf-8") as f:
         f.write(report_content)
-    print(f"Report saved to {NIGHTLY_REPORT_FILE}")
+    print(f"Report saved to {REPORT_FILE}")
 
 
 async def get_latest_release(
@@ -199,8 +200,21 @@ async def summarize_release(release: dict[str, Any], repo_name: str) -> str:
         return f"{header}\n- Error generating summary: {e}\nPRIORITY: Bugfix"
 
 
+def ensure_data_env() -> None:
+    """Ensures the data directory and state file exist before processing."""
+    if not DATA_DIR.exists():
+        DATA_DIR.mkdir(parents=True)
+        print(f"📁 Created directory: {DATA_DIR}")
+
+    if not KNOWN_RELEASES_FILE.exists():
+        with open(KNOWN_RELEASES_FILE, "w", encoding="utf-8") as f:
+            json.dump({}, f)
+        print(f"📄 Initialized new known_releases file: {KNOWN_RELEASES_FILE}")
+
+
 async def check_updates() -> None:
     """Check for updates and generate a report."""
+    ensure_data_env()
     repos = load_repos()
     known_releases = load_known_releases()
 
@@ -277,7 +291,7 @@ async def check_updates() -> None:
                 print(f"No new release for {repo} (Current: {tag})")
 
     if new_releases_found:
-        report_header = "# Nightly GitHub Pulse Report\n\n"
+        report_header = f"# GitHub New Releases Report {date.today().isoformat()}\n\n"
         full_report = report_header + "\n---\n".join(report_entries)
         save_report(full_report)
     else:
