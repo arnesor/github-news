@@ -10,6 +10,12 @@ import httpx
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+from tenacity import (
+    AsyncRetrying,
+    retry_if_exception,
+    stop_after_attempt,
+    wait_exponential,
+)
 
 from github_news.discord_client import post_forum_message, tags
 
@@ -146,6 +152,8 @@ async def get_latest_release(
 async def summarize_release(release: dict[str, Any], repo_name: str) -> str:
     """Generate a summary of the release using Gemini.
 
+    Handles Gemini API rate limits (429) by retrying with exponential backoff.
+
     Args:
         release: The release data.
         repo_name: The name of the repository.
@@ -187,13 +195,22 @@ async def summarize_release(release: dict[str, Any], repo_name: str) -> str:
     """
 
     try:
-        response = await ai_client.aio.models.generate_content(
-            model="gemini-flash-latest",
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                thinking_config=types.ThinkingConfig(include_thoughts=False)
+        async for attempt in AsyncRetrying(
+            stop=stop_after_attempt(6),
+            wait=wait_exponential(multiplier=15, min=15, max=600),
+            retry=retry_if_exception(
+                lambda e: "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e)
             ),
-        )
+            reraise=True,
+        ):
+            with attempt:
+                response = await ai_client.aio.models.generate_content(
+                    model="gemini-flash-latest",
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        thinking_config=types.ThinkingConfig(include_thoughts=False)
+                    ),
+                )
         return f"{header}\n\n{response.text}\n"
     except Exception as e:
         print(f"Error summarizing {repo_name}: {e}")
