@@ -34,9 +34,9 @@ jobs:
       - name: Run Monitor
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: uv run main.py
+        run: uv run src/github_news/main.py
 
       # 3. Only the state files are committed back to the 'data' branch
       - name: Save State to Data Branch
