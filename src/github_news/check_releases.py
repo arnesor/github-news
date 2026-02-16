@@ -276,6 +276,11 @@ async def check_updates() -> None:
                 tag_id = tags.get(priority.lower(), tags["bugfix"])
                 applied_tags = [tag_id]
 
+                if "bugfix" not in priority.lower():
+                    clean_summary = (
+                        f"@everyone {clean_summary}"  # Add mention to get notifications
+                    )
+
                 report_entries.append(clean_summary)
 
                 # Post to Discord

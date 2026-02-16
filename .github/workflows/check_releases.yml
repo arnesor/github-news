@@ -43,5 +43,5 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
           branch: data
-          commit_message: "database: update known_releases.json"
+          commit_message: "Update latest releases"
           file_pattern: 'data/known_releases.json data/latest_report.md'
