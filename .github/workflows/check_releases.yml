@@ -36,6 +36,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_NOTIFY_USER_ID: ${{ secrets.DISCORD_NOTIFY_USER_ID }}
         run: uv run src/github_news/main.py
 
       # 3. Only the state files are committed back to the 'data' branch

@@ -31,6 +31,7 @@ REPORT_FILE = DATA_DIR / "latest_report.md"
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL", "")
+DISCORD_NOTIFY_USER_ID = os.environ.get("DISCORD_NOTIFY_USER_ID", "")
 
 if not GITHUB_TOKEN:
     print("Error: GITHUB_TOKEN environment variable is not set.")
@@ -276,20 +277,21 @@ async def check_updates() -> None:
                 tag_id = tags.get(priority.lower(), tags["bugfix"])
                 applied_tags = [tag_id]
 
-                if "bugfix" not in priority.lower():
-                    clean_summary = (
-                        f"@everyone {clean_summary}"  # Add mention to get notifications
-                    )
+                notify_user = (
+                    DISCORD_NOTIFY_USER_ID
+                    if "bugfix" not in priority.lower() and DISCORD_NOTIFY_USER_ID
+                    else None
+                )
 
                 report_entries.append(clean_summary)
 
                 # Post to Discord
                 thread_name = f"{repo} {tag}"
                 try:
-                    # Truncate to distinct 1990 chars to be safe for Discord's 2000 limit
+                    # Truncate to distinct 1960 chars to be safe for Discord's 2000 limit
                     discord_content = (
-                        f"{clean_summary[:1990]}..."
-                        if len(clean_summary) > 1990
+                        f"{clean_summary[:1960]}..."
+                        if len(clean_summary) > 1960
                         else clean_summary
                     )
                     await post_forum_message(
@@ -298,6 +300,7 @@ async def check_updates() -> None:
                         thread_name,
                         discord_content,
                         applied_tags,
+                        notify_user_id=notify_user,
                     )
                     print(f"Posted to Discord: {thread_name} [Tag: {priority}]")
 
