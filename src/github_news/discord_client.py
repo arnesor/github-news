@@ -37,8 +37,7 @@ async def post_forum_message(
         payload["applied_tags"] = applied_tags
 
     # Resolve any user mentions so they actually ping
-    user_ids = re.findall(r"<@(\d+)>", discord_content)
-    if user_ids:
+    if user_ids := list(dict.fromkeys(re.findall(r"<@!?(\d+)>", discord_content))):
         payload["allowed_mentions"] = {"users": user_ids}
 
     try:

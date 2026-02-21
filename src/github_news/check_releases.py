@@ -288,10 +288,10 @@ async def check_updates() -> None:
                 # Post to Discord
                 thread_name = f"{repo} {tag}"
                 try:
-                    # Truncate to distinct 1990 chars to be safe for Discord's 2000 limit
+                    # Truncate to distinct 1960 chars to be safe for Discord's 2000 limit
                     discord_content = (
-                        f"{clean_summary[:1990]}..."
-                        if len(clean_summary) > 1990
+                        f"{clean_summary[:1960]}..."
+                        if len(clean_summary) > 1960
                         else clean_summary
                     )
                     await post_forum_message(
