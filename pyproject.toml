@@ -72,3 +72,10 @@ classmethod-decorators = ["classmethod", "validator", "root_validator", "pydanti
 requires = ["uv_build>=0.10.0,<0.11.0"]
 build-backend = "uv_build"
 
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+addopts = "-m 'not integration'"
+markers = [
+    "integration: marks tests that make real network calls (run with '-m integration')",
+]

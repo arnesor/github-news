@@ -1,3 +1,4 @@
+import re
 from typing import Any
 
 import httpx
@@ -16,6 +17,7 @@ async def post_forum_message(
     thread_name: str,
     content: str,
     applied_tags: list[str] | None = None,
+    notify_user_id: str | None = None,
 ) -> None:
     """Post a message to a Discord Forum channel via webhook.
 
@@ -23,12 +25,21 @@ async def post_forum_message(
         client: The httpx AsyncClient.
         webhook_url: The Discord webhook URL.
         thread_name: The title of the new thread.
-        content: The content of the post.
+        content: The content of the post (backend-agnostic, no Discord formatting).
         applied_tags: Optional list of tag IDs to apply.
+        notify_user_id: Optional Discord user ID to mention at the start of the post.
     """
-    payload: dict[str, Any] = {"content": content, "thread_name": thread_name}
+    # Prepend user mention if requested — Discord-specific, kept out of general content
+    discord_content = f"<@{notify_user_id}> {content}" if notify_user_id else content
+
+    payload: dict[str, Any] = {"content": discord_content, "thread_name": thread_name}
     if applied_tags:
         payload["applied_tags"] = applied_tags
+
+    # Resolve any user mentions so they actually ping
+    user_ids = re.findall(r"<@(\d+)>", discord_content)
+    if user_ids:
+        payload["allowed_mentions"] = {"users": user_ids}
 
     try:
         response = await client.post(webhook_url, json=payload)
