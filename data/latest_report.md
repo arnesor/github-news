@@ -1,17 +1,22 @@
-# GitHub New Releases Report 2026-02-20
+# GitHub New Releases Report 2026-02-22
 
-@everyone **[astral-sh/ruff 0.15.2](https://github.com/astral-sh/ruff/releases/tag/0.15.2)**
+**[marimo-team/marimo 0.20.0](https://github.com/marimo-team/marimo/releases/tag/0.20.0)**
+
+# marimo 0.20.0 Release Notes
 
 ### Summary
-Ruff 0.15.2 introduces a massive expansion to the default rule set for users in preview mode, increasing the count from 59 to 412 enabled rules. This release also focuses on parser stability, resolving edge cases in indentation tracking and async context detection.
+marimo 0.20.0 introduces enhanced interactive widgets for scientific computing and deep learning, including reactive Matplotlib plots and editable matrices. It also refines the reactive execution engine with a more predictable `mo.stop` behavior to prevent common dependency-related errors.
 
-### Highlights
-*   **Massive Preview Rule Expansion:** The preview default rule set has been significantly broadened to 412 rules. While mostly a superset of stable defaults, it specifically excludes several `E` and `F` series rules (like `E401`, `E701`, and `F403`) to refine the out-of-the-box experience.
-*   **Parser & Indentation Refinements:** Fixed critical parser issues, including incorrect indentation tracking after line continuations and false syntax errors when encountering match-like annotated assignments.
-*   **Improved Plugin Accuracy:** Multiple bug fixes were deployed for `flake8-async` (context logic), `flake8-bugbear` (lambda false positives), and `pyupgrade` (handling of `typing.io` and `typing.re`).
+### ⭐ Highlights
+*   **Reactive Matplotlib Selections:** `mo.ui.matplotlib` now adds interactive box and lasso selection to scatter plots. Users can select data points directly on the plot and reactively use those selections in downstream cells.
+*   **Editable Matrix & Vector Inputs:** The new `mo.ui.matrix` widget provides a reactive numeric grid for NumPy arrays or nested lists. It supports per-element bounds, symmetric constraints, and custom precision for interactive linear algebra workflows.
+*   **Rich PyTorch Visualization:** PyTorch `nn.Module` instances now render as interactive, collapsible HTML trees. This includes color-coded layer categories, trainable parameter counts, and hover-enabled documentation lookups.
 
-### Breaking Changes
-While this is a patch release, users with **preview mode enabled** will experience a significant increase in linting diagnostics due to the expanded default rule set. If you prefer the previous behavior, you must manually configure your `select` list to `["E4", "E7", "E9", "F"]`.
+### 🚨 Breaking Changes
+*   **`mo.stop` Dependency Logic:** To prevent `NameError` exceptions, marimo now waits for **all** of a cell’s dependencies to be unblocked before execution. Previously, a cell would trigger if only one of multiple stopped branches was unblocked, often leading to errors when variables from other branches were still undefined.
 
-### Priority
-MINOR
+### ✨ Other Key Enhancements
+*   Added Matplotlib SVG output support for crisper visuals.
+*   Masked `getpass.getpass()` input in the notebook UI for better security.
+*   New PDF export option to exclude code blocks.
+*   Preview feature: Initial backend logic for a new Storage Inspector.
