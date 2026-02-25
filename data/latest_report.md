@@ -1,17 +1,16 @@
-# GitHub New Releases Report 2026-02-24
+# GitHub New Releases Report 2026-02-25
 
-**[narwhals-dev/narwhals v2.17.0](https://github.com/narwhals-dev/narwhals/releases/tag/v2.17.0)**
+**[astral-sh/uv 0.10.6](https://github.com/astral-sh/uv/releases/tag/0.10.6)**
 
-## Summary
-Narwhals v2.17.0 introduces enhanced functionality for `Series.scatter` and improves compatibility with key backends like PySpark and DuckDB. The release also includes critical bug fixes for numeric comparisons and SQL-like operations to ensure consistent behavior across dataframes.
+### Summary
+uv 0.10.6 is a targeted patch release focusing on improving the reliability of environment resolution and file system operations. These updates refine how the tool handles conflicting Python version requirements and ensure file integrity during installation on Linux.
 
-## Highlights
-*   **Flexible Scattering:** `Series.scatter` now accepts `Series` objects for both indices and values, enabling more dynamic and idiomatic data updates.
-*   **Expanded Numeric Comparisons:** Added `Decimal` data type support to the `is_close` method for both Series and Expressions, broadening precision-based filtering.
-*   **Ecosystem Alignment:** Resolved compatibility issues with DuckDB 1.5 (`fetch_arrow_table` deprecation) and PySpark to maintain seamless cross-library integration.
+### Highlights
+- **Improved Python Version Selection:** Fixed logic for scripts where `requires-python` metadata conflicted with a local `.python-version` file, ensuring the correct interpreter is used.
+- **Lockfile Normalization:** Enhanced the handling of fork markers within lockfiles to ensure consistent marker normalization.
+- **Linux Reflink Fix:** Resolved an issue where file permissions were not preserved when using reflinks on Linux, maintaining proper security and execution bits.
 
-## Breaking Changes
-None reported in this release.
+### Breaking Changes
+No breaking changes are introduced in this release.
 
-## Priority
-Minor
+### Priority: Bugfix
