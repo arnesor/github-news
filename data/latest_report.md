@@ -1,16 +1,14 @@
-# GitHub New Releases Report 2026-02-25
+# GitHub New Releases Report 2026-02-27
 
-**[astral-sh/uv 0.10.6](https://github.com/astral-sh/uv/releases/tag/0.10.6)**
+**[astral-sh/ruff 0.15.4](https://github.com/astral-sh/ruff/releases/tag/0.15.4)**
 
 ### Summary
-uv 0.10.6 is a targeted patch release focusing on improving the reliability of environment resolution and file system operations. These updates refine how the tool handles conflicting Python version requirements and ensure file integrity during installation on Linux.
+Ruff 0.15.4 is a targeted patch release that resolves a critical panic triggered by the newly introduced `PLR1712` rule. This update ensures stability for users employing type annotation (`ANN`) or docstring (`D`) rules alongside the latest linting additions.
 
 ### Highlights
-- **Improved Python Version Selection:** Fixed logic for scripts where `requires-python` metadata conflicted with a local `.python-version` file, ensuring the correct interpreter is used.
-- **Lockfile Normalization:** Enhanced the handling of fork markers within lockfiles to ensure consistent marker normalization.
-- **Linux Reflink Fix:** Resolved an issue where file permissions were not preserved when using reflinks on Linux, maintaining proper security and execution bits.
+- **Panic Resolution:** Fixed a crash occurring when rule `PLR1712` was enabled in conjunction with rules that analyze definitions (such as the `ANN` and `D` suites).
+- **Pyflakes False Positive:** Resolved an issue in `F821` where names used before `del` in stub files (`.pyi`) were incorrectly flagged.
+- **Documentation Clarity:** Updated guidance on how Ruff detects first-party imports and corrected examples for the `import-heading` rule.
 
 ### Breaking Changes
-No breaking changes are introduced in this release.
-
-### Priority: Bugfix
+None.
