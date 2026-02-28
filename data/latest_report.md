@@ -1,14 +1,16 @@
-# GitHub New Releases Report 2026-02-27
+# GitHub New Releases Report 2026-02-28
 
-**[astral-sh/ruff 0.15.4](https://github.com/astral-sh/ruff/releases/tag/0.15.4)**
+**[astral-sh/uv 0.10.7](https://github.com/astral-sh/uv/releases/tag/0.10.7)**
 
 ### Summary
-Ruff 0.15.4 is a targeted patch release that resolves a critical panic triggered by the newly introduced `PLR1712` rule. This update ensures stability for users employing type annotation (`ANN`) or docstring (`D`) rules alongside the latest linting additions.
+uv 0.10.7 focuses on refining Windows compatibility and improving network diagnostics. It also introduces a secondary distribution channel through release mirroring to increase availability and reliability for global users.
 
 ### Highlights
-- **Panic Resolution:** Fixed a crash occurring when rule `PLR1712` was enabled in conjunction with rules that analyze definitions (such as the `ANN` and `D` suites).
-- **Pyflakes False Positive:** Resolved an issue in `F821` where names used before `del` in stub files (`.pyi`) were incorrectly flagged.
-- **Documentation Clarity:** Updated guidance on how Ruff detects first-party imports and corrected examples for the `import-heading` rule.
+- **Windows Container Support**: Fixed a bug related to junction handling within Windows Containers, ensuring smoother operation for containerized Windows workloads.
+- **Middleware Retry Logging**: Activated logging for internal middleware retries, allowing developers to better diagnose intermittent network issues during package fetching.
+- **Release Mirroring**: uv releases are now uploaded to a mirror, providing an alternative download source and improving resilience against primary registry downtime.
 
 ### Breaking Changes
-None.
+- 🟢 No breaking changes reported in this release.
+
+### Priority
