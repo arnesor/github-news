@@ -1,22 +1,31 @@
-# GitHub New Releases Report 2026-03-07
+# GitHub New Releases Report 2026-03-10
 
-**[astral-sh/uv 0.10.9](https://github.com/astral-sh/uv/releases/tag/0.10.9)**
-- Error generating summary: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+**[duckdb/duckdb v1.5.0](https://github.com/duckdb/duckdb/releases/tag/v1.5.0)**
+
+DuckDB v1.5.0, codenamed "Variegata," introduces a significant leap in system stability and performance, featuring buffer-managed query results and the ability to perform concurrent reads during checkpoints. This release also marks the formalization of the `VARIANT` logical type with full storage support and a complete modernization of the Command Line Interface (CLI).
+
+### Highlights
+
+* **Buffer-Managed Results & High Concurrency:** A new buffer-managed query result system prevents Out-of-Memory (OOM) errors during large data fetches. Furthermore, architectural improvements now allow connections to perform reads concurrently while a background checkpoint is in progress, significantly improving multi-connection availability.
+* **Semi-Structured Data (`VARIANT`):** Comprehensive support for the `VARIANT` type is now integrated, including native storage implementation, automatic "shredding" for Parquet files, and optimizer pushdown for `variant_extract` and casting operations.
+* **CLI & UX Overhaul:** The CLI has been refactored to use the C++ API, introducing modern features like dynamic syntax highlighting, advanced Zsh-style autocomplete, light/dark mode detection, and the new `_` token to query the results of the previous statement.
+
+### Breaking Changes
+
+⚠️ **Geometry & Extensions:** The `GEOMETRY` type has undergone a significant rework including logical type changes and new Coordinate Reference System (CRS) support, which may impact Spatial extension workflows. Additionally, several internal C-API structures and the serialization framework have been refactored; developers of custom extensions should recompile and verify compatibility with the new storage and binder changes.
 ---
-**[psf/black 26.3.0](https://github.com/psf/black/releases/tag/26.3.0)**
+**[numpy/numpy v2.4.3](https://github.com/numpy/numpy/releases/tag/v2.4.3)**
 
-### Black 26.3.0 Release Analysis
+### NumPy 2.4.3 Release Summary
 
-**Summary**
-This release focuses on performance optimizations for Windows users and improving the developer experience through clearer error reporting. It also delivers critical stability fixes, including a correction for a bug that could lead to the corruption of non-UTF-8 source files.
+NumPy 2.4.3 is a maintenance patch release focused on resolving bugs and stability issues discovered in the 2.4.2 release. It provides essential fixes for threading on ARM architectures and improves memory safety across the library.
 
-**Highlights**
-*   **Windows Performance Boost:** Introduced `winloop` support, providing Windows users of Black and `blackd` with a high-performance event loop similar to `uvloop` on Unix systems.
-*   **Actionable Error Messaging:** Replaced cryptic "INTERNAL ERROR" messages with clear, actionable warnings when the target Python version is newer than the version running Black, preventing confusion during AST safety checks.
-*   **GitHub Action Hardening:** Improved security for the official GitHub Action by restricting requirement parsing to version specifiers only, rejecting potentially unsafe direct URL references.
+### Highlights
 
-**Breaking Changes**
-*   **Action Configuration:** Users relying on direct references (e.g., `black @ https://...`) within their `pyproject.toml` for the GitHub Action will find these are now rejected. Most users will not be affected, but those using custom forks via the action should review their configurations.
+*   **ARM Architecture Fix:** Resolves a critical threading issue for OpenBLAS on ARM platforms, improving stability for mobile and cloud-native environments (Issue #30816).
+*   **Memory Management:** Addresses several memory leaks, buffer overruns in CPU baseline validation, and NULL pointer dereferences identified via LeakSanitizer.
+*   **Functional Improvements:** Fixes a weak hash function in `np.isin()`, corrects infinite recursion in masked structured arrays, and repairs boolean weekmask handling in `busdaycalendar`.
 
-**Priority**
-Minor
+### Breaking Changes
+
+None. This is a patch release intended to be a drop-in replacement for earlier 2.4.x versions. It maintains support for Python 3.11 through 3.14.
