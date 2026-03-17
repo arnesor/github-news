@@ -1,6 +1,6 @@
 {
     "astral-sh/ruff": "0.15.6",
-    "astral-sh/uv": "0.10.10",
+    "astral-sh/uv": "0.10.11",
     "cjolowicz/nox-poetry": "v1.2.0",
     "dynaconf/dynaconf": "3.2.12",
     "pandas-dev/pandas": "v3.0.1",
@@ -8,11 +8,11 @@
     "psf/black": "26.3.1",
     "pytest-dev/pytest": "9.0.2",
     "python-poetry/poetry": "2.3.2",
-    "unionai-oss/pandera": "v0.29.0",
+    "unionai-oss/pandera": "v0.30.0",
     "wntrblm/nox": "2026.02.09",
     "duckdb/duckdb": "v1.5.0",
     "ibis-project/ibis": "12.0.0",
     "narwhals-dev/narwhals": "v2.18.0",
     "numpy/numpy": "v2.4.3",
-    "marimo-team/marimo": "0.20.3"
+    "marimo-team/marimo": "0.21.0"
 }
