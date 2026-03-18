@@ -1,52 +1,46 @@
-# GitHub New Releases Report 2026-03-17
+# GitHub New Releases Report 2026-03-18
 
-**[astral-sh/uv 0.10.11](https://github.com/astral-sh/uv/releases/tag/0.10.11)**
+**[dynaconf/dynaconf 3.2.13](https://github.com/dynaconf/dynaconf/releases/tag/3.2.13)**
+
+# Dynaconf 3.2.13 Release Notes
 
 ### Summary
-uv 0.10.11 focuses on refining project management flexibility and improving metadata handling for both internal processes and external tools like Ruff. This patch release also addresses macOS-specific interpreter discovery and optimizes internal distribution ID performance.
+Dynaconf 3.2.13 is a security-focused maintenance release addressing critical vulnerabilities within the configuration templating system. This update specifically patches security risks in `@jinja` and `@format` tokens while resolving functional bugs in the internal converter logic.
 
 ### Highlights
-* **Flexible `--project` Flag**: The `--project` flag now allows direct references to `pyproject.toml` files and provides a warning instead of a hard error when pointing to other file types.
-* **macOS Interpreter Discovery**: Improved Python interpreter querying on macOS by disabling `SYSTEM_VERSION_COMPAT`, ensuring more accurate version detection in legacy-compatibility environments.
-* **Metadata & Performance**: Enhancements include fetching Ruff release metadata from an Astral mirror for better reliability and optimized distribution ID performance for faster dependency resolution.
+- **Templating Security:** Patched vulnerabilities in `@jinja` and `@format` processing to prevent potential exploitation via configuration strings.
+- **Converter Fix:** Resolved an issue where the `@get` converter was failing, ensuring configuration cross-references work as expected.
+- **Maintenance:** Stability improvements for the 3.2.x release branch.
 
 ### Breaking Changes
-No breaking changes were introduced in this release.
-
-### Priority
+- **None:** This is a patch release focused on security and bug fixes; no breaking changes are introduced.
 ---
-**[marimo-team/marimo 0.21.0](https://github.com/marimo-team/marimo/releases/tag/0.21.0)**
+**[pola-rs/polars py-1.39.2](https://github.com/pola-rs/polars/releases/tag/py-1.39.2)**
+
+## Polars py-1.39.2 Release Analysis
 
 ### Summary
-Marimo 0.21.0 introduces a major architecture update for interactive Matplotlib and adds native export functionality to the Jupyter `.ipynb` format. This release also enhances the developer experience with refined reactive components, improved cache controls, and new authentication options for Snowflake.
+Polars version 1.39.2 is a maintenance release for the Python package that contains no functional code changes. It likely serves to synchronize version numbers or address internal packaging and CI/CD requirements within the repository.
 
 ### Highlights
-*   **Built-in Interactive Matplotlib:** `mo.mpl.interactive()` has been rewritten to use marimo's internal communication channel. This removes the need for background threads or separate server processes, making interactive plots more stable and performant.
-*   **Native Jupyter Export:** You can now export marimo notebooks as `.ipynb` files directly from the editor's download menu. Exported files maintain visual cell order and include captured outputs for better interoperability with the wider data science ecosystem.
-*   **Enhanced Data & UI Tooling:** This update adds reactive histogram selection support, Snowflake authentication options in the UI, and Ruff configuration discovery for automatic notebook cell formatting.
-
-### 🚨 Breaking Changes
-*   **Altair Chart Scaling:** Altair charts no longer default to `width: "container"`. This change prevents aspect ratio distortion and ensures charts match the official Altair documentation defaults. To fill the container width, you must now explicitly set `width="container"` in your chart specification.
----
-**[unionai-oss/pandera v0.30.0](https://github.com/unionai-oss/pandera/releases/tag/v0.30.0)**
-
-# 📦 Pandera v0.30.0 Release Summary
-
-### Summary
-Pandera v0.30.0 officially introduces support for Pandas 3.0, ensuring compatibility with the latest evolution of the Python data ecosystem. This release also focuses on performance optimizations for `DataFrameModel` and expands feature parity for Polars users.
-
-### Highlights
-* **Pandas 3.0 Support:** Full compatibility with Pandas 3.0, including a transition to using pandas-native strings by default to leverage modern memory efficiencies.
-* **Polars Enhancements:** Added `PydanticModel` support for the Polars backend and improved error reporting for regex-based column validation.
-* **Performance Optimizations:** Refactored `DataFrameModel` to eliminate expensive deep copy operations during empty DataFrame creation, resulting in faster schema initializations.
+* **Version Synchronization:** This release aligns the Python package version without introducing new logic or modifications to the engine.
+* **Maintenance Update:** The update is purely administrative, ensuring consistency across the Polars ecosystem.
+* **No Impact on Usage:** Developers will experience no changes in functionality, performance, or API behavior compared to the previous patch.
 
 ### Breaking Changes
-⚠️ **Behavioral Changes:**
-* Under Pandas 3.0, the default string type now maps to pandas-native strings. 
-* The vestigial `ordering` parameter has been removed from Polars `Categorical` schemas.
-* `geopandas` has been unpinned, which may lead to version shifts in your environment if not explicitly managed.
+* None.
+---
+**[unionai-oss/pandera v0.30.1](https://github.com/unionai-oss/pandera/releases/tag/v0.30.1)**
 
-### What's Changed
-* **Fixes:** Resolved issues in optional nested validation, custom parsers, and built-in checks when dropping invalid rows.
-* **Maintenance:** Replaced `pre-commit` with `prek` for internal linting and fixed various documentation references.
-* **Documentation:** Added `AGENTS.md` to provide better context for AI-assisted development and tool usage.
+## 🚀 Pandera v0.30.1 Release Notes
+
+### Summary
+Pandera v0.30.1 introduces architectural refinements to schema management and enhances validation capabilities for Polars users. This update primarily focuses on refactoring internal accessors to use a centralized schema registry while expanding type support within the Polars engine.
+
+### Highlights
+*   **Schema Registry Refactor**: Pandera accessors have been refactored to utilize a schema registry, improving how schemas are managed and tracked internally.
+*   **Enhanced Polars Support**: This release adds support for instance types in Polars, allowing for more granular validation within Polars-based workflows.
+*   **Community Growth**: This version includes contributions from new community members, expanding the reach of the Polars integration.
+
+### ⚠️ Breaking Changes
+None. This is a patch release focused on internal improvements and incremental feature additions.
