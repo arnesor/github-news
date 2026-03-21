@@ -4,7 +4,7 @@
     "cjolowicz/nox-poetry": "v1.2.0",
     "dynaconf/dynaconf": "3.2.13",
     "pandas-dev/pandas": "v3.0.1",
-    "pola-rs/polars": "py-1.39.2",
+    "pola-rs/polars": "py-1.39.3",
     "psf/black": "26.3.1",
     "pytest-dev/pytest": "9.0.2",
     "python-poetry/poetry": "2.3.2",
