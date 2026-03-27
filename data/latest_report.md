@@ -1,34 +1,41 @@
-# GitHub New Releases Report 2026-03-25
+# GitHub New Releases Report 2026-03-27
 
-**[astral-sh/uv 0.11.1](https://github.com/astral-sh/uv/releases/tag/0.11.1)**
+**[astral-sh/ruff 0.15.8](https://github.com/astral-sh/ruff/releases/tag/0.15.8)**
 
-## uv v0.11.1 Release Notes
+### Ruff 0.15.8 Release Summary
 
-### Summary
-`uv` v0.11.1 is a maintenance release focused on refining Python version resolution and improving compatibility with specific hardware architectures and package indices. It addresses several regressions and edge cases discovered following the recent 0.11.0 milestone.
+Ruff 0.15.8 introduces three new internal rules in preview and provides early support for Python 3.15's `frozendict`. This update also delivers performance optimizations for diagnostic rendering alongside several bug fixes across the plugin ecosystem.
 
-### Highlights
-- **Refined Python Versioning:** Added special-casing for `==` Python version request ranges to ensure more predictable environment matching and resolution.
-- **Architecture & Index Fixes:** Resolved missing hash verification for RISC-V 64 Linux (MUSL) and optimized PyTorch index sourcing by removing `torchdata` from the specialized index list.
-- **Enhanced Download Reliability:** Implemented a fallback mechanism to direct downloads when direct URL streaming is unsupported, ensuring better compatibility with various remote hosting environments.
+#### 🚀 Highlights
+*   **New Preview Rules:** Three new lint rules are now available: `unnecessary-if` (`RUF050`), `useless-finally` (`RUF072`), and `f-string-percent-format` (`RUF073`), which warns against using the `%` operator on f-strings.
+*   **Performance Improvements:** Speed optimizations have been applied to diagnostic rendering, ensuring a snappier experience during linting and IDE integration.
+*   **Python 3.15 Readiness:** Ruff now recognizes `frozendict` as a built-in for projects targeting Python 3.15 and later.
 
-### Breaking Changes
-None. This release consists of bug fixes, reverts to previous behavior, and documentation improvements.
+#### ⚠️ Breaking Changes
+*   None reported in this version.
+
+#### 🛠️ Key Bug Fixes & Improvements
+*   **Rule Refinements:** Fixed false positives/negatives in `S607` (partial paths), `F821` (conditionally deleted variables), and `SLF001` (private member access involving `Self` annotations).
+*   **IPython Support:** Improved parsing for IPython assignment expressions involving the `%foo?` syntax.
+*   **Code Formatter:** Nested pragma comments are now excluded from line width calculations, preventing unexpected line breaks in `E501` and `W505`.
+*   **Dependency Graph:** The `analyze graph` command now correctly resolves string imports that reference specific attributes rather than just modules.
 ---
-**[narwhals-dev/narwhals v2.18.1](https://github.com/narwhals-dev/narwhals/releases/tag/v2.18.1)**
+**[astral-sh/uv 0.11.2](https://github.com/astral-sh/uv/releases/tag/0.11.2)**
 
-### Narwhals v2.18.1 Release Analysis
+### uv 0.11.2 Release Analysis
 
-#### Summary
-Narwhals v2.18.1 is a maintenance patch focused on resolving a specific bug in string operations and improving internal codebase stability. This release ensures better compatibility for users leveraging pandas DataFrames backed by pyarrow large-string types.
+`uv 0.11.2` focuses on hardening the self-update mechanism and optimizing internal project parsing for faster execution. This release also refines the package auditing preview feature and improves the developer experience for Windows users through better error reporting.
 
-#### Highlights
-*   **Bug Fix for `concat_str`**: Resolved an issue where string concatenation failed for pandas DataFrames utilizing pyarrow-backed large-string columns.
-*   **Codebase Maintenance**: Improved exception handling by adding proper attribute annotations to exception messages.
-*   **Noise Reduction**: Silenced unavoidable third-party `DeprecationWarnings` and marked tests affected by external pandas regressions to ensure cleaner CI/CD runs.
+#### 🌟 Highlights
+*   **Robust Self-Updates**: The `uv self update` command is now more reliable, prioritizing mirrors for manifest fetching, utilizing the internal `reqwest` client, and ensuring success/failure visibility even when using the `--quiet` flag.
+*   **Enhanced Package Auditing**: The preview auditing functionality now correctly evaluates optional extras and dependency groups, providing a more comprehensive security assessment of your project's dependency tree.
+*   **`uv run` Performance**: A bug fix eliminates redundant project configuration parsing during `uv run` invocations, leading to snappier execution times for local scripts and tools.
 
-#### Breaking Changes
-None. This is a non-breaking patch release.
+#### ⚠️ Breaking Changes
+*   None. This is a stable patch release focused on enhancements and bug fixes.
 
-#### Priority
-**Bugfix**
+#### 📦 How to Update
+Update `uv` to the latest version using the built-in update command:
+```sh
+uv self update
+```
