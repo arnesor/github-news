@@ -7,12 +7,12 @@
     "pola-rs/polars": "py-1.39.3",
     "psf/black": "26.3.1",
     "pytest-dev/pytest": "9.0.2",
-    "python-poetry/poetry": "2.3.2",
+    "python-poetry/poetry": "2.3.3",
     "unionai-oss/pandera": "v0.30.1",
     "wntrblm/nox": "2026.02.09",
     "duckdb/duckdb": "v1.5.1",
     "ibis-project/ibis": "12.0.0",
     "narwhals-dev/narwhals": "v2.18.1",
-    "numpy/numpy": "v2.4.3",
+    "numpy/numpy": "v2.4.4",
     "marimo-team/marimo": "0.21.0"
 }
