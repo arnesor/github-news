@@ -1,23 +1,19 @@
-# GitHub New Releases Report 2026-03-30
+# GitHub New Releases Report 2026-03-31
 
-**[numpy/numpy v2.4.4](https://github.com/numpy/numpy/releases/tag/v2.4.4)**
+**[pandas-dev/pandas v3.0.2](https://github.com/pandas-dev/pandas/releases/tag/v3.0.2)**
 
-# NumPy v2.4.4 Release Analysis
+### Pandas v3.0.2 Release Analysis
 
-### Summary
-NumPy 2.4.4 is a focused patch release designed to resolve critical bugs and stability issues identified after the 2.4.3 version. This release primarily addresses a persistent OpenBLAS threading problem on ARM architectures and ensures seamless compatibility for Python versions 3.11 through 3.14.
+#### Summary
+Pandas 3.0.2 is a patch release in the 3.0.x series, primarily focused on addressing regressions and bug fixes to improve library stability. It is a highly recommended upgrade for all users currently on version 3.0 to ensure the most reliable development experience.
 
-### Highlights
-- **ARM Threading Resolution:** Successfully resolves a long-standing OpenBLAS threading bug (issue #30816) specifically affecting ARM hardware, improving reliability for mobile and cloud-native deployments.
-- **Python 3.14 Readiness:** Includes updated documentation regarding `ndarray.resize` caveats for Python 3.14+ and general maintenance to support the latest Python release cycle.
-- **Internal Logic Fixes:** Corrects FNV-1a 64-bit selection logic and eliminates unnecessary warnings when using `ufunc` with `where=True` but no output.
+#### Highlights
+*   **Regression Fixes:** Resolves critical issues introduced in the initial 3.0.x releases to restore expected behavior.
+*   **Enhanced Stability:** Includes general bug fixes across the library to improve overall robustness and performance.
+*   **Python 3.11+ Compatibility:** Continues the 3.0 series' commitment to modern Python environments, requiring version 3.11 or higher.
 
-### Breaking Changes
-⚠️ **None.** This is a patch release focused on stability and bug fixes. It is a drop-in replacement for users currently on any 2.4.x version.
+#### Breaking Changes
+There are no intentional breaking changes in this patch release. However, users migrating from the 2.x series should remember that pandas 3.0+ requires Python 3.11 or higher.
 
-### Maintenance & Security
-- **Memory Safety:** Replaced deprecated C-function `sprintf` with the safer `snprintf` in the `numpy.i` interface.
-- **Architecture Support:** Fixed POWER VSX feature mapping to ensure correct SIMD optimizations on IBM Power architectures.
----
-**[python-poetry/poetry 2.3.3](https://github.com/python-poetry/poetry/releases/tag/2.3.3)**
-- Error generating summary: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+#### Priority
+**Bugfix** — Recommended for all 3.0.x users to resolve known regressions.
