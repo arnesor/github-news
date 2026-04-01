@@ -1,19 +1,19 @@
-# GitHub New Releases Report 2026-03-31
+# GitHub New Releases Report 2026-04-01
 
-**[pandas-dev/pandas v3.0.2](https://github.com/pandas-dev/pandas/releases/tag/v3.0.2)**
+**[marimo-team/marimo 0.22.0](https://github.com/marimo-team/marimo/releases/tag/0.22.0)**
 
-### Pandas v3.0.2 Release Analysis
+Marimo 0.22.0 introduces a unified Table Explorer and reliability fixes for the programmatic notebook API to power the new `marimo-pair` AI agent skill. This release also features significant performance gains in persistent caching, smarter data table formatting, and a standard approach to cache directory management.
 
-#### Summary
-Pandas 3.0.2 is a patch release in the 3.0.x series, primarily focused on addressing regressions and bug fixes to improve library stability. It is a highly recommended upgrade for all users currently on version 3.0 to ensure the most reliable development experience.
+### ⭐ Highlights
+- **Unified Table Explorer:** Row viewing and column exploration are now merged into a single tabbed pane with persistent state, streamlining data discovery within the UI.
+- **AI Pair Programming:** Reliability fixes for the experimental `_code` API enable the [marimo-pair](https://github.com/marimo-team/marimo-pair) agent skill, allowing for more robust agentic notebook editing.
+- **Performance & Data Scaling:** `mo.persistent_cache` now supports parallel read/writes, while data tables now utilize virtualization when pagination is disabled to handle large datasets smoothly.
 
-#### Highlights
-*   **Regression Fixes:** Resolves critical issues introduced in the initial 3.0.x releases to restore expected behavior.
-*   **Enhanced Stability:** Includes general bug fixes across the library to improve overall robustness and performance.
-*   **Python 3.11+ Compatibility:** Continues the 3.0 series' commitment to modern Python environments, requiring version 3.11 or higher.
+### 🚨 Breaking Changes
+- **`mo.image` uint8 handling:** `uint8` arrays are no longer normalized to `[0, 1]` float range automatically; they now render in the `[0, 255]` range. Use `vmin=0, vmax=1` explicitly to restore the previous behavior.
+- **Cache Location & Format:** The `__marimo__` directory now follows `sys.pycache_prefix`, and the internal cache version has been bumped. **Existing caches will be invalidated and can be safely deleted.**
 
-#### Breaking Changes
-There are no intentional breaking changes in this patch release. However, users migrating from the 2.x series should remember that pandas 3.0+ requires Python 3.11 or higher.
-
-#### Priority
-**Bugfix** — Recommended for all 3.0.x users to resolve known regressions.
+### ✨ Key Enhancements
+* **SQL Improvements:** Enhanced SQLAlchemy engine with safe execution and inspector methods for Snowflake, plus lazy schema fetching in the datasource panel.
+* **CLI UX:** Added a contextual startup tips system to the CLI.
+* **Formatting:** Numeric columns are now auto-right-aligned with normalized decimal formatting for better readability.
