@@ -153,7 +153,8 @@ async def get_latest_release(
 async def summarize_release(release: dict[str, Any], repo_name: str) -> str:
     """Generate a summary of the release using Gemini.
 
-    Handles Gemini API rate limits (429) by retrying with exponential backoff.
+    Handles Gemini API rate limits (429) and transient unavailability (503)
+    by retrying with exponential backoff.
 
     Args:
         release: The release data.
@@ -200,7 +201,10 @@ async def summarize_release(release: dict[str, Any], repo_name: str) -> str:
             stop=stop_after_attempt(6),
             wait=wait_exponential(multiplier=15, min=15, max=600),
             retry=retry_if_exception(
-                lambda e: "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e)
+                lambda e: any(
+                    keyword in str(e)
+                    for keyword in ("429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE")
+                )
             ),
             reraise=True,
         ):
