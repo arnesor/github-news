@@ -12,7 +12,7 @@
     "wntrblm/nox": "2026.02.09",
     "duckdb/duckdb": "v1.5.1",
     "ibis-project/ibis": "12.0.0",
-    "narwhals-dev/narwhals": "v2.18.1",
+    "narwhals-dev/narwhals": "v2.19.0",
     "numpy/numpy": "v2.4.4",
     "marimo-team/marimo": "0.22.0"
 }

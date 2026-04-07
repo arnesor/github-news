@@ -1,13 +1,16 @@
-# GitHub New Releases Report 2026-04-03
+# GitHub New Releases Report 2026-04-07
 
-**[astral-sh/ruff 0.15.9](https://github.com/astral-sh/ruff/releases/tag/0.15.9)**
+**[narwhals-dev/narwhals v2.19.0](https://github.com/narwhals-dev/narwhals/releases/tag/v2.19.0)**
 
-Ruff 0.15.9 delivers a suite of bug fixes and linting refinements, notably enhancing the accuracy of auto-fixes across `pyupgrade` and `pyflakes`. The release also introduces a new formatter configuration for nested string quotes and improves rule safety by better handling comments and symbol shadowing.
+### Narwhals v2.19.0 Release Summary
 
-### Highlights
-- **New Formatter Configuration:** A new `nested-string-quote-style` option has been added, providing more granular control over how quotes are handled in nested string scenarios.
-- **Enhanced Rule Precision:** `pyupgrade` (UP018) now detects more unnecessarily wrapped literals, while `pyflakes` (F811) begins flagging annotated variable redeclarations in preview mode.
-- **Improved Fix Safety:** Multiple rules, including `EM101` and `RUF024`, were updated to prevent variable shadowing during auto-fixes, and `RUF010` now correctly marks fixes as unsafe if they delete comments.
+**Summary**
+Narwhals v2.19.0 introduces expanded functionality for string operations and new statistical capabilities, further bridging the gap between Polars, pandas, and SQL backends. This update also focuses on internal consistency and developer experience through improved typing and standardized naming conventions.
 
-### Breaking Changes
-- None. This is a maintenance release focusing on bug fixes and rule refinements.
+**Highlights**
+* **Enhanced `str.contains`**: Users can now pass `Expr` or `Series` objects as patterns in `str.contains` for Polars and SQL-like backends, enabling dynamic, column-based pattern matching.
+* **New `nw.corr` Function**: Added native support for calculating correlation coefficients, expanding the library's statistical toolkit across supported dataframes.
+* **Internal API Cleanup**: Standardized date handling by replacing `weekday` with `day_of_week` for pandas and Dask backends to ensure cross-library consistency.
+
+**Breaking Changes**
+* None.
