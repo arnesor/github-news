@@ -1,44 +1,33 @@
-# GitHub New Releases Report 2026-04-10
+# GitHub New Releases Report 2026-04-11
 
-**[astral-sh/ruff 0.15.10](https://github.com/astral-sh/ruff/releases/tag/0.15.10)**
-
-Ruff 0.15.10 focuses on refining Python 3.12 compatibility and improving the stability of linting rules across various Python versions. This release also introduces custom file extension support for the Ruff server, enhancing its flexibility in specialized development environments.
-
-### Highlights
-
-*   **Improved F-String Validation**: The formatter and fixers now strictly avoid emitting multi-line f-string elements for Python targets older than 3.12, preventing potential syntax errors in legacy environments.
-*   **Server Custom Extensions**: The Ruff server now supports custom file extensions, allowing developers to apply linting and formatting to files that do not use the standard `.py` or `.pyi` extensions.
-*   **Stability & Rule Fixes**: This version resolves a panic in `pyupgrade` (`UP012`) and improves the robustness of several rules, including better handling of non-self-named variables in `flake8-self` (`SLF`) and closures in `flake8-logging`.
-
-### Breaking Changes
-
-No breaking changes were introduced in this release.
----
-**[astral-sh/uv 0.11.6](https://github.com/astral-sh/uv/releases/tag/0.11.6)**
-
-### uv 0.11.6 Release Analysis
+**[marimo-team/marimo 0.23.1](https://github.com/marimo-team/marimo/releases/tag/0.23.1)**
 
 ### Summary
-This release primarily addresses a low-severity security vulnerability where malformed wheel `RECORD` entries could lead to arbitrary file deletion during the uninstallation process. It also introduces critical fixes for virtual environment file protection and path normalization issues on Windows.
+marimo 0.23.1 introduces a visual navigation minimap for slide mode and restores full functionality to marimo islands and the Quarto extension. This patch also prioritizes platform security with a comprehensive suite of hardening fixes, including input sanitization and path traversal prevention.
+
+### ⭐ Highlights
+* **Slides Minimap:** Slide mode now features a performance-optimized, scrollable panel providing a scaled-down view of cells with support for click-to-navigate and drag-to-reorder functionality.
+* **Islands & Quarto Revival:** Critical bug fixes to "marimo islands" restore the ability to embed interactive Python outputs in external HTML and bring the `quarto-marimo` extension back into full compatibility.
+* **Security Hardening:** This release includes a robust set of security improvements, specifically targeting script injection in plugin slots, directory traversal via symlinks, and open redirect vulnerabilities.
+
+### ⚠️ Breaking Changes
+None. This is a quality-of-life and security-focused patch release.
+
+### 🛠️ Other Notable Changes
+* **New Lint Rule:** Added a rule to detect ordering discrepancies in top-level functions.
+* **UI Fixes:** Improved `mo.ui.matplotlib` rendering on browser zoom and fixed mixed-type column sorting in data tables.
+* **Dependency Updates:** Updated Ruff to version 0.15.9 and bumped the target version to Python 3.10.
+---
+**[wntrblm/nox 2026.04.10](https://github.com/wntrblm/nox/releases/tag/2026.04.10)**
+
+### Summary
+Nox 2026.04.10 introduces automated virtual environment recovery and enhanced session documentation while modernizing its core by dropping Python 3.8 support. This release also streamlines repository management by automatically handling `.gitignore` for the `.nox` directory and refining how tags select sessions.
 
 ### Highlights
-- **Security Fix (GHSA-pjjw-68hj-v9mw):** Prevents `uv` from removing files outside of the virtual environment during uninstallation, closing a loophole where malicious wheels could trigger arbitrary file deletion.
-- **Wheel RECORD Integrity:** Added logic to validate and "heal" wheel `RECORD` files during installation, ensuring that package metadata is accurate and safe for future operations.
-- **Windows Cache Management:** Fixed a bug in `uv cache clean` that caused errors on Windows due to improper Win32 path normalization.
+* **Self-Healing Virtualenvs:** Nox now automatically detects broken symlinks within virtual environments (common after a system Python upgrade) and recreates them, preventing cryptic execution errors.
+* **New `--usage` Command:** Developers can now access full docstrings for specific sessions directly from the CLI using `nox --usage <session>`, making complex configurations easier to navigate.
+* **Automatic Git Ignore:** The `.nox` directory now automatically includes a `.gitignore` file and `CACHEDIR.TAG`, ensuring local build artifacts stay out of version control without manual setup.
 
 ### Breaking Changes
-None. This is a patch release focused on security and stability.
----
-**[marimo-team/marimo 0.23.0](https://github.com/marimo-team/marimo/releases/tag/0.23.0)**
-
-### marimo 0.23.0
-
-Marimo 0.23.0 is a critical update that addresses a high-severity security vulnerability (CVE-2026-39987) involving unauthenticated remote code execution. Alongside this essential hardening, the release introduces reactive selection support for new Plotly chart types and several quality-of-life improvements for data filtering and the AI chat interface.
-
-#### Highlights
-* **Critical Security Patch:** Authenticates the `/terminal/ws` endpoint to prevent unauthenticated users from executing code remotely. This is vital for users exposing editable notebooks to shared networks or the public internet.
-* **Reactive Plotly Charts:** Added reactive selection support for **violin plots** and **area charts**, allowing these visualizations to dynamically trigger updates in downstream notebook cells.
-* **Improved Data Handling:** Resolved an issue with table filtering for `NaN` values in pandas string columns and refined the AI chat experience by ensuring the `Tab` key indents code rather than triggering autocomplete.
-
-#### Breaking Changes
-* **None.** While terminal access now strictly requires authentication, this is a security hardening measure and does not alter the public API or notebook functionality.
+* **Python 3.8 Dropped:** Support for Python 3.8 has been officially removed. You must use Python 3.9 or newer to run Nox.
+* **Tag Selection Logic:** The `-t` (tags) and `-k` (keywords) flags now select from all available sessions, ignoring `default=False` settings. This may cause sessions to run that were previously excluded by default.
