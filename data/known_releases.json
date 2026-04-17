@@ -1,5 +1,5 @@
 {
-    "astral-sh/ruff": "0.15.10",
+    "astral-sh/ruff": "0.15.11",
     "astral-sh/uv": "0.11.7",
     "cjolowicz/nox-poetry": "v1.2.0",
     "dynaconf/dynaconf": "3.2.13",
