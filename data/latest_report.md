@@ -1,16 +1,19 @@
-# GitHub New Releases Report 2026-04-28
+# GitHub New Releases Report 2026-04-29
 
-**[astral-sh/uv 0.11.8](https://github.com/astral-sh/uv/releases/tag/0.11.8)**
+**[marimo-team/marimo 0.23.4](https://github.com/marimo-team/marimo/releases/tag/0.23.4)**
 
-### Summary
-uv 0.11.8 enhances Python version management and lockfile stability while introducing several new environment variables for better environment isolation. This update also addresses edge cases in dependency resolution and improves security by hardening wheel extraction against external symlinks.
+### marimo v0.23.4
 
-### Highlights
-* **Advanced Python Discovery:** New configuration options like `UV_PYTHON_SEARCH_PATH` and `UV_PYTHON_NO_REGISTRY` provide granular control over how uv locates and identifies Python interpreters on the host system.
-* **Refined Lockfile Logic:** Improved handling of `exclude-newer` fields and the introduction of sentinel timestamps ensure more stable and predictable cross-platform lockfiles, even when using relative time spans.
-* **CLI & Scripting Improvements:** This release adds `pip uninstall -y` compatibility for easier automation, a `--short` flag for `uv self version`, and shifts `self-update` to use the Astral mirror for better reliability.
+**Summary**
+Marimo v0.23.4 focuses on refining the user experience with new interactive filtering components and improved data visualization support. This patch also addresses critical backend stability issues, including platform detection for WASM environments and security updates for dependencies.
 
-### Breaking Changes
-None reported. Note a **notable behavior change**: uv now disables transparent Python upgrades in projects when a specific patch version is requested via `.python-version`, ensuring stricter adherence to pinned versions.
+**Highlights**
+* **Enhanced Visualization Support:** Updated types and snapshots for Altair v6.1.0 and Vega-Lite v6.4.1 to ensure seamless compatibility with the latest plotting features.
+* **Interactive Filtering UI:** Introduced editable filter pills and standardized "top K" filter components, providing a more intuitive and consistent interface for data exploration.
+* **Backend & WASM Reliability:** Resolved issues with Pyodide platform detection, improved Starlette encoding using `msgspec`, and added support for DuckDB `INET` extension types.
 
-### Priority
+**Breaking Changes**
+* No breaking changes are introduced in this release.
+
+**Priority**
+Bugfix
