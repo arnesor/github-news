@@ -1,19 +1,19 @@
-# GitHub New Releases Report 2026-04-29
+# GitHub New Releases Report 2026-05-04
 
-**[marimo-team/marimo 0.23.4](https://github.com/marimo-team/marimo/releases/tag/0.23.4)**
+**[python-poetry/poetry 2.4.0](https://github.com/python-poetry/poetry/releases/tag/2.4.0)**
 
-### marimo v0.23.4
+## Poetry 2.4.0 Release Analysis
 
-**Summary**
-Marimo v0.23.4 focuses on refining the user experience with new interactive filtering components and improved data visualization support. This patch also addresses critical backend stability issues, including platform detection for WASM environments and security updates for dependencies.
+Poetry 2.4.0 introduces sophisticated dependency filtering based on release age to improve supply chain security and environment stability. This version also hardens the CLI experience with stricter input validation and addresses several critical bugs in publishing workflows and Windows environments.
 
-**Highlights**
-* **Enhanced Visualization Support:** Updated types and snapshots for Altair v6.1.0 and Vega-Lite v6.4.1 to ensure seamless compatibility with the latest plotting features.
-* **Interactive Filtering UI:** Introduced editable filter pills and standardized "top K" filter components, providing a more intuitive and consistent interface for data exploration.
-* **Backend & WASM Reliability:** Resolved issues with Pyodide platform detection, improved Starlette encoding using `msgspec`, and added support for DuckDB `INET` extension types.
+### Highlights
+*   **Dependency Age Filtering:** A new set of `solver.min-release-age` configurations allows teams to ignore packages released within a specific window (e.g., the last 2 days). This is a major win for supply chain security, helping users avoid "day-zero" malicious releases or buggy updates.
+*   **Stricter `poetry update` Validation:** To prevent configuration drift and silent failures, `poetry update` now raises an explicit error if you pass a package name that is not currently a project dependency.
+*   **Improved Build & Publish Reliability:** This release fixes a critical issue where `poetry publish --build` would ignore failed builds and upload stale artifacts. Additionally, it resolves a memory error encountered when calculating hashes for very large wheels.
 
-**Breaking Changes**
-* No breaking changes are introduced in this release.
+### Breaking Changes
+*   **CLI Behavior:** `poetry update <pkg>` now errors instead of silently ignoring the command if `<pkg>` is not a dependency. This may require updates to CI/CD scripts that rely on the old silent behavior.
+*   **Dependency Requirements:** Poetry now requires `installer >= 1.0.0` and `findpython >= 0.8`.
+*   **Metadata Changes:** The lock file marker ordering is now deterministic, which may cause a one-time diff in your `poetry.lock` files upon the next update.
 
-**Priority**
-Bugfix
+### Priority: Minor
