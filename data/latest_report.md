@@ -1,19 +1,32 @@
-# GitHub New Releases Report 2026-05-04
+# GitHub New Releases Report 2026-05-06
 
-**[python-poetry/poetry 2.4.0](https://github.com/python-poetry/poetry/releases/tag/2.4.0)**
+**[astral-sh/uv 0.11.10](https://github.com/astral-sh/uv/releases/tag/0.11.10)**
 
-## Poetry 2.4.0 Release Analysis
-
-Poetry 2.4.0 introduces sophisticated dependency filtering based on release age to improve supply chain security and environment stability. This version also hardens the CLI experience with stricter input validation and addresses several critical bugs in publishing workflows and Windows environments.
+### Summary
+`uv` version 0.11.10 is a focused maintenance release that resolves a specific edge case in Python version resolution. This update ensures that pre-release Python requests containing non-zero patch versions are correctly handled during environment setup and dependency resolution.
 
 ### Highlights
-*   **Dependency Age Filtering:** A new set of `solver.min-release-age` configurations allows teams to ignore packages released within a specific window (e.g., the last 2 days). This is a major win for supply chain security, helping users avoid "day-zero" malicious releases or buggy updates.
-*   **Stricter `poetry update` Validation:** To prevent configuration drift and silent failures, `poetry update` now raises an explicit error if you pass a package name that is not currently a project dependency.
-*   **Improved Build & Publish Reliability:** This release fixes a critical issue where `poetry publish --build` would ignore failed builds and upload stale artifacts. Additionally, it resolves a memory error encountered when calculating hashes for very large wheels.
+* **Enhanced Pre-release Support:** Fixed a bug where Python requests for pre-release versions (like alphas, betas, or RCs) with non-zero patch versions were being improperly restricted.
+* **Improved Development Flexibility:** This fix is particularly important for developers testing against the latest upstream Python builds and non-standard pre-release distributions.
+* **Verified Build Integrity:** All release artifacts continue to support GitHub Artifact Attestations, allowing users to verify the provenance of their binaries using the GitHub CLI.
 
 ### Breaking Changes
-*   **CLI Behavior:** `poetry update <pkg>` now errors instead of silently ignoring the command if `<pkg>` is not a dependency. This may require updates to CI/CD scripts that rely on the old silent behavior.
-*   **Dependency Requirements:** Poetry now requires `installer >= 1.0.0` and `findpython >= 0.8`.
-*   **Metadata Changes:** The lock file marker ordering is now deterministic, which may cause a one-time diff in your `poetry.lock` files upon the next update.
+No breaking changes have been identified in this release.
 
-### Priority: Minor
+### Priority
+This is a standard bugfix release.
+---
+**[marimo-team/marimo 0.23.5](https://github.com/marimo-team/marimo/releases/tag/0.23.5)**
+
+# marimo 0.23.5 Release Summary
+
+### Summary
+marimo 0.23.5 introduces interactive coding within slide views and expands observability with OpenTelemetry distributed tracing support. This update also improves the WASM experience by patching Polars network I/O and refining the developer CLI workflow.
+
+### 🌟 Highlights
+* **Editable Code in Slides**: Users can now toggle an inline code editor during presentations (press `C`), enabling live code execution and experimentation directly within the slide view or fullscreen mode.
+* **OpenTelemetry Support**: Added OTLP export and W3C trace context propagation, bringing enterprise-grade distributed tracing and observability to marimo applications.
+* **WASM Enhancements**: Patched Polars network I/O specifically for WASM notebooks, ensuring more reliable data handling in browser-based environments.
+
+### ⚠️ Breaking Changes
+* **None**: This release contains no documented breaking changes and focuses on feature enhancements and bug fixes.
