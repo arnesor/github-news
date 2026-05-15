@@ -1,17 +1,16 @@
-# GitHub New Releases Report 2026-05-13
+# GitHub New Releases Report 2026-05-15
 
-**[astral-sh/uv 0.11.14](https://github.com/astral-sh/uv/releases/tag/0.11.14)**
+**[astral-sh/ruff 0.15.13](https://github.com/astral-sh/ruff/releases/tag/0.15.13)**
 
-## uv v0.11.14 Release Summary
-
-`uv` 0.11.14 delivers targeted improvements to environment handling and dependency visualization alongside a new mirror override feature. This release fixes several edge cases in lock validation and uninstallation logic to improve overall tool reliability.
+### Summary
+Ruff 0.15.13 focuses on refining existing linting rules and enhancing developer experience with a new preview rule for lazy import evaluation. This release also addresses several key false positives in core rules and improves CLI visibility with colorized success messages.
 
 ### Highlights
-
-* **Astral Mirror Overrides:** Adds support for overriding the Astral mirror URL (#19206), facilitating easier use in restricted, air-gapped, or internal network environments.
-* **Better `.env` Isolation:** Fixed an issue where `.env` files were being applied in the parent process (#19343), ensuring cleaner environment management and preventing side effects.
-* **`uv tree` Accuracy:** Corrected a bug where conditional dependencies were displayed in the tree view even when the parent package was required without those specific extras (#19332).
+* **Lazy Import Evaluation Rule**: Added a preview rule ([#25016](https://github.com/astral-sh/ruff/pull/25016)) to detect instances where lazy imports are eagerly evaluated, preventing unintended performance overhead.
+* **Refined Bug Fixes**: Resolved notable false positives, specifically for class method redeclarations (`F811`), f-string debug specifiers (`PYI016`), and commented-out code detection involving leading whitespace (`ERA001`).
+* **CLI & UX Upgrades**: Improved the `ruff check` output with colorized success messages and updated the `--config` help text to include practical TOML examples for better configuration management.
 
 ### Breaking Changes
+None.
 
-No breaking changes were introduced in this release.
+### Priority
