@@ -5,14 +5,14 @@
     "dynaconf/dynaconf": "3.2.13",
     "pandas-dev/pandas": "v3.0.3",
     "pola-rs/polars": "py-1.40.1",
-    "psf/black": "26.3.1",
+    "psf/black": "26.5.0",
     "pytest-dev/pytest": "9.0.3",
     "python-poetry/poetry": "2.4.1",
     "unionai-oss/pandera": "v0.31.1",
     "wntrblm/nox": "2026.04.10",
     "duckdb/duckdb": "v1.5.2",
     "ibis-project/ibis": "12.0.0",
-    "narwhals-dev/narwhals": "v2.21.0",
+    "narwhals-dev/narwhals": "v2.21.2",
     "numpy/numpy": "v2.4.5",
     "marimo-team/marimo": "0.23.6"
 }

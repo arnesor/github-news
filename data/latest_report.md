@@ -1,17 +1,34 @@
-# GitHub New Releases Report 2026-05-16
+# GitHub New Releases Report 2026-05-17
 
-**[numpy/numpy v2.4.5](https://github.com/numpy/numpy/releases/tag/v2.4.5)**
+**[narwhals-dev/narwhals v2.21.2](https://github.com/narwhals-dev/narwhals/releases/tag/v2.21.2)**
 
-# NumPy v2.4.5 Analysis
+### Narwhals v2.21.2 Analysis
 
-NumPy 2.4.5 is a targeted patch release focusing on stability, memory safety, and refined type hinting for the 2.4.x series. It maintains infrastructure and provides essential bug fixes for environments running Python 3.11 through 3.14.
+#### Summary
+Narwhals v2.21.2 introduces support for the negation unary operator in expressions and series, streamlining numeric data manipulation. The release also focuses on infrastructure stability and proactive preparation for upcoming upstream changes in the pandas ecosystem.
+
+#### Highlights
+* **Unary Negation Operator:** Users can now use the `-` operator directly on Narwhals expressions and series objects, simplifying mathematical transformations.
+* **DuckDB Stability:** Reverted a previous fix regarding `float('nan')` values in joins for DuckDB to maintain broader engine compatibility.
+* **Pandas Future-Proofing:** Initiated internal updates to handle the upcoming deprecation of `inplace` arguments in pandas, ensuring long-term compatibility.
+
+#### Breaking Changes
+None. This is a maintenance patch focused on stability and a minor feature addition.
+
+#### Priority: Bugfix
+---
+**[psf/black 26.5.0](https://github.com/psf/black/releases/tag/26.5.0)**
+
+### Summary
+Black 26.5.0 introduces early support for Python 3.15, incorporating new syntactic features like unpacking in comprehensions and lazy imports. The release also focuses on improving developer experience through clearer parse error reporting and refining stable formatting edge cases.
 
 ### Highlights
-
-*   **Critical Memory & Safety Fixes:** Patches a heap buffer overflow in `timedelta` string casts, resolves a memory leak in `np.zeros`, and prevents a deadlock scenario caused by downstream imports during `dlopen` calls.
-*   **Significant Typing Improvements:** Enhances type hint accuracy and assignability for core functions including `np.shape`, `tile`, and `sliding_window_view`, alongside a fix for `DTypeLike` runtime type-checker support.
-*   **Compatibility & Regression Fixes:** Restores support for older pickles by reverting a `np.dtype()` signature deprecation and fixes in-place aliasing issues (where `out=input`) for `matvec` and `vecmat` operations.
+* **Python 3.15 Compatibility:** Syntactic support for PEP 798 (unpacking in comprehensions) and PEP 810 (lazy imports) is now live, with CI updated to include Python 3.15 testing.
+* **Enhanced Parse Error Reporting:** The introduction of `SourceASTParseError` and multi-line output with error pointers makes it easier to distinguish between source syntax errors and internal tool failures.
+* **Stable Style Refinements:** Fixed several edge cases where `# fmt: skip` was ignored in nested expressions or compound statements, and resolved a crash involving f-strings following `# fmt: off` comments.
 
 ### Breaking Changes
+No direct breaking changes to formatting logic were introduced in this release. Note that `blackd` users will now receive HTTP 400 (Bad Request) instead of HTTP 500 for source parse failures, which may require minor adjustments to automated monitoring systems.
 
-None. As a patch release, v2.4.5 is backward compatible. Note that `matrix_rank` now returns 0 for empty matrices; while technically a bug fix for consistency, users relying on previous edge-case behavior should verify their workflows.
+### Priority
+Minor
