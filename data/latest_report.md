@@ -1,17 +1,15 @@
-# GitHub New Releases Report 2026-05-23
+# GitHub New Releases Report 2026-05-28
 
-**[pola-rs/polars py-1.41.0](https://github.com/pola-rs/polars/releases/tag/py-1.41.0)**
+**[pola-rs/polars py-1.41.1](https://github.com/pola-rs/polars/releases/tag/py-1.41.1)**
 
-## Polars py-1.41.0 Release Summary
-
-### Summary
-Polars version `py-1.41.0` delivers massive performance optimizations alongside critical stabilization updates to its streaming engine and Parquet reader. This release also introduces several key API enhancements, such as `LazyFrame.gather` and float16 stabilization, while marking `StringCache` as deprecated.
+Polars version 1.41.1 is a patch release focused on optimizing engine stability, resolving memory regressions, and refining query execution. This update introduces performance enhancements for unique aggregations and addresses critical bugs in Common Subexpression Elimination (CSPE) and PyArrow integrations.
 
 ### Highlights
-1. **Stabilized Streaming Engine (#27497):** The out-of-core streaming engine is now officially stabilized, providing highly reliable and efficient execution for datasets that exceed RAM limits.
-2. **`LazyFrame.gather` (#27501):** Added native support for gathering/indexing rows lazily, enabling richer optimization pushdowns and cleaner expression composition.
-3. **Blazing Fast Parquet Metadata Decoding (#27427):** Implemented a hand-written Thrift decoder that drastically speeds up Parquet file metadata parsing, reducing overhead during query planning.
 
-### Breaking Changes & Deprecations
-* ⚠️ **Deprecation of `StringCache` (#27580):** The global `StringCache` is now deprecated. Developers should transition to local scoped contexts (`with pl.StringCache(): ...`) to prevent state leaks and prepare for future removal.
-* *Note:* No immediate breaking changes have been introduced in this release.
+* **CSPE Refinements (`POLARS_ALLOW_NESTED_CSPE`)**: To prevent unexpected query behavior, nested Common Subexpression Elimination (CSPE) is now opt-in via a new environment variable. Additionally, a critical bug where scan filters were dropped during CSPE filter pushdowns has been resolved.
+* **Memory & Performance Improvements**: This release fixes a significant memory usage regression affecting TPCH Q22 and introduces an adaptive size dispatch (switching between hashset and radix sort) with capacity-aware resets in `agg_n_unique` for faster aggregations.
+* **PyArrow and Scan Integration**: Polars now correctly post-applies residual PyArrow predicates, ensuring data integrity and accurate filtering when interfacing with PyArrow datasets.
+
+### Breaking Changes
+
+No breaking API changes are introduced in this patch release. However, if your workflows relied on implicit nested CSPE optimizations, you will now need to explicitly opt-in by setting the `POLARS_ALLOW_NESTED_CSPE` environment variable.
