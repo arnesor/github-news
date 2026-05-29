@@ -1,15 +1,27 @@
-# GitHub New Releases Report 2026-05-28
+# GitHub New Releases Report 2026-05-29
 
-**[pola-rs/polars py-1.41.1](https://github.com/pola-rs/polars/releases/tag/py-1.41.1)**
+**[astral-sh/ruff 0.15.15](https://github.com/astral-sh/ruff/releases/tag/0.15.15)**
 
-Polars version 1.41.1 is a patch release focused on optimizing engine stability, resolving memory regressions, and refining query execution. This update introduces performance enhancements for unique aggregations and addresses critical bugs in Common Subexpression Elimination (CSPE) and PyArrow integrations.
+### Summary
+Ruff version 0.15.15 brings key performance optimizations targeting memory footprint and AST efficiency, alongside minor bug fixes and tool improvements. This patch release also introduces enhanced duplicate import reporting in type-checking blocks and refines formatting for nested lambdas in f-strings.
 
 ### Highlights
-
-* **CSPE Refinements (`POLARS_ALLOW_NESTED_CSPE`)**: To prevent unexpected query behavior, nested Common Subexpression Elimination (CSPE) is now opt-in via a new environment variable. Additionally, a critical bug where scan filters were dropped during CSPE filter pushdowns has been resolved.
-* **Memory & Performance Improvements**: This release fixes a significant memory usage regression affecting TPCH Q22 and introduces an adaptive size dispatch (switching between hashset and radix sort) with capacity-aware resets in `agg_n_unique` for faster aggregations.
-* **PyArrow and Scan Integration**: Polars now correctly post-applies residual PyArrow predicates, ensuring data integrity and accurate filtering when interfacing with PyArrow datasets.
+- **AST & Memory Enhancements:** Significantly reduced memory usage and optimized lexer speed by introducing `ThinVec` to shrink AST `Stmt` nodes, avoiding redundant `TokenValue` drops, and sizing token vectors more efficiently.
+- **Parser and Linter Updates (`F811` & `F821`):** Preview rule `F811` now reports duplicate imports within `typing.TYPE_CHECKING` blocks, while `F821` correctly treats function-scope bare annotations as locals according to PEP 526.
+- **Formatter and Server Fixes:** Resolved a formatting bug with lambdas nested inside f-strings and improved LSP stability by ensuring code actions are returned for `codeAction/resolve` requests lacking a valid URL.
 
 ### Breaking Changes
+None.
+---
+**[astral-sh/uv 0.11.17](https://github.com/astral-sh/uv/releases/tag/0.11.17)**
 
-No breaking API changes are introduced in this patch release. However, if your workflows relied on implicit nested CSPE optimizations, you will now need to explicitly opt-in by setting the `POLARS_ALLOW_NESTED_CSPE` environment variable.
+### Summary
+`uv` version 0.11.17 introduces PEP 794 support for package builds and improves developer UX with helpful CLI diagnostics, such as warning users when attempting to add standard library modules. This release also brings robust offline stability, virtual environment safety safeguards, and critical bug fixes to environment management.
+
+### Highlights
+- **PEP 794 Support in `uv-build`**: Added support for `import-names` and `import-namespaces`, bringing `uv` closer to modern Python packaging standards.
+- **Developer UX & Diagnostic Polish**: `uv add` now warns you if you try to add a standard library module, while the "403 Forbidden" hint now suggests utilizing `ignore-error-codes`.
+- **Offline & Safety Safeguards**: Lock freshness checks for direct URLs are now skipped while offline to prevent command failures, and `uv venv --clear` is now blocked from accidentally deleting non-virtual environments.
+
+### Breaking Changes
+No breaking changes. However, safety validations have been tightened: `uv venv --clear` will now reject deleting non-virtual environments, duplicate script metadata blocks are rejected, and using binary names like "python3" as script entry points is now banned.
