@@ -1,27 +1,17 @@
-# GitHub New Releases Report 2026-05-29
+# GitHub New Releases Report 2026-05-30
 
-**[astral-sh/ruff 0.15.15](https://github.com/astral-sh/ruff/releases/tag/0.15.15)**
+**[pola-rs/polars py-1.41.2](https://github.com/pola-rs/polars/releases/tag/py-1.41.2)**
 
-### Summary
-Ruff version 0.15.15 brings key performance optimizations targeting memory footprint and AST efficiency, alongside minor bug fixes and tool improvements. This patch release also introduces enhanced duplicate import reporting in type-checking blocks and refines formatting for nested lambdas in f-strings.
+### Polars `py-1.41.2` Release Summary
 
-### Highlights
-- **AST & Memory Enhancements:** Significantly reduced memory usage and optimized lexer speed by introducing `ThinVec` to shrink AST `Stmt` nodes, avoiding redundant `TokenValue` drops, and sizing token vectors more efficiently.
-- **Parser and Linter Updates (`F811` & `F821`):** Preview rule `F811` now reports duplicate imports within `typing.TYPE_CHECKING` blocks, while `F821` correctly treats function-scope bare annotations as locals according to PEP 526.
-- **Formatter and Server Fixes:** Resolved a formatting bug with lambdas nested inside f-strings and improved LSP stability by ensuring code actions are returned for `codeAction/resolve` requests lacking a valid URL.
+Polars version `1.41.2` focuses on memory optimization and engine stability, notably upgrading the core allocator to a newer version of `jemalloc` to boost performance. Additionally, this patch prevents unnecessary data materialization during column and list operations while hardening the query engine against async blocking deadlocks.
 
-### Breaking Changes
-None.
----
-**[astral-sh/uv 0.11.17](https://github.com/astral-sh/uv/releases/tag/0.11.17)**
+#### 🚀 Highlights
 
-### Summary
-`uv` version 0.11.17 introduces PEP 794 support for package builds and improves developer UX with helpful CLI diagnostics, such as warning users when attempting to add standard library modules. This release also brings robust offline stability, virtual environment safety safeguards, and critical bug fixes to environment management.
+*   **Jemalloc Upgrade (#27797):** Upgraded to a new version of `jemalloc` to improve memory allocation performance, resolve underlying allocator bugs, and optimize memory overhead.
+*   **Reduced Data Materialization:** Optimized several column, array, and list operations (such as `list.sample`, `array.shift`, and `ScalarColumn` splits) to avoid eager materialization of broadcast values, saving CPU cycles and memory.
+*   **Async Deadlock Mitigation (#27767):** Hardened the internal engine runtime to prevent async blocking deadlocks, ensuring more robust multi-threaded performance in complex pipelines.
 
-### Highlights
-- **PEP 794 Support in `uv-build`**: Added support for `import-names` and `import-namespaces`, bringing `uv` closer to modern Python packaging standards.
-- **Developer UX & Diagnostic Polish**: `uv add` now warns you if you try to add a standard library module, while the "403 Forbidden" hint now suggests utilizing `ignore-error-codes`.
-- **Offline & Safety Safeguards**: Lock freshness checks for direct URLs are now skipped while offline to prevent command failures, and `uv venv --clear` is now blocked from accidentally deleting non-virtual environments.
+#### ⚠️ Breaking Changes
 
-### Breaking Changes
-No breaking changes. However, safety validations have been tightened: `uv venv --clear` will now reject deleting non-virtual environments, duplicate script metadata blocks are rejected, and using binary names like "python3" as script entry points is now banned.
+*   **None:** This is a patch release focused on stability and optimizations; there are no breaking changes.
