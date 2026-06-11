@@ -1,16 +1,14 @@
-# GitHub New Releases Report 2026-06-06
+# GitHub New Releases Report 2026-06-11
 
-**[narwhals-dev/narwhals v2.22.1](https://github.com/narwhals-dev/narwhals/releases/tag/v2.22.1)**
+**[astral-sh/uv 0.11.20](https://github.com/astral-sh/uv/releases/tag/0.11.20)**
 
-### Narwhals v2.22.1 Release Analysis
+### Summary
+`uv` version 0.11.20 delivers notable enhancements to package export operations and dependency listing, alongside an early preview of a new `uv upgrade` command. The release also packs performance optimizations for large workspaces, reduced macOS binary sizes, and several robust stability bug fixes.
 
-#### Summary
-Narwhals version v2.22.1 is a lightweight patch release focused on improving ecosystem compatibility, packaging, and stability. It delivers key bug fixes for Polars and Fireducks integrations, alongside build improvements to ensure test data is packaged correctly.
+### Highlights
+*   **Preview of `uv upgrade`**: This release introduces an early, hidden `uv upgrade` command to lay the groundwork for streamlined dependency updates, with initial restrictions in place (such as rejecting Git revisions).
+*   **Better Custom Index Control**: Users can now use `--emit-index-url` and `--emit-find-links` with `uv export`, while `uv pip list` gains support for `--find-links`, facilitating smoother workflows with offline or self-hosted package registries.
+*   **Workspace & Compiler Optimizations**: Discovery times for massive multi-package workspaces are significantly reduced, and macOS release builds are now compiled with Identical COMDAT Folding (ICF) to reduce binary size.
 
-#### Highlights
-* **Polars Compatibility Improvements**: Backported critical fixes for Polars, including support for the `is_close` comparison on `Decimal` dtypes and correcting behavior for `semi` and `anti` joins on null values.
-* **Fireducks Preservation**: Patched an issue to preserve expected execution and compatibility with Fireducks.
-* **Complete Source Distribution (`sdist`)**: Included test data assets in the `sdist` build to facilitate seamless offline verification and package testing for downstream packagers.
-
-#### Breaking Changes
-* **None**: This is a non-breaking patch release designed to safely resolve bugs without affecting existing APIs.
+### Breaking Changes
+*   **None**: This patch release is fully backward-compatible.
