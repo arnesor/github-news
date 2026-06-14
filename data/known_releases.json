@@ -6,7 +6,7 @@
     "pandas-dev/pandas": "v3.0.3",
     "pola-rs/polars": "py-1.41.2",
     "psf/black": "26.5.1",
-    "pytest-dev/pytest": "9.0.3",
+    "pytest-dev/pytest": "9.1.0",
     "python-poetry/poetry": "2.4.1",
     "unionai-oss/pandera": "v0.31.1",
     "wntrblm/nox": "2026.04.10",
