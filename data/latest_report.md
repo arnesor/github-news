@@ -1,29 +1,19 @@
-# GitHub New Releases Report 2026-06-20
+# GitHub New Releases Report 2026-06-22
 
-**[astral-sh/uv 0.11.23](https://github.com/astral-sh/uv/releases/tag/0.11.23)**
+**[numpy/numpy v2.5.0](https://github.com/numpy/numpy/releases/tag/v2.5.0)**
 
-### Summary
-`uv` version 0.11.23 is a targeted patch release focused on resolving regressions introduced in recent updates. This release restores critical compatibility with the `pre-commit-uv` ecosystem and corrects workspace configuration resolution issues.
-
-### Highlights
-* **Restored `pre-commit-uv` Compatibility:** Reverted a recent change to "transparent Python upgrades" in project environments to mitigate unintended breakages when running `pre-commit-uv` hooks.
-* **Workspace Resolution Fix:** Restored legacy behavior where workspace members "hidden" by an intermediate `pyproject.toml` are correctly treated as standalone projects.
-* **Rapid Stability Rollback:** This release acts as a focused hotfix to ensure developer environment stability and prevent CI/CD pipeline failures caused by recent toolchain updates.
-
-### Breaking Changes
-* **None.** This release does not introduce new breaking changes; instead, it actively rolls back previous changes to resolve accidental breakages and restore expected behaviors.
----
-**[pytest-dev/pytest 9.1.1](https://github.com/pytest-dev/pytest/releases/tag/9.1.1)**
-
-### pytest 9.1.1 Release Notes Summary
+### NumPy v2.5.0 Release Summary
 
 **Summary**
-Pytest 9.1.1 is a patch release addressing critical regressions introduced in version 9.1.0 alongside typing and logic bugs. Key updates include restoring `conftest.py` loading behavior for specific invocation directories and resolving an issue with indirect fixture parametrization overrides.
+NumPy 2.5.0 is a transitional release that officially drops support for Python 3.11, completely removes `numpy.distutils`, and expires a large number of deprecations from the 2.0.x era. It also introduces significant scaling optimizations for free-threaded Python, achieves 100% typing coverage, and adds descending sort options to align with the Array API standard.
 
 **Highlights**
-* **Conftest Loading Regression Fixed (#14608):** Restored the automatic loading of `conftest.py` files located in `<invocation dir>/test*` when invoking pytest without arguments, ensuring initialization hooks like `pytest_addoption` fire correctly.
-* **Parametrized Fixture Overriding (#14591):** Fixed a regression that triggered a "duplicate parametrization" error when overriding a parametrized fixture using indirect `@pytest.mark.parametrize`.
-* **Exception Group Assertions (#14220):** Resolved a logic bug in `pytest.RaisesGroup` that occasionally displayed incorrect and confusing mismatch messages during test failures.
+* **Free-Threading & Performance Gains:** Delivers dramatically better scaling on free-threaded CPython via lock-free dispatch tables, immortal shared objects, and `mimalloc` memory allocation. Additionally, `numpy.searchsorted` is up to 20x faster for multi-key searches, and contiguous array reductions see up to 1.9x speedups.
+* **Descending Sorts (Array API):** Adds a new `descending=True` keyword argument to `numpy.sort` and `numpy.argsort`, bringing sorting behavior into full compliance with the Array API standard.
+* **Pattern Matching & Advanced Typing:** `numpy.ndarray` now supports structural pattern matching (`match`/`case` statements). Static typing has reached 100% submodule coverage, introducing preliminary shape-typing support for `linalg`, `fft`, and array creation functions.
 
-**Breaking Changes**
-⚠️ None. This is a patch release focused solely on bug fixes and regressions.
+**⚠️ Breaking & Compatibility Changes**
+* **Python 3.11 & Distutils Dropped:** Minimum supported Python version is now 3.12. `numpy.distutils` has been completely removed.
+* **`linalg.eig` Return Types:** `linalg.eig` and `linalg.eigvals` now *always* return complex arrays. If your matrix is symmetric or Hermitian, switch to `eigh` or `eigvalsh` to guarantee real-valued outputs.
+* **Deprecated In-Place Mutation:** Directly setting `.shape` or `.dtype` attributes, as well as resizing arrays in-place, is now deprecated to ensure thread safety. Use `.view()` or `np.reshape` instead.
+* **Strict Overflow Checking:** Arithmetic operations on `datetime64`/`timedelta64` and out-of-range Python integers in `numpy.where` now raise `OverflowError` instead of silently wrapping or truncating.
