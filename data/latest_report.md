@@ -1,19 +1,29 @@
-# GitHub New Releases Report 2026-06-22
+# GitHub New Releases Report 2026-06-24
 
-**[numpy/numpy v2.5.0](https://github.com/numpy/numpy/releases/tag/v2.5.0)**
+**[astral-sh/ruff 0.15.19](https://github.com/astral-sh/ruff/releases/tag/0.15.19)**
 
-### NumPy v2.5.0 Release Summary
+### Summary
+Ruff version 0.15.19 delivers a suite of micro-optimizations alongside improved editor integrations and minor rule adjustments. This patch release focuses on reducing memory allocations during parsing and formatting while enhancing the overall developer experience within IDEs.
+
+### Highlights
+1. **Performance Micro-Optimizations**: Multiple internal enhancements—such as using `ArrayVec` for qualified name segments, lazily creating source files, and avoiding allocations during string literal parsing—further boost Ruff's blazing-fast execution speeds.
+2. **Improved Hover & Code Actions**: Added preview support for displaying human-readable rule names when hovering over suppression comments (e.g., `# noqa`) and within IDE code actions.
+3. **Resilient Editor Integration**: Resolves a panic crash when inserting text at notebook cell boundaries and ensures Ruff safely falls back to default configurations when invalid editor-only settings are encountered.
+
+### Breaking Changes
+None.
+---
+**[astral-sh/uv 0.11.24](https://github.com/astral-sh/uv/releases/tag/0.11.24)**
+
+### uv v0.11.24 Release Summary
 
 **Summary**
-NumPy 2.5.0 is a transitional release that officially drops support for Python 3.11, completely removes `numpy.distutils`, and expires a large number of deprecations from the 2.0.x era. It also introduces significant scaling optimizations for free-threaded Python, achieves 100% typing coverage, and adds descending sort options to align with the Array API standard.
+Astral's `uv` version 0.11.24 delivers early support for CPython 3.15.0b3 alongside relocatable project environments behind its preview flag. This update also optimizes dependency resolution performance and resolves several bugs surrounding Python upgrades and shell environment activations.
 
 **Highlights**
-* **Free-Threading & Performance Gains:** Delivers dramatically better scaling on free-threaded CPython via lock-free dispatch tables, immortal shared objects, and `mimalloc` memory allocation. Additionally, `numpy.searchsorted` is up to 20x faster for multi-key searches, and contiguous array reductions see up to 1.9x speedups.
-* **Descending Sorts (Array API):** Adds a new `descending=True` keyword argument to `numpy.sort` and `numpy.argsort`, bringing sorting behavior into full compliance with the Array API standard.
-* **Pattern Matching & Advanced Typing:** `numpy.ndarray` now supports structural pattern matching (`match`/`case` statements). Static typing has reached 100% submodule coverage, introducing preliminary shape-typing support for `linalg`, `fft`, and array creation functions.
+*   **Relocatable Project Environments (Preview):** Project environments can now be made relocatable under the preview flag (`#19965`), complemented by fixes to make `activate.fish` relocatable and expand support for broader Fish shell versions (`#19856`).
+*   **CPython 3.15.0b3 Support:** Out-of-the-box support has been added for CPython 3.15.0b3, letting developers proactively test their pipelines against the next Python release (`#19964`).
+*   **Performance & Control Improvements:** Leverages a compact index for lazy version maps to boost speed (`#19959`), allows developers to disable the `exclude-newer` configuration (`#19934`), and reapplies a key fix for transparent Python upgrades in project environments (`#19928`).
 
-**⚠️ Breaking & Compatibility Changes**
-* **Python 3.11 & Distutils Dropped:** Minimum supported Python version is now 3.12. `numpy.distutils` has been completely removed.
-* **`linalg.eig` Return Types:** `linalg.eig` and `linalg.eigvals` now *always* return complex arrays. If your matrix is symmetric or Hermitian, switch to `eigh` or `eigvalsh` to guarantee real-valued outputs.
-* **Deprecated In-Place Mutation:** Directly setting `.shape` or `.dtype` attributes, as well as resizing arrays in-place, is now deprecated to ensure thread safety. Use `.view()` or `np.reshape` instead.
-* **Strict Overflow Checking:** Arithmetic operations on `datetime64`/`timedelta64` and out-of-range Python integers in `numpy.where` now raise `OverflowError` instead of silently wrapping or truncating.
+**Breaking Changes**
+*   None.
