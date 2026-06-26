@@ -1,7 +1,7 @@
-# GitHub New Releases Report 2026-06-25
+# GitHub New Releases Report 2026-06-26
 
-**[dynaconf/dynaconf 3.3.0](https://github.com/dynaconf/dynaconf/releases/tag/3.3.0)**
+**[astral-sh/ruff 0.15.20](https://github.com/astral-sh/ruff/releases/tag/0.15.20)**
 - Error generating summary: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
 ---
-**[pola-rs/polars py-1.42.0](https://github.com/pola-rs/polars/releases/tag/py-1.42.0)**
+**[marimo-team/marimo 0.23.11](https://github.com/marimo-team/marimo/releases/tag/0.23.11)**
 - Error generating summary: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
