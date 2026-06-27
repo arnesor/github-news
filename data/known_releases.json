@@ -1,8 +1,8 @@
 {
     "astral-sh/ruff": "0.15.20",
-    "astral-sh/uv": "0.11.24",
+    "astral-sh/uv": "0.11.25",
     "cjolowicz/nox-poetry": "v1.2.0",
-    "dynaconf/dynaconf": "3.3.0",
+    "dynaconf/dynaconf": "3.3.1",
     "pandas-dev/pandas": "v3.0.3",
     "pola-rs/polars": "py-1.42.0",
     "psf/black": "26.5.1",
