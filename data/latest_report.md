@@ -1,29 +1,27 @@
-# GitHub New Releases Report 2026-06-30
+# GitHub New Releases Report 2026-07-01
 
-**[dynaconf/dynaconf 3.3.2](https://github.com/dynaconf/dynaconf/releases/tag/3.3.2)**
+**[astral-sh/uv 0.11.26](https://github.com/astral-sh/uv/releases/tag/0.11.26)**
 
 ### Summary
-Dynaconf 3.3.2 is a patch release focused on resolving key stability issues, edge-case crashes, and parser anomalies in configuration handling. This update delivers critical bug fixes for validation processes, environment-based loading recursion, and list merging operations to ensure a more robust configuration experience.
+The uv 0.11.26 release focuses primarily on performance optimizations to the PubGrub dependency resolver to speed up package resolution and installation pipelines. It also introduces a safety warning to prevent potential build issues when the build cache is misconfigured.
 
 ### Highlights
-* **Fix `RecursionError` in `from_env` (#1409):** Prevents an infinite recursion crash when environment-based loading is triggered alongside the `validate_on_update` option.
-* **Safer List Merging (#1410):** Resolves a crash that occurred when attempting to merge a list marked with `dynaconf_merge` into a missing or undefined configuration key.
-* **Improved Parser Precision (#1411, #1412):** Corrects validation edge cases within `validation_file.toml` and ensures strings that merely share a prefix with a converter are no longer incorrectly processed as casts.
+* **PubGrub Resolver Speedups**: Enhances dependency resolution speed by adapting uv to IDs-only PubGrub dependencies and reusing resolver work across solver iterations.
+* **Memory & Search Optimizations**: Speeds up candidate selection for disjoint ranges and eliminates unnecessary allocations in `ForkMap::contains` to reduce overhead during resolution.
+* **Build Cache Warning**: Adds a helpful warning when the build cache is located inside the source directory, helping developers avoid recursive build issues or cache pollution.
 
 ### Breaking Changes
-There are no breaking changes introduced in this patch release.
+None. This is a fully backward-compatible patch release.
 ---
-**[unionai-oss/pandera v0.32.1](https://github.com/unionai-oss/pandera/releases/tag/v0.32.1)**
+**[pola-rs/polars py-1.42.1](https://github.com/pola-rs/polars/releases/tag/py-1.42.1)**
 
-### Pandera v0.32.1 Release Analysis 🚀
+### Summary
+Polars version `py-1.42.1` is a patch release focusing on engine stability through critical bug and panic fixes, notably resolving edge-case issues in temporal extraction and projection pushdowns. Additionally, this release introduces targeted performance optimizations for Parquet metadata resolution and small-datatype summation, alongside a key deprecation in `pl.concat`.
 
-**Summary**
-Pandera v0.32.1 is a patch release focused on improving thread safety, validation reliability, and ecosystem integrations across Polars, PySpark, and Xarray. It resolves critical concurrency bottlenecks while introducing minor developer experience enhancements, such as Pydantic alias support.
+### Highlights
+* **Optimized Parquet & I/O Performance**: Added a sampled resolve mode for multi-file Parquet metadata (#28111) and made path expansion non-blocking (#28073) to accelerate multi-file processing.
+* **Engine Stability & Panic Fixes**: Resolved multiple panic conditions, including crashes during temporal extraction on datetime columns with nulls (#28054), projection pushdowns on `select(len())` (#28108), and `replace` operations involving expressions or object dtypes (#27433).
+* **Faster Small-Dtype Summation**: Integrated an upcast sum kernel (#27958) to significantly speed up summation operations on series with smaller data types.
 
-**Highlights**
-* **Thread Safety & Concurrency Fixes:** Resolves critical concurrency bugs by isolating configuration contexts per execution context (#2380) and ensuring strict thread-safety during Pandas schema validation (#2383).
-* **Pydantic Alias Support:** Adds native support for Pydantic aliases within DataFrame schemas, streamlining data validation workflows that rely on customized model field mappings (#2381).
-* **Ecosystem Resilience:** Fixes builtin check registration in Polars-only installations (#2389), handles missing regex matches gracefully in PySpark (#2394), and preserves regex DataVar schemas in Xarray during validation (#2393).
-
-**Breaking Changes**
-⚠️ **None.** This is a backwards-compatible patch release.
+### Breaking Changes & Deprecations
+* **Deprecation**: The `strict` parameter in `pl.concat` has been deprecated and replaced with the new `how='horizontal_extend'` option (#27965). Update your code to use the new parameter to ensure future compatibility.
