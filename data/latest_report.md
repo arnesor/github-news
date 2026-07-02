@@ -1,27 +1,29 @@
-# GitHub New Releases Report 2026-07-01
+# GitHub New Releases Report 2026-07-02
 
-**[astral-sh/uv 0.11.26](https://github.com/astral-sh/uv/releases/tag/0.11.26)**
+**[marimo-team/marimo 0.23.12](https://github.com/marimo-team/marimo/releases/tag/0.23.12)**
+
+### marimo v0.23.12 Release
+
+**Summary**
+Marimo version 0.23.12 introduces key enhancements to frontend performance, accessibility, and machine learning framework integrations. This release updates model catalogs, improves mobile layout responsiveness, and adds native array protocol support for PyTorch and JAX in audio components.
+
+**Highlights**
+* **Audio & Framework Integrations**: Adds native array protocol support (including `torch.Tensor` and JAX) inside `mo.audio`, alongside support for `pydantic-ai` v2.
+* **WASM & Frontend Upgrades**: Upgrades the frontend to Tailwind v4.3, implements a LazyStore dual-mode WASM backend, and enables direct JSON payload hydration for islands.
+* **Accessibility & UX Polishing**: Adds keyboard and screen-reader support to `mo.ui.file_browser`, improves mobile layout clipping, and suppresses kernel-dependent table controls during static exports.
+
+**Breaking Changes**
+* 🛠️ None.
+---
+**[narwhals-dev/narwhals v2.23.0](https://github.com/narwhals-dev/narwhals/releases/tag/v2.23.0)**
 
 ### Summary
-The uv 0.11.26 release focuses primarily on performance optimizations to the PubGrub dependency resolver to speed up package resolution and installation pipelines. It also introduces a safety warning to prevent potential build issues when the build cache is misconfigured.
+Narwhals v2.23.0 introduces new selector capabilities, broader datatype support, and top-level covariance expressions to enhance compatibility across backend engines. This release also fixes several backend-specific edge cases (including PyArrow and Polars), improves typing preservation for expression chains, and expands downstream CI testing.
 
 ### Highlights
-* **PubGrub Resolver Speedups**: Enhances dependency resolution speed by adapting uv to IDs-only PubGrub dependencies and reusing resolver work across solver iterations.
-* **Memory & Search Optimizations**: Speeds up candidate selection for disjoint ranges and eliminates unnecessary allocations in `ForkMap::contains` to reduce overhead during resolution.
-* **Build Cache Warning**: Adds a helpful warning when the build cache is located inside the source directory, helping developers avoid recursive build issues or cache pollution.
+1. **New Datatype & Selector Features**: Added `selectors.enum` to simplify targeting categorical enum columns and introduced support for the `Float16` datatype.
+2. **Covariance & PyArrow Enhancements**: Added top-level covariance (`cov`) expressions and resolved null-handling issues for correlation (`corr`) within PyArrow, exposing both in `stable.v1`.
+3. **Improved Expression Typing**: Fixed a typing issue to preserve stable `Expr` subclasses through complex `when/then/otherwise` chains, improving developer experience and type safety.
 
 ### Breaking Changes
-None. This is a fully backward-compatible patch release.
----
-**[pola-rs/polars py-1.42.1](https://github.com/pola-rs/polars/releases/tag/py-1.42.1)**
-
-### Summary
-Polars version `py-1.42.1` is a patch release focusing on engine stability through critical bug and panic fixes, notably resolving edge-case issues in temporal extraction and projection pushdowns. Additionally, this release introduces targeted performance optimizations for Parquet metadata resolution and small-datatype summation, alongside a key deprecation in `pl.concat`.
-
-### Highlights
-* **Optimized Parquet & I/O Performance**: Added a sampled resolve mode for multi-file Parquet metadata (#28111) and made path expansion non-blocking (#28073) to accelerate multi-file processing.
-* **Engine Stability & Panic Fixes**: Resolved multiple panic conditions, including crashes during temporal extraction on datetime columns with nulls (#28054), projection pushdowns on `select(len())` (#28108), and `replace` operations involving expressions or object dtypes (#27433).
-* **Faster Small-Dtype Summation**: Integrated an upcast sum kernel (#27958) to significantly speed up summation operations on series with smaller data types.
-
-### Breaking Changes & Deprecations
-* **Deprecation**: The `strict` parameter in `pl.concat` has been deprecated and replaced with the new `how='horizontal_extend'` option (#27965). Update your code to use the new parameter to ensure future compatibility.
+⚠️ **No breaking changes** are introduced in this release. All updates are backward-compatible.
