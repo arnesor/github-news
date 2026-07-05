@@ -1,29 +1,14 @@
-# GitHub New Releases Report 2026-07-02
+# GitHub New Releases Report 2026-07-05
 
-**[marimo-team/marimo 0.23.12](https://github.com/marimo-team/marimo/releases/tag/0.23.12)**
-
-### marimo v0.23.12 Release
-
-**Summary**
-Marimo version 0.23.12 introduces key enhancements to frontend performance, accessibility, and machine learning framework integrations. This release updates model catalogs, improves mobile layout responsiveness, and adds native array protocol support for PyTorch and JAX in audio components.
-
-**Highlights**
-* **Audio & Framework Integrations**: Adds native array protocol support (including `torch.Tensor` and JAX) inside `mo.audio`, alongside support for `pydantic-ai` v2.
-* **WASM & Frontend Upgrades**: Upgrades the frontend to Tailwind v4.3, implements a LazyStore dual-mode WASM backend, and enables direct JSON payload hydration for islands.
-* **Accessibility & UX Polishing**: Adds keyboard and screen-reader support to `mo.ui.file_browser`, improves mobile layout clipping, and suppresses kernel-dependent table controls during static exports.
-
-**Breaking Changes**
-* 🛠️ None.
----
-**[narwhals-dev/narwhals v2.23.0](https://github.com/narwhals-dev/narwhals/releases/tag/v2.23.0)**
+**[numpy/numpy v2.5.1](https://github.com/numpy/numpy/releases/tag/v2.5.1)**
 
 ### Summary
-Narwhals v2.23.0 introduces new selector capabilities, broader datatype support, and top-level covariance expressions to enhance compatibility across backend engines. This release also fixes several backend-specific edge cases (including PyArrow and Polars), improves typing preservation for expression chains, and expands downstream CI testing.
+NumPy 2.5.1 is a patch release focused on fixing bugs, refining type hints, and continuing preparation for Python 3.15. Most notably, this release restores backwards compatibility for downstream packages via a critical fix to the Cython Datetime API and resolves several memory leaks.
 
 ### Highlights
-1. **New Datatype & Selector Features**: Added `selectors.enum` to simplify targeting categorical enum columns and introduced support for the `Float16` datatype.
-2. **Covariance & PyArrow Enhancements**: Added top-level covariance (`cov`) expressions and resolved null-handling issues for correlation (`corr`) within PyArrow, exposing both in `stable.v1`.
-3. **Improved Expression Typing**: Fixed a typing issue to preserve stable `Expr` subclasses through complex `when/then/otherwise` chains, improving developer experience and type safety.
+* **Cython Datetime API Fix ([#31835](https://github.com/numpy/numpy/pull/31835)):** Fixes compatibility issues with the NumPy datetime Cython APIs, allowing downstream libraries to seamlessly support NumPy versions older than 2.5.
+* **Memory & Threading Fixes:** Resolves critical memory leaks in `reduceat` and `accumulate` operations ([#31833](https://github.com/numpy/numpy/pull/31833), [#31842](https://github.com/numpy/numpy/pull/31842)) and prevents potential deadlocks within the `NpyString` API ([#31832](https://github.com/numpy/numpy/pull/31832)).
+* **Regression & Bug Patches:** Fixes a regression in `np.ma.masked_array` introduced in 2.5.0 ([#31837](https://github.com/numpy/numpy/pull/31837)), corrects dtype inference for empty lists in `asarray([])` ([#31836](https://github.com/numpy/numpy/pull/31836)), and prevents a segfault in MT19937 random seeding ([#31857](https://github.com/numpy/numpy/pull/31857)).
 
 ### Breaking Changes
-⚠️ **No breaking changes** are introduced in this release. All updates are backward-compatible.
+* **Toolchain Requirements:** While there are no breaking runtime API changes, the minimum supported GCC version for compiling NumPy from source has been updated from **9.3.0 to 10.3.0** ([#31849](https://github.com/numpy/numpy/pull/31849)).
