@@ -1,6 +1,6 @@
 {
     "astral-sh/ruff": "0.15.20",
-    "astral-sh/uv": "0.11.27",
+    "astral-sh/uv": "0.11.28",
     "cjolowicz/nox-poetry": "v1.2.0",
     "dynaconf/dynaconf": "3.3.2",
     "pandas-dev/pandas": "v3.0.4",

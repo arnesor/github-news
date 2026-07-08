@@ -1,14 +1,14 @@
-# GitHub New Releases Report 2026-07-07
+# GitHub New Releases Report 2026-07-08
 
-**[astral-sh/uv 0.11.27](https://github.com/astral-sh/uv/releases/tag/0.11.27)**
+**[astral-sh/uv 0.11.28](https://github.com/astral-sh/uv/releases/tag/0.11.28)**
 
 ### Summary
-`uv` version 0.11.27 introduces a wide range of performance optimizations alongside key bug fixes and preview feature enhancements. This release focuses on speeding up core tasks like lockfile parsing, caching, and site-package scanning to deliver an even faster developer experience.
+`uv` version 0.11.28 focuses on hardening ZIP archive security against parser differentials and introduces a massive sweep of memory allocation optimizations to boost CLI execution speed. This release also refines terminal error formatting for a better user experience and addresses several package resolution and caching bugs.
 
 ### Highlights
-* **Broad Performance Gains:** Key optimizations include SIMD-accelerated TOML parsing (#20079), avoiding full site-packages scans for direct reinstalls (#20119), reducing allocations during version specifier parsing (#20105), and caching default dependency markers when reading locks (#20125).
-* **Workspace Shebang Script Discovery (Preview):** The `uv workspace list --scripts` command has been enhanced to automatically discover extensionless shebang scripts (#20099).
-* **Robustness & Ecosystem Support:** Re-adds public APIs used by the Pixi package manager (#20074) and improves stability by raising a proper error instead of panicking when a registry package lacks a version in `uv.lock` (#19855).
+- **Security Hardening (ZIP Parser)**: Upgraded `astral-async-zip` to v0.0.20 to protect against parser differential vulnerabilities. `uv` will now strictly reject malformed or ambiguous ZIP archives that were previously accepted.
+- **Aggressive Performance Optimization**: Significantly reduced CPU and memory overhead by avoiding dozens of unnecessary string allocations and object clones during runtime processes (e.g., Git revision handling, Python compatibility checks, and dependency metadata resolution). Additionally, `uv pip install` now limits bytecode compilation strictly to newly installed distributions.
+- **Polished Error Rendering**: Revamped terminal output by preserving multiline indentation for error causes, displaying complete user-error cause chains, and routing final command failures through the standard printer so they properly respect `-q` and `-qq` quiet flags.
 
 ### Breaking Changes
-* None. This is a backward-compatible patch release.
+No formal breaking changes are present in this release. However, the security update to the ZIP parser is a **behavioral change**: some malformed or non-standard ZIP archives that previously succeeded during package installation may now be rejected.
