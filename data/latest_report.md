@@ -1,16 +1,14 @@
-# GitHub New Releases Report 2026-07-09
+# GitHub New Releases Report 2026-07-10
 
-**[marimo-team/marimo 0.23.13](https://github.com/marimo-team/marimo/releases/tag/0.23.13)**
-
-## marimo 0.23.13
+**[astral-sh/ruff 0.15.21](https://github.com/astral-sh/ruff/releases/tag/0.15.21)**
 
 ### Summary
-Marimo version 0.23.13 delivers targeted bug fixes to improve notebook parsing stability and code formatting reliability. This patch release addresses edge cases when pasting notebooks and ensures class decorators are preserved during formatting, alongside preliminary work on a new formatter.
+Ruff version 0.15.21 delivers a robust suite of performance optimizations alongside practical additions to its linting and formatting toolkits. Key updates include new CLI flags for rule ignoring and exclusion, alongside improved syntax handling for Jupyter notebooks.
 
 ### Highlights
-* **Pasted Notebook Parsing Fix:** Resolved edge cases encountered when parsing pasted notebooks, making code migration and sharing smoother (#10033).
-* **Class Decorator Preservation:** Fixed a formatting bug to ensure that class decorators on exposed classes are properly preserved (#10042).
-* **WIP JAX/Flax Formatter:** Introduced initial work on a dedicated formatter for JAX/Flax, laying the groundwork for better ML-ecosystem integration (#9902).
+* **New CLI Capabilities**: Introduces `--add-ignore` (in preview) to programmatically append `ruff:ignore` comments to your code, and `--extend-exclude` for the `ruff format` command to extend exclude patterns without overwriting existing defaults.
+* **Massive Performance Enhancements**: Optimizes the formatter and linter via cached parenthesized expression boundaries, inlining of hot paths (like `fits_element`), lazy builtin bindings, and enabling ICF (Identical Code Folding) for macOS release builds.
+* **Improved Rule & Parsing Safety**: Marks executable/type-stubs autofixes (`EXE004` and `PYI061`) as unsafe to prevent unintended side effects, and refines syntax error detection in individual Jupyter notebook cells.
 
 ### Breaking Changes
-None. This is a non-breaking patch release.
+* **None**. There are no breaking API changes in this release. Note that some rule autofixes have been marked as unsafe, meaning they will no longer run automatically during default `--fix` passes.
