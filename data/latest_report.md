@@ -1,14 +1,14 @@
-# GitHub New Releases Report 2026-07-10
+# GitHub New Releases Report 2026-07-11
 
-**[astral-sh/ruff 0.15.21](https://github.com/astral-sh/ruff/releases/tag/0.15.21)**
+**[marimo-team/marimo 0.23.14](https://github.com/marimo-team/marimo/releases/tag/0.23.14)**
 
 ### Summary
-Ruff version 0.15.21 delivers a robust suite of performance optimizations alongside practical additions to its linting and formatting toolkits. Key updates include new CLI flags for rule ignoring and exclusion, alongside improved syntax handling for Jupyter notebooks.
+Marimo v0.23.14 introduces powerful new features including anywidget composition with hot-reloading, an experimental debugger with per-line execution timing, and major upgrades to the AI assistant. It also brings cached WASM exports, allowing published interactive notebooks to instantly hydrate cell outputs from a bundled cache instead of recomputing them in the browser.
 
 ### Highlights
-* **New CLI Capabilities**: Introduces `--add-ignore` (in preview) to programmatically append `ruff:ignore` comments to your code, and `--extend-exclude` for the `ruff format` command to extend exclude patterns without overwriting existing defaults.
-* **Massive Performance Enhancements**: Optimizes the formatter and linter via cached parenthesized expression boundaries, inlining of hot paths (like `fits_element`), lazy builtin bindings, and enabling ICF (Identical Code Folding) for macOS release builds.
-* **Improved Rule & Parsing Safety**: Marks executable/type-stubs autofixes (`EXE004` and `PYI061`) as unsafe to prevent unintended side effects, and refines syntax error detection in individual Jupyter notebook cells.
+*   **Anywidget Composition & Hot Reloading:** Parent widgets can now render child widgets passed as values. Frontend widget code hot-reloads instantly in place, preserving widget state during live edits.
+*   **Experimental Debugger & Per-Line Timing:** A new experimental execution lifecycle adds frame-watching to highlight running code, support breakpoints, and display a helpful elapsed-time pill on any line executing for over ~500ms.
+*   **Upgraded AI Assistant & WASM Caching:** The AI chat panel now supports web search, prompt caching, and a "Fix in Chat" tool that imports error tracebacks as context. Additionally, `marimo export html-wasm --execute` can now bundle runtime caches to run heavy computations (like PyTorch or JAX) instantly in-browser.
 
 ### Breaking Changes
-* **None**. There are no breaking API changes in this release. Note that some rule autofixes have been marked as unsafe, meaning they will no longer run automatically during default `--fix` passes.
+None. All features are backwards-compatible, and new caching/debugging execution lifecycles are strictly opt-in.
