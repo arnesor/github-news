@@ -1,14 +1,16 @@
-# GitHub New Releases Report 2026-07-11
+# GitHub New Releases Report 2026-07-12
 
-**[marimo-team/marimo 0.23.14](https://github.com/marimo-team/marimo/releases/tag/0.23.14)**
+**[wntrblm/nox 2026.07.11](https://github.com/wntrblm/nox/releases/tag/2026.07.11)**
+
+## 🚀 Nox 2026.07.11 Release
 
 ### Summary
-Marimo v0.23.14 introduces powerful new features including anywidget composition with hot-reloading, an experimental debugger with per-line execution timing, and major upgrades to the AI assistant. It also brings cached WASM exports, allowing published interactive notebooks to instantly hydrate cell outputs from a bundled cache instead of recomputing them in the browser.
+Nox release `2026.07.11` officially drops support for Python 3.9 while paving the way for the future with early support for Python 3.15. This update delivers major performance gains through intelligent caching and lazy module imports alongside key bug fixes and interpreter-resolution improvements.
 
-### Highlights
-*   **Anywidget Composition & Hot Reloading:** Parent widgets can now render child widgets passed as values. Frontend widget code hot-reloads instantly in place, preserving widget state during live edits.
-*   **Experimental Debugger & Per-Line Timing:** A new experimental execution lifecycle adds frame-watching to highlight running code, support breakpoints, and display a helpful elapsed-time pill on any line executing for over ~500ms.
-*   **Upgraded AI Assistant & WASM Caching:** The AI chat panel now supports web search, prompt caching, and a "Fix in Chat" tool that imports error tracebacks as context. Additionally, `marimo export html-wasm --execute` can now bundle runtime caches to run heavy computations (like PyTorch or JAX) instantly in-browser.
+### 🌟 Highlights
+*   **Performance Boosts**: Experience faster runtimes with cached session-name normalization, `uv` detection, interpreter discovery, and metadata reads.
+*   **Python 3.15 Support**: Added Python 3.15 to the test matrix, introducing lazy module imports to optimize performance on the upcoming Python release.
+*   **Command Exit Codes**: The `CommandFailed` exception now exposes a `return_code` property, allowing developers to cleanly inspect and handle specific execution failures programmatically.
 
-### Breaking Changes
-None. All features are backwards-compatible, and new caching/debugging execution lifecycles are strictly opt-in.
+### ⚠️ Breaking Changes
+*   **Dropped Python 3.9**: Nox now requires Python 3.10 or newer. Environments still running on Python 3.9 must be upgraded to run this version.
