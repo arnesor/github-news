@@ -1,16 +1,16 @@
-# GitHub New Releases Report 2026-07-12
+# GitHub New Releases Report 2026-07-14
 
-**[wntrblm/nox 2026.07.11](https://github.com/wntrblm/nox/releases/tag/2026.07.11)**
+**[narwhals-dev/narwhals v2.24.0](https://github.com/narwhals-dev/narwhals/releases/tag/v2.24.0)**
 
-## 🚀 Nox 2026.07.11 Release
+### Narwhals v2.24.0 Release Summary
 
-### Summary
-Nox release `2026.07.11` officially drops support for Python 3.9 while paving the way for the future with early support for Python 3.15. This update delivers major performance gains through intelligent caching and lazy module imports alongside key bug fixes and interpreter-resolution improvements.
+**Summary**
+Narwhals v2.24.0 introduces key usability enhancements, including the new `nw.list` function and broader, more flexible schema definition support. Crucially, this release also resolves potential SQL injection vulnerabilities alongside compatibility updates for PyArrow v25.
 
-### 🌟 Highlights
-*   **Performance Boosts**: Experience faster runtimes with cached session-name normalization, `uv` detection, interpreter discovery, and metadata reads.
-*   **Python 3.15 Support**: Added Python 3.15 to the test matrix, introducing lazy module imports to optimize performance on the upcoming Python release.
-*   **Command Exit Codes**: The `CommandFailed` exception now exposes a `return_code` property, allowing developers to cleanly inspect and handle specific execution failures programmatically.
+**Highlights**
+* 🔒 **Security Hardening**: Patched potential SQL injection vulnerabilities in both `sink_parquet` (#3783) and `join_asof` (#3782) operations.
+* 🚀 **New `nw.list` Function**: Added native `nw.list` (#3694) support, expanding Narwhals' capabilities for handling list-type data.
+* 🛠️ **Improved Schema Flexibility**: Widened `IntoSchema` to seamlessly accept `IntoDType` values and sequences of `(name, dtype)` pairs (#3756), simplifying dtype mapping workflows.
 
-### ⚠️ Breaking Changes
-*   **Dropped Python 3.9**: Nox now requires Python 3.10 or newer. Environments still running on Python 3.9 must be upgraded to run this version.
+**Breaking Changes**
+* None reported in this release.
