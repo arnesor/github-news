@@ -1,16 +1,14 @@
-# GitHub New Releases Report 2026-07-14
+# GitHub New Releases Report 2026-07-16
 
-**[narwhals-dev/narwhals v2.24.0](https://github.com/narwhals-dev/narwhals/releases/tag/v2.24.0)**
+**[astral-sh/uv 0.11.29](https://github.com/astral-sh/uv/releases/tag/0.11.29)**
 
-### Narwhals v2.24.0 Release Summary
+### Summary
+uv version 0.11.29 introduces significant performance optimizations by caching workspace discovery and widening resolver version ranges, alongside key usability enhancements like JSON output for `uv tree` and CUDA 13.2 support. This release also resolves several panic-inducing edge cases, improves path security for build backends, and refines PEP 440 range ordering.
 
-**Summary**
-Narwhals v2.24.0 introduces key usability enhancements, including the new `nw.list` function and broader, more flexible schema definition support. Crucially, this release also resolves potential SQL injection vulnerabilities alongside compatibility updates for PyArrow v25.
+### Highlights
+* **Workspace Discovery & Performance Boosts:** Performance is heavily optimized across `uv sync`, `uv tree`, `uv export`, `uv format`, and `uv audit` by reusing workspace discovery results and deferring client/build setup for no-op sync operations.
+* **JSON Output for `uv tree`:** Programmatic analysis of your dependency tree is now much easier with the addition of native JSON output support to the `uv tree` command ([#19978](https://github.com/astral-sh/uv/pull/19978)).
+* **Robustness & Security Hardening:** Enhanced security by rejecting PEP 517 build-backend paths that escape the source tree via symlinks. Additionally, several panic scenarios (such as invalid cloud credentials, invalid `pylock.toml` URLs, and non-UTF-8 virtualenv paths) have been replaced with clean error diagnostics.
 
-**Highlights**
-* 🔒 **Security Hardening**: Patched potential SQL injection vulnerabilities in both `sink_parquet` (#3783) and `join_asof` (#3782) operations.
-* 🚀 **New `nw.list` Function**: Added native `nw.list` (#3694) support, expanding Narwhals' capabilities for handling list-type data.
-* 🛠️ **Improved Schema Flexibility**: Widened `IntoSchema` to seamlessly accept `IntoDType` values and sequences of `(name, dtype)` pairs (#3756), simplifying dtype mapping workflows.
-
-**Breaking Changes**
-* None reported in this release.
+### Breaking Changes
+⚠️ **No breaking changes** are introduced in this release.
