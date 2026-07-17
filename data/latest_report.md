@@ -1,14 +1,14 @@
-# GitHub New Releases Report 2026-07-16
+# GitHub New Releases Report 2026-07-17
 
-**[astral-sh/uv 0.11.29](https://github.com/astral-sh/uv/releases/tag/0.11.29)**
+**[astral-sh/ruff 0.15.22](https://github.com/astral-sh/ruff/releases/tag/0.15.22)**
 
 ### Summary
-uv version 0.11.29 introduces significant performance optimizations by caching workspace discovery and widening resolver version ranges, alongside key usability enhancements like JSON output for `uv tree` and CUDA 13.2 support. This release also resolves several panic-inducing edge cases, improves path security for build backends, and refines PEP 440 range ordering.
+Ruff version 0.15.22 introduces several new preview rules aimed at modernizing configuration comments alongside a new autofix for module-level import placement. This release also delivers substantial parser performance optimizations and key bug fixes for Python type stub files and loop variable checks.
 
 ### Highlights
-* **Workspace Discovery & Performance Boosts:** Performance is heavily optimized across `uv sync`, `uv tree`, `uv export`, `uv format`, and `uv audit` by reusing workspace discovery results and deferring client/build setup for no-op sync operations.
-* **JSON Output for `uv tree`:** Programmatic analysis of your dependency tree is now much easier with the addition of native JSON output support to the `uv tree` command ([#19978](https://github.com/astral-sh/uv/pull/19978)).
-* **Robustness & Security Hardening:** Enhanced security by rejecting PEP 517 build-backend paths that escape the source tree via symlinks. Additionally, several panic scenarios (such as invalid cloud credentials, invalid `pylock.toml` URLs, and non-UTF-8 virtualenv paths) have been replaced with clean error diagnostics.
+* **Modernized Ignore Comments (`RUF105`, `RUF106`, `RUF201`)**: New preview rules encourage transitioning from legacy `# noqa` comments to `# ruff:ignore`, while promoting human-readable rule names instead of opaque codes in both inline comments and configuration selectors.
+* **Autofix for `E402` (Module Level Imports)**: A new preview autofix automatically moves misplaced module-level imports to the top of the file, smoothing out import ordering workflows.
+* **Parser & Lexer Performance Boosts**: Several under-the-hood optimizations have been introduced—including avoiding redundant lexer token bookkeeping, eliminating unnecessary identifier lookaheads, and reusing parser scratch buffers—to speed up linting times.
 
 ### Breaking Changes
-⚠️ **No breaking changes** are introduced in this release.
+⚠️ **None**: There are no breaking changes introduced in this release.
