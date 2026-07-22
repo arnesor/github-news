@@ -1,16 +1,33 @@
-# GitHub New Releases Report 2026-07-21
+# GitHub New Releases Report 2026-07-22
 
-**[astral-sh/uv 0.11.30](https://github.com/astral-sh/uv/releases/tag/0.11.30)**
+**[astral-sh/uv 0.11.31](https://github.com/astral-sh/uv/releases/tag/0.11.31)**
 
-### uv 0.11.30 Release Analysis
+### Summary
+`uv` version 0.11.31 introduces support for cross-workspace path references and new configuration options for security malware audits. This release also delivers resolution performance optimizations for transitive conflicts alongside several key bug fixes.
 
-**Summary**
-`uv` version 0.11.30 focuses heavily on performance optimizations for dependency resolution and caching, while also introducing early support for CPython 3.15.0b4. This release also refines workspace management in preview mode and addresses edge cases in uninstallation and environment configuration.
+### Highlights
+- **Cross-Workspace Path References**: Allows workspace sources to reference members located in another workspace directly by path ([#18401](https://github.com/astral-sh/uv/pull/18401)).
+- **Malware Audit Configuration**: Added `audit.malware-check` and `audit.malware-check-url` settings to support automated package security checks ([#20587](https://github.com/astral-sh/uv/pull/20587)).
+- **Transitive Conflict Performance**: Fixed quadratic time complexity when deduplicating transitive dependency conflicts, improving resolution speeds ([#20578](https://github.com/astral-sh/uv/pull/20578)).
 
-**Highlights**
-* **Massive Resolver & Cache Performance Gains:** Accelerates lockfile serialization using `toml_writer`, limits parallel cache reads to reduce scheduling overhead, and optimizes candidate resolution by caching requirement markers and skipping candidates excluded by `exclude-newer`.
-* **CPython 3.15.0b4 Support:** Adds compatibility for the latest Python 3.15 beta, allowing developers to test their environments against upcoming Python versions.
-* **Workspace Usability Upgrades:** Enhances preview features by allowing `uv workspace metadata --sync` to target the active virtual environment via `--active`, and fixes centralized project environment reuse when workspaces are accessed via symlinks.
+### Breaking Changes
+None.
+---
+**[pola-rs/polars py-1.43.0](https://github.com/pola-rs/polars/releases/tag/py-1.43.0)**
 
-**Breaking Changes**
-⚠️ **None.** This release is fully backward-compatible.
+## Polars py-1.43.0 Release Summary
+
+### Summary
+Polars `py-1.43.0` introduces major query engine optimizations for Hive-partitioned scans and joins, along with algorithmic performance upgrades like O(n) rolling min/max operations. This release also continues API stabilization by deprecating legacy methods and implicit type coercions in favor of stricter, safer defaults.
+
+### Highlights
+- **Hive & Query Engine Optimizations**: Added pre-partitioning on Hive keys for joins and group-bys, optimized Hive inner joins into filtered partition unions, and tightened filter constraint propagation.
+- **New Features & Expressions**: Introduced `ewm_sum` / `ewm_sum_by`, a consolidated `list` packing expression, `scan_arrow_c_stream`, and explicit `Series.degrees()` / `Series.radians()` helpers.
+- **Memory & Streaming Upgrades**: Added `POLARS_OOC_DISK_BUDGET_MB` for out-of-core processing, removed excess memory copies in the streaming IPC sink, and implemented an O(n) monotonic deque for rolling calculations.
+
+### Breaking Changes & Deprecations
+⚠️ **Deprecations Introduced** (no immediate hard breaks, but action required):
+- **Type Casts**: Deprecated casting numeric types to Categorical, as well as non-nested dtypes directly to Lists.
+- **Categoricals**: Deprecated `cat.get_categories()` and `cat.to_local()` (use `Expr.cat.to()` and `Expr.cat.physical()`).
+- **Bitwise & Struct Ops**: Deprecated bitwise operations between integers and booleans, and calling `.to_struct()` without explicit field names.
+- **LazyFrame & Configuration**: Deprecated `LazyFrame.profile()`. Renamed parameter `missing_utf8_is_empty_string` to `empty_string_is_null`.
