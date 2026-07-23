@@ -1,33 +1,44 @@
-# GitHub New Releases Report 2026-07-22
+# GitHub New Releases Report 2026-07-23
 
-**[astral-sh/uv 0.11.31](https://github.com/astral-sh/uv/releases/tag/0.11.31)**
+**[duckdb/duckdb v1.5.5](https://github.com/duckdb/duckdb/releases/tag/v1.5.5)**
+
+## Summary
+DuckDB v1.5.5 is a patch release focused on critical bug fixes, memory safety, and engine stability following the v1.5.4 release. It addresses several out-of-bounds read vulnerabilities, resolves concurrency deadlocks, and bumps core extensions including HTTPFS, Iceberg, and ADBC.
+
+## Highlights
+* **Security & Memory Safety**: Fixed multiple out-of-bounds read vulnerabilities across JSON path lookahead, dictionary string decompression, string-to-struct casts, and decimal handling.
+* **Concurrency & Memory Fixes**: Resolved a deadlock in `TemporaryMemoryManager`, fixed a segfault in external hash aggregation when radix bits grow, and resolved crashes during concurrent `ALTER` and `INSERT` operations.
+* **Ecosystem & ADBC Updates**: Introduced support for the `duckdb://` URI scheme and ADBC Statistics API, alongside version updates for PostgreSQL, HTTPFS, Iceberg, and Lance extensions.
+
+## Breaking Changes
+None. This is a backward-compatible bug fix patch release.
+---
+**[dynaconf/dynaconf 3.3.3](https://github.com/dynaconf/dynaconf/releases/tag/3.3.3)**
+
+## Dynaconf 3.3.3 Release Overview
 
 ### Summary
-`uv` version 0.11.31 introduces support for cross-workspace path references and new configuration options for security malware audits. This release also delivers resolution performance optimizations for transitive conflicts alongside several key bug fixes.
+Dynaconf 3.3.3 is a patch release focused on resolving a regression in lazy evaluation when box behavior is disabled. It also introduces documentation improvements for configuration validation and streamlines internal deployment workflows.
 
 ### Highlights
-- **Cross-Workspace Path References**: Allows workspace sources to reference members located in another workspace directly by path ([#18401](https://github.com/astral-sh/uv/pull/18401)).
-- **Malware Audit Configuration**: Added `audit.malware-check` and `audit.malware-check-url` settings to support automated package security checks ([#20587](https://github.com/astral-sh/uv/pull/20587)).
-- **Transitive Conflict Performance**: Fixed quadratic time complexity when deduplicating transitive dependency conflicts, improving resolution speeds ([#20578](https://github.com/astral-sh/uv/pull/20578)).
+- **Lazy Evaluation Fix:** Resolved a regression affecting lazy evaluation when `dynaboxify=False` (#1429).
+- **Docs Clarification:** Improved documentation surrounding `True`, `False`, and `None` handling for `must_exist` checks (#1416).
+- **CI/CD Enhancements:** Consolidated and simplified documentation publishing and backport branch workflows on CI (#1415, #1417, #1420).
 
 ### Breaking Changes
 None.
 ---
-**[pola-rs/polars py-1.43.0](https://github.com/pola-rs/polars/releases/tag/py-1.43.0)**
+**[pandas-dev/pandas v3.0.5](https://github.com/pandas-dev/pandas/releases/tag/v3.0.5)**
 
-## Polars py-1.43.0 Release Summary
+## Pandas v3.0.5 Release Analysis
 
 ### Summary
-Polars `py-1.43.0` introduces major query engine optimizations for Hive-partitioned scans and joins, along with algorithmic performance upgrades like O(n) rolling min/max operations. This release also continues API stabilization by deprecating legacy methods and implicit type coercions in favor of stricter, safer defaults.
+Pandas 3.0.5 is a patch release in the 3.0.x series focused on delivering critical regression and bug fixes. The maintainers recommend that all users currently running Pandas 3.0.x upgrade to this version to ensure optimal stability.
 
 ### Highlights
-- **Hive & Query Engine Optimizations**: Added pre-partitioning on Hive keys for joins and group-bys, optimized Hive inner joins into filtered partition unions, and tightened filter constraint propagation.
-- **New Features & Expressions**: Introduced `ewm_sum` / `ewm_sum_by`, a consolidated `list` packing expression, `scan_arrow_c_stream`, and explicit `Series.degrees()` / `Series.radians()` helpers.
-- **Memory & Streaming Upgrades**: Added `POLARS_OOC_DISK_BUDGET_MB` for out-of-core processing, removed excess memory copies in the streaming IPC sink, and implemented an O(n) monotonic deque for rolling calculations.
+- **Regression Fixes**: Addresses unexpected regressions introduced in earlier 3.0.x releases.
+- **Bug Fixes**: Resolves various community-reported bugs to improve overall core functionality.
+- **Python 3.11+ Requirement**: Continues seamless support for modern Python runtimes (Python 3.11 and higher).
 
-### Breaking Changes & Deprecations
-⚠️ **Deprecations Introduced** (no immediate hard breaks, but action required):
-- **Type Casts**: Deprecated casting numeric types to Categorical, as well as non-nested dtypes directly to Lists.
-- **Categoricals**: Deprecated `cat.get_categories()` and `cat.to_local()` (use `Expr.cat.to()` and `Expr.cat.physical()`).
-- **Bitwise & Struct Ops**: Deprecated bitwise operations between integers and booleans, and calling `.to_struct()` without explicit field names.
-- **LazyFrame & Configuration**: Deprecated `LazyFrame.profile()`. Renamed parameter `missing_utf8_is_empty_string` to `empty_string_is_null`.
+### Breaking Changes
+No breaking changes are present in this patch release.
