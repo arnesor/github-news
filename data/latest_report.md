@@ -1,44 +1,47 @@
-# GitHub New Releases Report 2026-07-23
+# GitHub New Releases Report 2026-07-24
 
-**[duckdb/duckdb v1.5.5](https://github.com/duckdb/duckdb/releases/tag/v1.5.5)**
-
-## Summary
-DuckDB v1.5.5 is a patch release focused on critical bug fixes, memory safety, and engine stability following the v1.5.4 release. It addresses several out-of-bounds read vulnerabilities, resolves concurrency deadlocks, and bumps core extensions including HTTPFS, Iceberg, and ADBC.
-
-## Highlights
-* **Security & Memory Safety**: Fixed multiple out-of-bounds read vulnerabilities across JSON path lookahead, dictionary string decompression, string-to-struct casts, and decimal handling.
-* **Concurrency & Memory Fixes**: Resolved a deadlock in `TemporaryMemoryManager`, fixed a segfault in external hash aggregation when radix bits grow, and resolved crashes during concurrent `ALTER` and `INSERT` operations.
-* **Ecosystem & ADBC Updates**: Introduced support for the `duckdb://` URI scheme and ADBC Statistics API, alongside version updates for PostgreSQL, HTTPFS, Iceberg, and Lance extensions.
-
-## Breaking Changes
-None. This is a backward-compatible bug fix patch release.
----
-**[dynaconf/dynaconf 3.3.3](https://github.com/dynaconf/dynaconf/releases/tag/3.3.3)**
-
-## Dynaconf 3.3.3 Release Overview
+**[astral-sh/ruff 0.16.0](https://github.com/astral-sh/ruff/releases/tag/0.16.0)**
 
 ### Summary
-Dynaconf 3.3.3 is a patch release focused on resolving a regression in lazy evaluation when box behavior is disabled. It also introduces documentation improvements for configuration validation and streamlines internal deployment workflows.
+Ruff 0.16.0 significantly expands its default linter footprint by enabling 413 rules out of the box and adding automatic Python formatting inside Markdown files. This update also introduces native `ruff: ignore` comment support, richer CLI diffs, and CI output formatting.
 
 ### Highlights
-- **Lazy Evaluation Fix:** Resolved a regression affecting lazy evaluation when `dynaboxify=False` (#1429).
-- **Docs Clarification:** Improved documentation surrounding `True`, `False`, and `None` handling for `must_exist` checks (#1416).
-- **CI/CD Enhancements:** Consolidated and simplified documentation publishing and backport branch workflows on CI (#1415, #1417, #1420).
+- **Markdown Code Block Formatting**: Ruff now automatically formats Python code snippets embedded within Markdown files by default.
+- **Native Comment Suppressions**: Supports `# ruff: ignore[RULE]` inline or on preceding lines as an alternative to `# noqa`.
+- **Improved CI & Diff Tooling**: Fixes and diffs are now shown directly in `check` and `format --check`, alongside support for `--output-format github` / `gitlab` annotations.
 
 ### Breaking Changes
-None.
+⚠️ **Action Required**:
+- **Default Rules Expanded**: Default enabled rules increased drastically from 59 to 413. Review your configuration if you prefer minimal defaults.
+- **Markdown Formatting Active by Default**: `ruff format` will now format Python blocks inside `.md` files by default.
+- **JSON Output Nullability**: Fields like `filename`, `location`, and `end_location` in JSON output can now be `null` instead of defaulting to empty strings or row 1, column 1.
 ---
-**[pandas-dev/pandas v3.0.5](https://github.com/pandas-dev/pandas/releases/tag/v3.0.5)**
+**[astral-sh/uv 0.11.32](https://github.com/astral-sh/uv/releases/tag/0.11.32)**
 
-## Pandas v3.0.5 Release Analysis
+## uv 0.11.32 Release Overview
 
 ### Summary
-Pandas 3.0.5 is a patch release in the 3.0.x series focused on delivering critical regression and bug fixes. The maintainers recommend that all users currently running Pandas 3.0.x upgrade to this version to ensure optimal stability.
+`uv` version 0.11.32 introduces stricter canonical lockfile enforcement, targeted package filtering for `uv check`, and improved upgrades across multi-marker package declarations. It also optimizes dependency-group conflict resolution performance and fixes a edge case in universal resolution python requirement discovery.
 
 ### Highlights
-- **Regression Fixes**: Addresses unexpected regressions introduced in earlier 3.0.x releases.
-- **Bug Fixes**: Resolves various community-reported bugs to improve overall core functionality.
-- **Python 3.11+ Requirement**: Continues seamless support for modern Python runtimes (Python 3.11 and higher).
+- **Strict Lockfile Formatting:** `uv lock --check` and commands using `--locked` now reject non-canonically formatted lockfiles. You can automatically fix these using `uv lock --refresh`.
+- **Targeted Package Checks:** Added `--package` and `--all-packages` flags to `uv check` for granular workspace package validation.
+- **Improved Multi-Marker Upgrades:** `uv upgrade` now supports updating multiple marker-specific declarations of the same package simultaneously.
 
 ### Breaking Changes
-No breaking changes are present in this patch release.
+**None.** However, note that CI pipelines using `--locked` or `uv lock --check` will now reject lockfiles that are not canonically formatted. Regenerate affected lockfiles using `uv lock --refresh`.
+---
+**[marimo-team/marimo 0.23.15](https://github.com/marimo-team/marimo/releases/tag/0.23.15)**
+
+## Marimo 0.23.15 Release Summary
+
+### Summary
+Marimo version 0.23.15 delivers a broad collection of stability improvements, security updates, and UX enhancements across data handling, AI tooling, and rendering. This patch release addresses data editor column corruption, improves agent session routing, and introduces streaming file downloads directly from disk.
+
+### Highlights
+* **Data Integrity & Visualization Fixes:** Resolved `data_editor` corruption on `int8`/`uint8`/`float16` columns, switched pandas serialization to Arrow IPC, and restored retina rendering for Matplotlib figures.
+* **AI & Agent Session Upgrades:** Added precise session targeting so AI agents reliably connect to the correct active notebook, queued follow-up messages while the assistant streams, and updated the LLM model catalog.
+* **File Management & Diagnostics:** Enabled streaming file-browser downloads directly from disk, added searchable comboboxes for secrets/environment variables, and introduced previewable diagnostics in feedback modals.
+
+### Breaking Changes
+None. This is a non-breaking patch release.

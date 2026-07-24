@@ -1,6 +1,6 @@
 {
-    "astral-sh/ruff": "0.15.22",
-    "astral-sh/uv": "0.11.31",
+    "astral-sh/ruff": "0.16.0",
+    "astral-sh/uv": "0.11.32",
     "cjolowicz/nox-poetry": "v1.2.0",
     "dynaconf/dynaconf": "3.3.3",
     "pandas-dev/pandas": "v3.0.5",
@@ -14,5 +14,5 @@
     "ibis-project/ibis": "12.0.0",
     "narwhals-dev/narwhals": "v2.24.0",
     "numpy/numpy": "v2.5.1",
-    "marimo-team/marimo": "0.23.14"
+    "marimo-team/marimo": "0.23.15"
 }
