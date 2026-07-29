@@ -1,16 +1,21 @@
-# GitHub New Releases Report 2026-07-28
+# GitHub New Releases Report 2026-07-29
 
-**[pola-rs/polars py-1.43.1](https://github.com/pola-rs/polars/releases/tag/py-1.43.1)**
+**[astral-sh/uv 0.12.0](https://github.com/astral-sh/uv/releases/tag/0.12.0)**
 
-### Polars `py-1.43.1` Release Analysis
+### Astral uv v0.12.0 Release Summary
 
 **Summary**
-Polars `py-1.43.1` is a patch release focused heavily on engine correctness, SQL compliance, and stability fixes across cloud and catalog integrations. It also introduces minor boolean expression performance improvements and enables callback sinks for Polars Cloud.
+uv 0.12.0 introduces key updates to improve correctness, security compliance, and developer experience across the Python toolchain. While many changes are defensively marked as breaking—such as stricter package validation, security hardening, and layout updates—most existing user workflows will upgrade seamlessly.
 
 **Highlights**
-- **Engine & Join Stability**: Resolved undefined behavior on `first/last_non_null` with empty chunks, fixed self-join panics on Delta/Iceberg scans, and corrected slice handling in ordered joins.
-- **SQL & Logic Corrections**: Addressed 3-valued logic (3VL) edge cases with SQL `NOT IN` interactions on `NULL` values and ensured `SUM`/`CORR` aggregates return `NULL` for all-null inputs.
-- **Cloud & Integration Features**: Enabled callback sinks on cloud environments and fixed shared `SchemaError` issues across Delta and Iceberg table readers.
+- **Default Build Systems (`uv init`)**: `uv init` now configures `uv_build` by default, generating a packaged `src/` layout with executable entry points out of the box.
+- **Improved Pre-release Resolution**: The dependency resolver now defaults to `if-necessary` mode, gracefully handling transitively requested pre-releases while continuing to prefer stable releases.
+- **Script-Relative Project Discovery**: Executing `uv run path/to/script.py` now discovers project settings and virtual environments relative to the script's location instead of the current working directory.
 
 **Breaking Changes**
-None.
+⚠️ **Yes, breaking changes are present:**
+- **Package Layout**: `uv init` defaults to a packaged layout with `uv_build` (use `--no-package` for the legacy layout).
+- **Format & Archive Restrictions**: Deprecated archive formats (`.tar.bz2`, `.tar.xz`) and non-standard wheel compressions (bzip2, LZMA) are now rejected.
+- **Interpreter Security**: Rejects wheels containing case-variant executable entry points (e.g., `Python.exe`) or `.data` files that could overwrite the environment's interpreter.
+- **Hash & Lockfile Enforcement**: Reject MD5-only digests in `--require-hashes` mode; strictly validate `pylock.toml` structure, filenames, and reported artifact sizes.
+- **Path Resolution**: Relative indexes resolve against `--directory`, and path arguments passed to `uv add` preserve their original relative/absolute forms.
