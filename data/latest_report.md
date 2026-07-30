@@ -1,21 +1,16 @@
-# GitHub New Releases Report 2026-07-29
+# GitHub New Releases Report 2026-07-30
 
-**[astral-sh/uv 0.12.0](https://github.com/astral-sh/uv/releases/tag/0.12.0)**
+**[dynaconf/dynaconf 3.3.4](https://github.com/dynaconf/dynaconf/releases/tag/3.3.4)**
 
-### Astral uv v0.12.0 Release Summary
+### Dynaconf 3.3.4 Release Summary
 
 **Summary**
-uv 0.12.0 introduces key updates to improve correctness, security compliance, and developer experience across the Python toolchain. While many changes are defensively marked as breaking—such as stricter package validation, security hardening, and layout updates—most existing user workflows will upgrade seamlessly.
+Dynaconf 3.3.4 is a maintenance patch release focused on resolving key resolution issues, CLI edge cases, and framework integration bugs. It improves settings merge cleanup, path parsing reliability, and Django early validation behavior without introducing breaking changes.
 
 **Highlights**
-- **Default Build Systems (`uv init`)**: `uv init` now configures `uv_build` by default, generating a packaged `src/` layout with executable entry points out of the box.
-- **Improved Pre-release Resolution**: The dependency resolver now defaults to `if-necessary` mode, gracefully handling transitively requested pre-releases while continuing to prefer stable releases.
-- **Script-Relative Project Discovery**: Executing `uv run path/to/script.py` now discovers project settings and virtual environments relative to the script's location instead of the current working directory.
+* **CLI Initialization Fix:** Resolved an issue where passing list values for `env` during `dynaconf init` resulted in an error (#1278, #1421).
+* **Path & Token Merging:** Fixed settings resolution to keep sibling keys sharing a dotted path leaf name (#1434) and cleaned up nested `dynaconf_merge` tokens when parent keys are new (#1435).
+* **Django Integration:** Corrected a bug in the Django early validation integration flow (#1432).
 
 **Breaking Changes**
-⚠️ **Yes, breaking changes are present:**
-- **Package Layout**: `uv init` defaults to a packaged layout with `uv_build` (use `--no-package` for the legacy layout).
-- **Format & Archive Restrictions**: Deprecated archive formats (`.tar.bz2`, `.tar.xz`) and non-standard wheel compressions (bzip2, LZMA) are now rejected.
-- **Interpreter Security**: Rejects wheels containing case-variant executable entry points (e.g., `Python.exe`) or `.data` files that could overwrite the environment's interpreter.
-- **Hash & Lockfile Enforcement**: Reject MD5-only digests in `--require-hashes` mode; strictly validate `pylock.toml` structure, filenames, and reported artifact sizes.
-- **Path Resolution**: Relative indexes resolve against `--directory`, and path arguments passed to `uv add` preserve their original relative/absolute forms.
+None. This is a backward-compatible patch release.
