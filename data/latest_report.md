@@ -1,16 +1,26 @@
-# GitHub New Releases Report 2026-08-07
+# GitHub New Releases Report 2026-08-08
 
-**[pola-rs/polars rs-0.55.2](https://github.com/pola-rs/polars/releases/tag/rs-0.55.2)**
+**[astral-sh/ruff 0.16.2](https://github.com/astral-sh/ruff/releases/tag/0.16.2)**
 
-### Polars Rust Crate `rs-0.55.2` Release Notes
+### Summary
+Ruff 0.16.2 is a lightweight patch release focused on refining LSP server capabilities and linting accuracy. This update resolves false positive type-hinting warnings for `singledispatch` functions and optimizes language server behavior around TOML files.
 
-**Summary**
-Polars `rs-0.55.2` is a patch release for the Rust implementation focusing on cloud I/O resiliency and critical stability fixes. It introduces an adaptive HTTP rate-limiter for cloud storage access alongside a fix for a concurrency unsoundness issue in Rayon.
+### Highlights
+- **LSP TOML Formatting Exclusions:** Language server formatting capabilities are now registered dynamically to properly exclude TOML files from formatting requests ([#27332](https://github.com/astral-sh/ruff/pull/27332)).
+- **`flake8-pyi` False Positive Fix (`PYI041`):** Resolved incorrect rule violations triggered on `singledispatch` functions ([#27335](https://github.com/astral-sh/ruff/pull/27335)).
 
-**Highlights**
-* **Adaptive HTTP Rate-Limiter**: Automatically adjusts request rates to prevent throttling during cloud I/O operations (#28591).
-* **Rayon Unsoundness Fix**: Resolved a memory safety/concurrency bug in `rayon block_on` (#28709).
-* **CSPE Reliability**: Added shallow IR node equality checks alongside hashing to prevent collisions in Common Subplan Elimination (#28506).
+### Breaking Changes
+None.
+---
+**[astral-sh/uv 0.12.3](https://github.com/astral-sh/uv/releases/tag/0.12.3)**
 
-**Breaking Changes**
-* 🟢 **None**: This release contains no breaking changes.
+### Summary
+`uv` version 0.12.3 delivers targeted performance improvements for Linux startup times, memory efficiency in large workspaces, and dependency resolution. It also introduces support for CPython 3.13.15 alongside enhancements to workspace metadata tooling.
+
+### Highlights
+- **Linux & Discovery Performance:** Significantly reduced Linux startup latency by optimizing cache initialization and avoiding slow `/proc` reads during Python interpreter discovery.
+- **Lower Memory Footprint:** `uv workspace metadata` now streams JSON output, drastically reducing memory usage when querying large monorepos.
+- **Faster Dependency Resolutions:** Accelerated conflict-heavy package resolutions by avoiding unnecessary materialized range complements.
+
+### Breaking Changes
+None.
