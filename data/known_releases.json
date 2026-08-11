@@ -9,7 +9,7 @@
     "pytest-dev/pytest": "9.1.1",
     "python-poetry/poetry": "2.4.1",
     "unionai-oss/pandera": "v0.32.1",
-    "wntrblm/nox": "2026.07.11",
+    "wntrblm/nox": "2026.08.10",
     "duckdb/duckdb": "v1.5.5",
     "ibis-project/ibis": "12.0.0",
     "narwhals-dev/narwhals": "v2.24.0",

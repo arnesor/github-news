@@ -1,14 +1,14 @@
-# GitHub New Releases Report 2026-08-10
+# GitHub New Releases Report 2026-08-11
 
-**[numpy/numpy v2.5.2](https://github.com/numpy/numpy/releases/tag/v2.5.2)**
+**[wntrblm/nox 2026.08.10](https://github.com/wntrblm/nox/releases/tag/2026.08.10)**
 
-### Summary
-NumPy 2.5.2 is a patch release focused on critical bug fixes, memory leak resolutions, and free-threading stability improvements. It officially introduces pre-built wheels for Python 3.15.0rc1, expanding overall support across Python 3.12 through 3.15.
+### Overview
+Nox release `2026.08.10` introduces experimental parallel session execution alongside a new `python-discovery` engine for enhanced interpreter lookup and version specifier support. It also refines CLI option precedence, improves Conda version handling, and enforces stricter global flag validation.
 
 ### Highlights
-* **Python 3.15.0rc1 Wheels:** Added official pre-built wheel support for the latest Python 3.15 release candidate.
-* **C API & Free-Threading Stability:** Made `PyArray_StringDTypeObject` opaque under `abi3t` to resolve structural layout crashes, alongside fixes for 32-bit systems using `abi3t`.
-* **Memory & Concurrency Fixes:** Resolved reference leaks in `copyto` and SIMD sequences, addressed thread-safety/locking bugs in RNG state access, and fixed `StringDType` memory corruption in `np.fromiter`.
+- **Parallel Session Execution**: Run sessions concurrently using `--parallel` / `-j` (requires session opt-in or `--allow-parallel`).
+- **Upgraded Python Discovery**: Powered by `python-discovery`, improving interpreter lookup, version specifier sets, and `requires-python` support in script mode.
+- **Fixed Option Precedence**: Explicit command-line options now reliably override noxfile and alias default values.
 
 ### Breaking Changes
-⚠️ **C API Layout Modification (`abi3t` builds):** `PyArray_StringDTypeObject` is now an opaque struct when targeting the free-threaded stable ABI (`Py_TARGET_ABI3T`). C extensions compiled for `abi3t` can no longer directly access fields on this struct. Access the allocator API via `NpyString_acquire_allocator((PyArray_StringDTypeObject *)descr)` instead. *(Note: This breaking modification was applied in a patch release because direct field access previously caused crashes due to variable object header sizes).*
+⚠️ **Stricter CLI Option Validation**: Unrecognized global options now result in an error instead of being silently ignored. CI scripts or workflows passing invalid or obsolete flags will need to be updated.
