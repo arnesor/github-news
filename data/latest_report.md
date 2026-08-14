@@ -1,14 +1,27 @@
-# GitHub New Releases Report 2026-08-11
+# GitHub New Releases Report 2026-08-14
 
-**[wntrblm/nox 2026.08.10](https://github.com/wntrblm/nox/releases/tag/2026.08.10)**
+**[astral-sh/ruff 0.16.3](https://github.com/astral-sh/ruff/releases/tag/0.16.3)**
 
-### Overview
-Nox release `2026.08.10` introduces experimental parallel session execution alongside a new `python-discovery` engine for enhanced interpreter lookup and version specifier support. It also refines CLI option precedence, improves Conda version handling, and enforces stricter global flag validation.
+### Summary
+Ruff 0.16.3 delivers significant performance improvements across major platforms through Profile-Guided Optimization (PGO) and reduced AST memory usage. This release also resolves multiple false positives in `pylint`, expands security checks in `flake8-bandit`, and introduces a preview rule for modernizing `while` loops.
 
 ### Highlights
-- **Parallel Session Execution**: Run sessions concurrently using `--parallel` / `-j` (requires session opt-in or `--allow-parallel`).
-- **Upgraded Python Discovery**: Powered by `python-discovery`, improving interpreter lookup, version specifier sets, and `requires-python` support in script mode.
-- **Fixed Option Precedence**: Explicit command-line options now reliably override noxfile and alias default values.
+- **Engine Performance Upgrades**: Enabled Profile-Guided Optimization (PGO) on Linux, macOS ARM64, and Windows x86-64 release binaries, reduced `Expr` AST size to 64 bytes, and updated to mimalloc v3.
+- **Improved Security & Pylint Linting**: `flake8-bandit` rules (`S602`, `S603`, `S607`, `S609`) now inspect keyword arguments, alongside fixes for string formatting (`PLE1300`, `PLE1307`) and Python 3.8 `finally` blocks.
+- **New Pyupgrade Rule & CLI Links**: Introduced preview rule `UP048` (`while 1` $\rightarrow$ `while True`) and added clickable terminal hyperlinks to rule codes in `ruff check --statistics` output.
 
 ### Breaking Changes
-⚠️ **Stricter CLI Option Validation**: Unrecognized global options now result in an error instead of being silently ignored. CI scripts or workflows passing invalid or obsolete flags will need to be updated.
+- None.
+---
+**[astral-sh/uv 0.12.4](https://github.com/astral-sh/uv/releases/tag/0.12.4)**
+
+### Summary
+uv 0.12.4 introduces performance optimizations for dependency resolution and Simple API parsing, alongside enhanced network security with post-quantum TLS key exchange. The release also adds finer dependency-installation controls to `uv check` and resolves various lockfile and interpreter cache edge cases.
+
+### Highlights
+- **Performance Optimizations:** Significantly speeds up resolution across long spans of unavailable package versions via range coalescing, and accelerates Simple API parsing through direct metadata deserialization.
+- **Post-Quantum TLS Support:** Upgrades network transport to prefer post-quantum key exchange and introduces opt-in TLS diagnostics for troubleshooting connections.
+- **Root-less `uv check` Workflow:** Adds the `--no-install-project` flag (and `UV_NO_INSTALL_PROJECT` environment variable) to install dependencies without building or installing the root project.
+
+### Breaking Changes
+None.
