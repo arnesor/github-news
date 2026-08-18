@@ -1,14 +1,14 @@
-# GitHub New Releases Report 2026-08-15
+# GitHub New Releases Report 2026-08-18
 
-**[astral-sh/uv 0.12.5](https://github.com/astral-sh/uv/releases/tag/0.12.5)**
+**[marimo-team/marimo 0.24.0](https://github.com/marimo-team/marimo/releases/tag/0.24.0)**
 
 ### Summary
-uv 0.12.5 introduces support for recent CPython patch releases, credential redaction in requirement URLs, and new preview capabilities for package indexes and SBOM exports. The release also refines Python interpreter selection prioritization and fixes relative index path resolution in PEP 723 scripts.
+marimo 0.24.0 elevates data workflow management by adding first-class Hugging Face Hub remote storage support and visual indicators for data-bound variables. The release also introduces a unified notebook export interface, AI capabilities in the chat sidebar, and updated file browser defaults.
 
 ### Highlights
-- **Credential Redaction & Clearer Errors:** Automatically redacts credentials in requirement URLs and improves error reporting for invalid editable requirements.
-- **Named Index Selection (Preview):** Adds the `index-by-name` preview flag, allowing `--index` and `--default-index` to select configured package indexes by name.
-- **SBOM Enhancements & CPython Updates:** Includes distribution artifact URLs and hashes by default in CycloneDX SBOM exports, alongside support for CPython 3.10.21, 3.11.16, and 3.12.14.
+* **Hugging Face Hub Integration**: Auto-detects `huggingface_hub.HfApi` to browse datasets, models, spaces, and buckets directly from the storage sidebar, with native `hf://` file reading across Polars, pandas, and DuckDB.
+* **Unified Export Dialog**: Provides a centralized, customizable modal for exporting notebooks to various target formats with format-specific configuration options.
+* **AI Capabilities & Data Previews**: Adds modular tool access (such as web search) to the AI chat sidebar and introduces interactive indicator icons on variables bound to external data sources.
 
-### Breaking Changes
-None.
+### ⚠️ Breaking Changes
+* **`mo.ui.file_browser` default behavior**: `restrict_navigation` now defaults to `True`, preventing users from navigating outside the specified root directory unless explicitly overridden.
