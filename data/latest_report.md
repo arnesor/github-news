@@ -1,7 +1,14 @@
-# GitHub New Releases Report 2026-08-28
+# GitHub New Releases Report 2026-08-30
 
-**[astral-sh/ruff 0.16.5](https://github.com/astral-sh/ruff/releases/tag/0.16.5)**
-- Error generating summary: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
----
-**[astral-sh/uv 0.12.7](https://github.com/astral-sh/uv/releases/tag/0.12.7)**
-- Error generating summary: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+**[python-poetry/poetry 2.4.2](https://github.com/python-poetry/poetry/releases/tag/2.4.2)**
+
+### Summary
+Poetry 2.4.2 is a security and maintenance release addressing multiple path traversal vulnerabilities during package downloads and source distribution extraction. It also fixes a lockfile integrity bug where unlisted artifacts could be installed if the source lacked artifact hashes.
+
+### Highlights
+- **Path Traversal in Downloads**: Patched a vulnerability that allowed path traversal when downloading files from compromised URLs or package sources ([#11029](https://github.com/python-poetry/poetry/pull/11029)).
+- **Path Traversal in sdist Extraction**: Resolved a security issue on Python 3.10.0–3.10.12 and 3.11.0–3.11.4 where malicious tarballs could extract files outside the target directory ([#11027](https://github.com/python-poetry/poetry/pull/11027)).
+- **Lockfile Enforcement**: Fixed a bug where Poetry installed artifacts not present in the lockfile when the package source did not provide a hash ([#11030](https://github.com/python-poetry/poetry/pull/11030)).
+
+### Breaking Changes
+None. This is a non-breaking patch release focused on security and bug fixes.

@@ -7,7 +7,7 @@
     "pola-rs/polars": "py-1.44.1",
     "psf/black": "26.5.1",
     "pytest-dev/pytest": "9.1.1",
-    "python-poetry/poetry": "2.4.1",
+    "python-poetry/poetry": "2.4.2",
     "unionai-oss/pandera": "v0.32.1",
     "wntrblm/nox": "2026.08.17",
     "duckdb/duckdb": "v1.5.5",
