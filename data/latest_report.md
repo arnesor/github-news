@@ -1,14 +1,14 @@
-# GitHub New Releases Report 2026-08-30
+# GitHub New Releases Report 2026-08-31
 
-**[python-poetry/poetry 2.4.2](https://github.com/python-poetry/poetry/releases/tag/2.4.2)**
+**[unionai-oss/pandera v0.33.0](https://github.com/unionai-oss/pandera/releases/tag/v0.33.0)**
 
 ### Summary
-Poetry 2.4.2 is a security and maintenance release addressing multiple path traversal vulnerabilities during package downloads and source distribution extraction. It also fixes a lockfile integrity bug where unlisted artifacts could be installed if the source lacked artifact hashes.
+Pandera v0.33.0 introduces a dedicated command-line interface (CLI) for data validation, schema inference, and test data generation directly from your terminal. This release also broadens ecosystem compatibility with first-class `pyarrow.Table` schema validation, improved Narwhals backend support, and critical parser and lazy validation fixes across backends.
 
 ### Highlights
-- **Path Traversal in Downloads**: Patched a vulnerability that allowed path traversal when downloading files from compromised URLs or package sources ([#11029](https://github.com/python-poetry/poetry/pull/11029)).
-- **Path Traversal in sdist Extraction**: Resolved a security issue on Python 3.10.0–3.10.12 and 3.11.0–3.11.4 where malicious tarballs could extract files outside the target directory ([#11027](https://github.com/python-poetry/poetry/pull/11027)).
-- **Lockfile Enforcement**: Fixed a bug where Poetry installed artifacts not present in the lockfile when the package source did not provide a hash ([#11030](https://github.com/python-poetry/poetry/pull/11030)).
+* **New Pandera CLI**: Introduced built-in CLI commands (`pandera validate`, `infer`, and `generate`) equipped with backend metadata inspection.
+* **Native PyArrow Validation**: Added first-class schema validation support for `pyarrow.Table` data structures.
+* **Expanded Narwhals & Typing Support**: Brought Pandas schema API parity to the Narwhals backend and added a unified, backend-neutral `FieldType[T]` typing contract.
 
 ### Breaking Changes
-None. This is a non-breaking patch release focused on security and bug fixes.
+⚠️ **Polars Dependency Minimum Version**: The minimum supported version for the Polars backend has been increased to `polars >= 1.20.0`.
