@@ -1,14 +1,14 @@
-# GitHub New Releases Report 2026-08-31
+# GitHub New Releases Report 2026-09-01
 
-**[unionai-oss/pandera v0.33.0](https://github.com/unionai-oss/pandera/releases/tag/v0.33.0)**
+**[astral-sh/uv 0.12.8](https://github.com/astral-sh/uv/releases/tag/0.12.8)**
 
 ### Summary
-Pandera v0.33.0 introduces a dedicated command-line interface (CLI) for data validation, schema inference, and test data generation directly from your terminal. This release also broadens ecosystem compatibility with first-class `pyarrow.Table` schema validation, improved Narwhals backend support, and critical parser and lazy validation fixes across backends.
+uv 0.12.8 delivers performance optimizations for large lockfile operations and concurrent downloads, alongside enhancements to the experimental content-addressed cache. This patch also brings important fixes for Azure Storage integrations, workspace discovery, and security hash validation under `--require-hashes`.
 
 ### Highlights
-* **New Pandera CLI**: Introduced built-in CLI commands (`pandera validate`, `infer`, and `generate`) equipped with backend metadata inspection.
-* **Native PyArrow Validation**: Added first-class schema validation support for `pyarrow.Table` data structures.
-* **Expanded Narwhals & Typing Support**: Brought Pandas schema API parity to the Narwhals backend and added a unified, backend-neutral `FieldType[T]` typing contract.
+- **Faster Lockfile Traversal & Warm Resolutions**: Speeds up dependency graph construction, dependency tree exports, audits, and warm resolutions on large lockfiles via package indexing and reduced marker interner work.
+- **Content-Addressed Cache Preview**: Adds the `content-addressed-cache` preview feature to deduplicate identical files across cached wheels, optimized with buffer reuse and fast macOS cleanup.
+- **Concurrency & Security Fixes**: Prevents concurrent `uv` processes from duplicating remote wheel downloads, redacts Azure SAS signature tokens from logs, and enforces strict hash validation when using `--require-hashes`.
 
 ### Breaking Changes
-⚠️ **Polars Dependency Minimum Version**: The minimum supported version for the Polars backend has been increased to `polars >= 1.20.0`.
+None.
