@@ -1,14 +1,14 @@
-# GitHub New Releases Report 2026-09-04
+# GitHub New Releases Report 2026-09-05
 
-**[astral-sh/ruff 0.16.6](https://github.com/astral-sh/ruff/releases/tag/0.16.6)**
+**[astral-sh/uv 0.12.10](https://github.com/astral-sh/uv/releases/tag/0.12.10)**
 
 ### Summary
-Ruff 0.16.6 delivers targeted bug fixes, parser enhancements, and incremental preview rule improvements across multiple linting categories. This patch release resolves parser panics, refines built-in call detection, and introduces early compatibility support for Python 3.15 match patterns.
+uv 0.12.10 delivers enhanced publishing security, lockfile stability improvements, and performance optimizations across workspaces. This patch release notably adds automatic token revocation for PyPI trusted publishing and resolves several edge cases with `exclude-newer` lockfile semantics.
 
 ### Highlights
-* **Panic & Parser Fixes**: Resolved a crash on `match` subjects in `flake8-bugbear` (`B031`) and added proper validation for unary expressions during parsing.
-* **Expanded Builtin Detection**: Updated `flake8-async` (`ASYNC230`) and `pylint` (`PLW1514`) rules to properly recognize calls via `builtins.open`.
-* **Autofix Refinements**: Added an autofix for `flake8-pytest-style` (`PT020`), resolved an autofix loop between `TID254` and `TID255`, and excluded pragma comments from line length calculation in `isort` (`I001`).
+- **Trusted Publishing Token Revocation**: `uv publish` now automatically attempts to revoke short-lived PyPI trusted-publishing tokens upon completion, even when a publish fails ([#21423](https://github.com/astral-sh/uv/pull/21423)).
+- **`exclude-newer` Lockfile Fixes**: Several fixes prevent false `--locked` failures and allow `uv lock --check` to correctly reuse lockfiles when cutoff dates are moved later or disabled ([#21454](https://github.com/astral-sh/uv/pull/21454), [#19571](https://github.com/astral-sh/uv/pull/19571)).
+- **Performance Gains**: Workspace resolution is now faster for large projects with conflicts by filtering out unrelated extras and dependency groups during conflict simplification ([#21399](https://github.com/astral-sh/uv/pull/21399)).
 
 ### Breaking Changes
-*None.* This is a backwards-compatible patch release focused on bug fixes and preview feature refinements.
+None. *(Note: `uv init` now requires an explicit `--name` flag if the inferred directory name conflicts with a reserved Python interpreter name).*
