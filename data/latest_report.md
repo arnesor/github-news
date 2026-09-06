@@ -1,14 +1,14 @@
-# GitHub New Releases Report 2026-09-05
+# GitHub New Releases Report 2026-09-06
 
-**[astral-sh/uv 0.12.10](https://github.com/astral-sh/uv/releases/tag/0.12.10)**
+**[python-poetry/poetry 2.4.3](https://github.com/python-poetry/poetry/releases/tag/2.4.3)**
 
-### Summary
-uv 0.12.10 delivers enhanced publishing security, lockfile stability improvements, and performance optimizations across workspaces. This patch release notably adds automatic token revocation for PyPI trusted publishing and resolves several edge cases with `exclude-newer` lockfile semantics.
+### Poetry 2.4.3 Release Overview
 
-### Highlights
-- **Trusted Publishing Token Revocation**: `uv publish` now automatically attempts to revoke short-lived PyPI trusted-publishing tokens upon completion, even when a publish fails ([#21423](https://github.com/astral-sh/uv/pull/21423)).
-- **`exclude-newer` Lockfile Fixes**: Several fixes prevent false `--locked` failures and allow `uv lock --check` to correctly reuse lockfiles when cutoff dates are moved later or disabled ([#21454](https://github.com/astral-sh/uv/pull/21454), [#19571](https://github.com/astral-sh/uv/pull/19571)).
-- **Performance Gains**: Workspace resolution is now faster for large projects with conflicts by filtering out unrelated extras and dependency groups during conflict simplification ([#21399](https://github.com/astral-sh/uv/pull/21399)).
+**Summary**
+Poetry 2.4.3 is a targeted patch release addressing an archive extraction failure affecting specific Python runtimes. It restores the ability to properly extract source distributions (sdists) on select patch releases of Python 3.10 and 3.11.
 
-### Breaking Changes
-None. *(Note: `uv init` now requires an explicit `--name` flag if the inferred directory name conflicts with a reserved Python interpreter name).*
+**Highlights**
+- Fixed an issue preventing sdist extraction on Python versions 3.10.0–3.10.12 and 3.11.0–3.11.4 ([#11037](https://github.com/python-poetry/poetry/pull/11037)).
+
+**Breaking Changes**
+None.
