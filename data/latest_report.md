@@ -1,27 +1,27 @@
-# GitHub New Releases Report 2026-09-09
+# GitHub New Releases Report 2026-09-10
 
-**[astral-sh/uv 0.12.11](https://github.com/astral-sh/uv/releases/tag/0.12.11)**
+**[astral-sh/uv 0.12.12](https://github.com/astral-sh/uv/releases/tag/0.12.12)**
 
 ### Summary
-uv 0.12.11 delivers substantial performance improvements for package installation and local wheel extraction alongside tighter hash verification safeguards. It also refines preview support for PEP 751 (`pylock.toml`) lockfiles and resolves various cross-platform CLI issues.
+uv 0.12.12 introduces official code signing for macOS and Windows binaries and wheels to enhance supply chain security and reduce antivirus false positives. It also patches an issue where distributions uploaded after the `exclude-newer` cutoff were mistakenly included in lockfiles and requirement hashes.
 
 ### Highlights
-- **Optimized Installs & Wheel Extraction**: Significantly speeds up installation and overwrites by eliminating per-file temporary directories and adopting positioned reads with reusable buffers for local ZIP/wheel extraction.
-- **Pre-Build Source Hash Verification**: Closes a security gap by verifying source archives against recorded hashes in `uv.lock` before reading package metadata or executing build backends.
-- **PEP 751 (`pylock.toml`) Compliance**: Automatically generates missing artifact hashes when exporting `pylock.toml` files and warns when hash tables are empty.
+- **macOS & Windows Code Signing**: Executables and wheels are now signed and notarized (Apple Developer ID on macOS, Azure Authenticode on Windows), supporting publisher-based allowlisting and eliminating OS security warnings.
+- **`exclude-newer` Consistency Fix**: Distributions uploaded after the configured `exclude-newer` timestamp are now strictly excluded from lockfiles and generated requirement hashes ([#21539](https://github.com/astral-sh/uv/pull/21539)).
+- **Supply Chain Verification**: Release assets continue to support GitHub Artifact Attestations, allowing easy cryptographic integrity verification via the GitHub CLI.
 
 ### Breaking Changes
-None. Note that empty `pylock.toml` artifact hash tables now emit a deprecation warning and will be rejected in an upcoming release.
+None. This is a backwards-compatible patch release.
 ---
-**[narwhals-dev/narwhals v2.26.0](https://github.com/narwhals-dev/narwhals/releases/tag/v2.26.0)**
+**[pola-rs/polars py-1.44.2](https://github.com/pola-rs/polars/releases/tag/py-1.44.2)**
 
 ### Summary
-Narwhals v2.26.0 brings key performance optimizations for selector routing and pandas-like statistical operations alongside critical PyArrow backend bug fixes. This release also stabilizes typing across selectors and concatenation while deprecating `cat.get_categories` to maintain alignment with upstream Polars updates.
+Polars `py-1.44.2` is a targeted patch release for Python users that backports critical fixes to the 1.44 release branch. This update focuses on stability and maintenance without introducing new features or breaking changes.
 
 ### Highlights
-- **Engine Performance Improvements**: Optimized bare selector evaluation via `simple_select` and accelerated pandas-like execution for `is_finite`, `sqrt`, `kurtosis`, and `skew`.
-- **PyArrow Bug Fixes**: Corrected `clip` behavior to preserve nulls rather than replacing them with boundary values, and fixed series length preservation in `shift` when offset `n` exceeds array length.
-- **Typing & API Modernization**: Improved type stability for selectors and `concat` with stable frame classes, and transitioned category retrieval to use `dtype.categories` on `pl.Enum`.
+- **Backport 1.44.2 (#29216)**: Consolidates upstream fixes and stability patches directly into the 1.44.x series.
+- **Patch Stability**: Focuses strictly on reliability and bug resolution for existing workflows.
+- **Contributor Fixes**: Incorporates key community-driven improvements across the Polars engine.
 
 ### Breaking Changes
-None. Note that `cat.get_categories` has been formally deprecated following its removal in upstream Polars.
+None. This is a routine patch release backward-compatible with the 1.44.x series.
