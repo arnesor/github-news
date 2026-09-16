@@ -1,14 +1,13 @@
-# GitHub New Releases Report 2026-09-15
+# GitHub New Releases Report 2026-09-16
 
-**[astral-sh/uv 0.12.14](https://github.com/astral-sh/uv/releases/tag/0.12.14)**
+**[astral-sh/uv 0.12.15](https://github.com/astral-sh/uv/releases/tag/0.12.15)**
 
 ### Summary
-uv 0.12.14 introduces standardized diagnostics and differentiated exit codes for package operations, alongside support for resuming interrupted HTTP downloads. The release also brings notable performance optimizations across dependency resolution workflows and resolves platform-specific installation edge cases.
+uv 0.12.15 is a targeted patch release that resolves a critical regression from 0.12.14 affecting package installations in common environments like Docker. It also delivers performance improvements that accelerate cold-cache resolutions and HTTP cache revalidations.
 
 ### Highlights
-- **Resumable Downloads:** Large downloads can now resume via HTTP Range requests when supported, improving reliability on unstable network connections.
-- **Resolution Performance Gains:** Accelerated dependency resolution across the board with background parsing for large index responses, streamlined local wheelhouse metadata inspection, and faster warm-cache decoding.
-- **Standardized Error Diagnostics:** Package-operation errors now feature compact, labeled cause chains and actionable hints, including dedicated resolver hints when `uv tool upgrade` fails.
+- **Docker & Target Install Regression Fix:** Reverted the rejection of symlinked wheel installation destinations, restoring support for `uv pip install --system` in official `python:*` Docker images and commands using `--target .` ([#21699](https://github.com/astral-sh/uv/pull/21699)).
+- **Faster Cache Operations:** Cold-cache dependency resolution and HTTP cache revalidation are now faster due to batching cache write operations ([#21675](https://github.com/astral-sh/uv/pull/21675)).
 
 ### Breaking Changes
-⚠️ **Exit Code Semantics Changed:** Package-operation commands no longer return a uniform error code across all failures. Expected failures return exit code `1`, while recognized operational and internal errors now return `2`. Update any CI/CD scripts or wrapper tools that explicitly assert an exit code of `1`.
+None. This release restores previously broken behavior.
