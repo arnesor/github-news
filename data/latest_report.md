@@ -1,13 +1,14 @@
-# GitHub New Releases Report 2026-09-16
+# GitHub New Releases Report 2026-09-17
 
-**[astral-sh/uv 0.12.15](https://github.com/astral-sh/uv/releases/tag/0.12.15)**
+**[astral-sh/ruff 0.16.8](https://github.com/astral-sh/ruff/releases/tag/0.16.8)**
 
 ### Summary
-uv 0.12.15 is a targeted patch release that resolves a critical regression from 0.12.14 affecting package installations in common environments like Docker. It also delivers performance improvements that accelerate cold-cache resolutions and HTTP cache revalidations.
+Ruff 0.16.8 introduces forward-looking support for Python 3.15 lazy imports alongside PEP 728 `TypedDict` class keywords. This release also refines several type-checking and `pyupgrade` rules while introducing flexible banned-API configuration options.
 
 ### Highlights
-- **Docker & Target Install Regression Fix:** Reverted the rejection of symlinked wheel installation destinations, restoring support for `uv pip install --system` in official `python:*` Docker images and commands using `--target .` ([#21699](https://github.com/astral-sh/uv/pull/21699)).
-- **Faster Cache Operations:** Cold-cache dependency resolution and HTTP cache revalidation are now faster due to batching cache write operations ([#21675](https://github.com/astral-sh/uv/pull/21675)).
+- **Python 3.15 & Lazy Import Support**: Added detection for `__lazy_modules__` and updated `flake8-type-checking` (`TC001`–`TC003`) to prefer lazy imports over `TYPE_CHECKING` blocks on Python 3.15+.
+- **Modern Typing Additions**: Added recognition for PEP 728 `TypedDict` class keyword arguments and quoted type expressions inside `typing.TypeForm`.
+- **Expanded Configuration**: Added `extend-banned-api` to `flake8-tidy-imports`, allowing projects to append to existing banned API lists without overriding parent configurations.
 
 ### Breaking Changes
-None. This release restores previously broken behavior.
+None. Note that the autofix for `UP040` (type alias syntax) is now categorized as unsafe and will no longer apply automatically without the `--unsafe-fixes` flag.
