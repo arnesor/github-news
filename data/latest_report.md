@@ -1,14 +1,14 @@
-# GitHub New Releases Report 2026-09-21
+# GitHub New Releases Report 2026-09-23
 
-**[python-poetry/poetry 2.5.1](https://github.com/python-poetry/poetry/releases/tag/2.5.1)**
+**[astral-sh/uv 0.12.18](https://github.com/astral-sh/uv/releases/tag/0.12.18)**
 
-### Poetry 2.5.1 Release Summary
+### Summary
+uv 0.12.18 enhances CI/CD workflows and scriptability by introducing a `--check` mode and JSON output formatting to `uv pip install` and `uv pip sync`. The release also packages important stability fixes, including atomic rollback of project files on command failure and faster editable build times.
 
-**Summary**  
-Poetry 2.5.1 is a focused patch release addressing a package removal issue. It resolves a `TypeError` that occurred when uninstalling a package with the `installer.builtin-uninstall` setting enabled.
+### Highlights
+- **JSON Output & Dry-Run Auditing**: `uv pip install` and `uv pip sync` now support `--check` to report environment diffs without applying them, alongside `--output-format json` (compatible with `--dry-run`) for automated tooling integration.
+- **Atomic State Rollbacks**: Commands such as `uv add`, `uv remove`, and `uv version` now automatically restore project manifests, script headers, and lock files if the operation fails or is interrupted.
+- **Faster Editable Builds**: Editable wheel creation in `uv_build` is now faster by skipping compression for intermediate temporary wheels.
 
-**Highlights**  
-* Resolved a `TypeError` that caused package uninstallation to fail when `installer.builtin-uninstall` was configured ([#11077](https://github.com/python-poetry/poetry/pull/11077)).
-
-**Breaking Changes**  
-* None. This is a non-breaking bugfix release.
+### Breaking Changes
+None. All changes and additions in this release are backward-compatible.
