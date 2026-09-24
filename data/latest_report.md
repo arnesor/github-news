@@ -1,14 +1,14 @@
-# GitHub New Releases Report 2026-09-23
+# GitHub New Releases Report 2026-09-24
 
-**[astral-sh/uv 0.12.18](https://github.com/astral-sh/uv/releases/tag/0.12.18)**
+**[marimo-team/marimo 0.25.0](https://github.com/marimo-team/marimo/releases/tag/0.25.0)**
 
 ### Summary
-uv 0.12.18 enhances CI/CD workflows and scriptability by introducing a `--check` mode and JSON output formatting to `uv pip install` and `uv pip sync`. The release also packages important stability fixes, including atomic rollback of project files on command failure and faster editable build times.
+marimo 0.25.0 introduces an overhauled notebook sandboxing architecture with new Pixi backend support, enabling Conda dependencies and multi-language runtimes. This release also brings portable single-file and offline WebAssembly exports, persistent expanded cell outputs, and faster asynchronous editor startup.
 
 ### Highlights
-- **JSON Output & Dry-Run Auditing**: `uv pip install` and `uv pip sync` now support `--check` to report environment diffs without applying them, alongside `--output-format json` (compatible with `--dry-run`) for automated tooling integration.
-- **Atomic State Rollbacks**: Commands such as `uv add`, `uv remove`, and `uv version` now automatically restore project manifests, script headers, and lock files if the operation fails or is interrupted.
-- **Faster Editable Builds**: Editable wheel creation in `uv_build` is now faster by skipping compression for intermediate temporary wheels.
+* **Pixi Sandbox Support**: Adds `--sandbox=pixi` alongside default `uv` sandboxes, allowing notebooks to manage Conda packages, native libraries, and non-Python runtimes (such as R) directly via inline metadata.
+* **Revamped Sandbox Lifecycle & UI**: Decouples editor startup from kernel environment provisioning for near-instant editor access, complete with in-editor package manifest recovery if environment setup fails.
+* **Portable WebAssembly Exports**: Enables exporting interactive WASM notebooks as fully self-contained single-file HTML (`--single-file`) or offline-ready bundles (`--offline`) requiring no internet connection.
 
 ### Breaking Changes
-None. All changes and additions in this release are backward-compatible.
+No strict breaking API changes, and existing CLI commands remain backwards-compatible. However, the underlying sandbox execution and environment lifecycle have been substantially reworked to run asynchronously per notebook, which may alter behavior in advanced or custom execution workflows.
