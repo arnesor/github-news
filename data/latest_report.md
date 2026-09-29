@@ -1,27 +1,27 @@
-# GitHub New Releases Report 2026-09-25
+# GitHub New Releases Report 2026-09-29
 
-**[astral-sh/ruff 0.16.9](https://github.com/astral-sh/ruff/releases/tag/0.16.9)**
+**[astral-sh/uv 0.12.20](https://github.com/astral-sh/uv/releases/tag/0.12.20)**
 
 ### Summary
-Ruff 0.16.9 is a maintenance release focused on eliminating false positives across core linting rules and improving diagnostic clarity. It also introduces forward-looking updates to LibCST-based fixes to ensure compatibility with Python 3.15.
+uv 0.12.20 delivers targeted stability and performance improvements, notably mitigating severe cache-revalidation stalls on ext4 filesystems and resolving several resolver and CLI panics. It also improves lockfile handling by reusing lockfiles when dependency declarations are semantically equivalent and expands preview support for `pylock.toml`.
 
 ### Highlights
-- **Reduced False Positives in `flake8-bugbear`**: Resolved false positive triggers for function calls utilizing keyword arguments across rules `B009`, `B010`, and `B043` ([#28776](https://github.com/astral-sh/ruff/pull/28776)).
-- **Deferred Annotations with Lazy Imports**: Updated `flake8-tidy-imports` (`TID255`) to permit lazy imports when used within deferred type annotations ([#28767](https://github.com/astral-sh/ruff/pull/28767)).
-- **Python 3.15 Readiness**: Updated LibCST-based autofixes to support upcoming syntax and AST changes in Python 3.15 ([#28616](https://github.com/astral-sh/ruff/pull/28616)).
+- **HTTP Cache Stall Mitigation**: Restores previous cache-write scheduling to eliminate severe cache-revalidation stalls observed on ext4 filesystems.
+- **Semantic Lockfile Reuse**: Skips unnecessary re-locking by recognizing semantically equivalent dependency declarations.
+- **Robustness & Panic Fixes**: Addresses multiple crash/panic conditions across managed Python detection, resolver trace logging, and non-ASCII whitespace requirements, while adding state restoration for interrupted `uv upgrade` calls.
 
 ### Breaking Changes
-None. This release is fully backwards-compatible.
+None. This is a backwards-compatible patch release.
 ---
-**[astral-sh/uv 0.12.19](https://github.com/astral-sh/uv/releases/tag/0.12.19)**
+**[duckdb/duckdb v1.5.6](https://github.com/duckdb/duckdb/releases/tag/v1.5.6)**
 
 ### Summary
-uv 0.12.19 delivers targeted fixes to dependency resolution and direct-URL package caching, alongside expanded interpreter support for newer PyPy and GraalPy builds. It also adds opt-in preview capabilities for lazy build-backend imports on CPython 3.15+ and smarter `uv.lock` freshness checks.
+DuckDB v1.5.6 is a comprehensive patch release focusing on query optimizer reliability, storage engine hardening, and ecosystem compatibility. It resolves multiple critical edge cases across window functions, WAL recovery, and Parquet data serialization.
 
 ### Highlights
-- **Direct-URL Caching Fix**: Preserves signed and encoded query parameters in direct-URL metadata, preventing unnecessary reinstalls of unchanged remote packages.
-- **Lockfile & Build Previews**: Adds experimental flags to run build-backend hooks with lazy imports on CPython 3.15+ (`build-lazy-imports`) and omit unused resolution settings from `uv.lock` to reduce churn (`resolution-inputs`).
-- **Resolver & Specifier Corrections**: Fixes installed-package verification where `1.0.0` did not satisfy arbitrary equality `===1`, and avoids git checkout marker collisions with `.ok` files in dependencies.
+* **Query Optimizer & Top-N Window Stability**: Delivers extensive fixes to `TopNWindowElimination`—including handling of `LIMIT 0`, nullable ordering expressions, and join projection mapping—alongside pushdown fixes for `UNNEST` and volatile projections.
+* **Storage Engine & Transaction Hardening**: Hardens temporary file reads, resolves a file locking issue during WAL recovery, prevents duplicate emitted chunks in caching operators, and backports the `enable_optimistic_write` setting.
+* **Data Type & Parser Correctness**: Prevents silent truncation of oversized integer literals into `HUGEINT`, corrects Parquet `TIME_NS` read/writes, and fixes state leakage across rows in ICU `strptime`.
 
 ### Breaking Changes
-None. This release also restores the public `FlatDistributions` export and `BTreeMap` conversion for downstream Rust API consumers.
+* **Julia Client Deprecation**: The bundled in-tree Julia client has been removed from the core repository in favor of the standalone package at [`duckdb/DuckDB.jl`](https://github.com/duckdb/DuckDB.jl). Standard SQL interfaces and core storage formats remain backward-compatible.
