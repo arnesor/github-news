@@ -5,7 +5,7 @@
     "dynaconf/dynaconf": "3.3.5",
     "pandas-dev/pandas": "v3.0.6",
     "pola-rs/polars": "py-1.44.2",
-    "psf/black": "26.5.1",
+    "psf/black": "26.10.0",
     "pytest-dev/pytest": "9.1.1",
     "python-poetry/poetry": "2.5.1",
     "unionai-oss/pandera": "v0.33.1",
