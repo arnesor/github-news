@@ -1,27 +1,30 @@
-# GitHub New Releases Report 2026-10-06
+# GitHub New Releases Report 2026-10-07
 
-**[narwhals-dev/narwhals v2.27.0](https://github.com/narwhals-dev/narwhals/releases/tag/v2.27.0)**
+**[pola-rs/polars py-2.0.0](https://github.com/pola-rs/polars/releases/tag/py-2.0.0)**
 
 ### Summary
-Narwhals v2.27.0 introduces key functionality enhancements including frame-level schema casting and expanded `list.contains` backend compatibility. This release also ships dozens of consistency improvements and bug fixes across pandas, PyArrow, Dask, DuckDB, and Polars backends.
+Polars `py-2.0.0` marks a major milestone featuring the official release of Python Polars 2.0 with out-of-core (OOC) processing enabled by default at an 80% RAM threshold. This release introduces significant performance gains across the streaming engine, expanded SQL capabilities, and faster cloud I/O.
 
 ### Highlights
-* **Frame-level `.cast()` Support**: Added `{DataFrame, LazyFrame}.cast` to streamline schema casting across entire frames without needing manual expression loops (#3815, #4016).
-* **Expanded `list.contains`**: Added `list.contains` support for PyArrow, pandas, and Dask, while aligning lazy backend null-handling with Polars behavior (#4001, #3996).
-* **File-like Object I/O**: `{read,scan}_*` methods now support file-like objects (such as `io.BytesIO` and `io.StringIO`), improving in-memory workflows (#3956).
+- **Default Out-of-Core (OOC) Processing**: OOC execution is now enabled by default with an 80% RAM threshold and a 64 GB disk budget, complemented by a new streaming out-of-core sort.
+- **SQL Frontend Expansion**: Added support for advanced SQL analytics including `GROUP BY GROUPING SETS`, `ROLLUP`, `CUBE`, `QUALIFY`, and new window functions (`PERCENT_RANK`, `CUME_DIST`, `NTILE`).
+- **Engine & I/O Optimizations**: Major throughput boosts across Parquet/IPC out-of-order scans, improved Iceberg/Lance pushdowns, vectorized decimal math, and optimized join/group-by hash tables.
 
 ### Breaking Changes
-None. Note that validation has been tightened across backends to match Polars conventions: operations like `str.slice` with negative lengths, `str.zfill` with negative widths, and duplicate `struct` field names now consistently raise errors instead of returning undefined backend-specific results.
+⚠️ **Breaking changes are present in this release:**
+- **SQL Behavior**: Exact SQL numeric literals are now typed as `Decimal`, and SQL `%`/`DIV` operations now truncate. `QUALIFY` now evaluates before projection, and SQL window functions over grouped rows evaluate on the aggregated rows.
+- **Parquet Enums**: Parquet `ENUM` logical types are now read as `pl.String`.
+- **API Deprecations**: `cut` and `qcut` have been deprecated in favor of binning functions.
+- **Plugin CSE/CSPE**: Expression plugins must now explicitly opt in to Common Subexpression Elimination.
 ---
-**[unionai-oss/pandera v0.34.0](https://github.com/unionai-oss/pandera/releases/tag/v0.34.0)**
+**[unionai-oss/pandera v0.34.1](https://github.com/unionai-oss/pandera/releases/tag/v0.34.1)**
 
 ### Summary
-Pandera v0.34.0 introduces native validation support for PyTorch `TensorDict` alongside nested `DataFrameModel` validation for Polars workflows. This release also tightens validation behavior across backends, eliminating silent failures in integer coercion, parser configurations, and schema serialization.
+Pandera v0.34.1 lays foundational groundwork with an architectural specification for a generic, dataframe-agnostic schema API. Additionally, this release highlights recent ecosystem expansions by announcing PyTorch TensorDict support across documentation banners.
 
 ### Highlights
-* **PyTorch `TensorDict` Backend**: Added dedicated `TensorDictSchema` and `TensorDictModel` classes to validate tensor shapes, PyTorch dtypes, and batch sizes for machine learning and reinforcement learning pipelines.
-* **Nested Polars Models**: Introduced support for validating nested `DataFrameModel` schemas within the Polars backend.
-* **Safer Coercion & Check Validation**: Integer coercion now halts on overflow instead of wrapping silently, Polars fails loudly when user-declared parsers are provided instead of skipping them, and `Check.str_length` explicitly rejects reversed bounds.
+* **Dataframe-Agnostic Schema Spec**: Introduced an initial specification for a unified, backend-agnostic schema API to improve consistency across different dataframe implementations ([#2401](https://github.com/unionai-oss/pandera/pull/2401)).
+* **PyTorch TensorDict Documentation**: Added announcements across docs banners showcasing Pandera's validation capabilities for PyTorch `TensorDict` structures ([#2544](https://github.com/unionai-oss/pandera/pull/2544)).
 
 ### Breaking Changes
-No intentional breaking API changes are introduced. However, behavioral tightening—such as raising errors on integer coercion overflow and rejecting invalid bounds in `Check.str_length`—may cause previously unnoticed invalid states to fail loudly.
+* None. This release contains non-breaking specification and documentation updates.
