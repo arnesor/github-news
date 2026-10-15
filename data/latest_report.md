@@ -1,28 +1,14 @@
-# GitHub New Releases Report 2026-10-11
+# GitHub New Releases Report 2026-10-15
 
-**[narwhals-dev/narwhals v2.27.1](https://github.com/narwhals-dev/narwhals/releases/tag/v2.27.1)**
+**[astral-sh/uv 0.13.1](https://github.com/astral-sh/uv/releases/tag/0.13.1)**
 
 ### Summary
-Narwhals v2.27.1 is a targeted patch release addressing edge-case behaviors in string expression functions. It improves cross-backend consistency by ensuring correct return dtypes for null object columns and fixing character-width padding on legacy Polars versions.
+uv 0.13.1 introduces crucial stability and concurrency fixes to eliminate race conditions during lockfile writes, cache cleans, and parallel tool operations. This release also delivers performance improvements that decrease binary size and accelerate Simple API parsing, alongside early support for CPython 3.16.0a1.
 
 ### Highlights
-* **Accurate Return Dtype in `str.len_chars`**: Fixed an issue where computing `str.len_chars` on all-null `object` columns failed to return a proper numeric data type (#4031).
-* **Correct Padding in `str.zfill` for Polars < 2.0**: Ensured that padding correctly measures character counts rather than byte lengths when running on Polars versions prior to 2.0 (#4040).
+- **Concurrency & Race Condition Hardening:** Resolved multiple concurrency hazards to prevent corruptions during simultaneous tool installations, cache clean operations, and reads on partially written lockfiles or sysconfig files.
+- **Safer Tool & Python Uninstalls:** Fixed an issue where uninstalling tools or managed Python interpreters could mistakenly remove unrelated files adjacent to storage directories.
+- **Performance & Footprint Reductions:** Shrunk uv's binary size while reducing overhead in package metadata parsing and accelerating Simple API parsing.
 
 ### Breaking Changes
-None. This is a backwards-compatible bugfix release.
----
-**[numpy/numpy v2.5.4](https://github.com/numpy/numpy/releases/tag/v2.5.4)**
-
-### NumPy 2.5.4 Release Overview
-
-**Summary**  
-NumPy 2.5.4 is a maintenance patch release delivering critical stability, crash, and typing fixes for Python versions 3.12 through 3.15. It primarily focuses on resolving hangs in LAPACK operations, correcting `MaskedArray` type conversions, and addressing compiler-specific bugs.
-
-**Highlights**  
-- **Linear Algebra Hardening**: `numpy.linalg.svd` and `numpy.linalg.lstsq` now explicitly raise exceptions on infinite inputs, preventing process hangs on modern LAPACK implementations and eliminating garbage output.
-- **Safer `MaskedArray` Fill Values**: Inherited `fill_value`s that cannot be represented in a new target `dtype` are now automatically reset to the default value rather than leaving stale, invalid states.
-- **`StringDType` Hashing & Crash Fixes**: `StringDType` instances with equivalent NaN sentinels now generate identical hashes (resolving broken dictionary lookups and set deduplication), alongside fixes for segfaults in `as_arrays()` and crashes in `ufunc.accumulate`.
-
-**Breaking Changes**  
-None (patch release). Note minor behavioral adjustments: `linalg.svd` and `linalg.lstsq` will now raise an error instead of returning garbage on inputs with infinities, and conversions of `MaskedArray` with complex fill values to real dtypes may now emit a `ComplexWarning`.
+None. This is a backwards-compatible patch release focusing on stability, bug fixes, and performance.
