@@ -1,27 +1,33 @@
-# GitHub New Releases Report 2026-10-21
+# GitHub New Releases Report 2026-10-22
 
-**[astral-sh/uv 0.13.4](https://github.com/astral-sh/uv/releases/tag/0.13.4)**
+**[astral-sh/uv 0.13.5](https://github.com/astral-sh/uv/releases/tag/0.13.5)**
 
 ### Summary
-uv 0.13.4 is an urgent security release addressing a compromised root Certificate Authority intermediate on the Web PKI. Users are strongly encouraged to upgrade immediately to refresh their bundled root certificates and ensure secure operations.
+uv 0.13.5 provides critical security updates addressing compromised eMudhra root certificates across standalone CPython builds and internal certificate chains. This release also introduces preview support for PEP 850 wheel variants alongside notable memory and resolution performance optimizations.
 
 ### Highlights
-- **Critical Security Fix ([GHSA-hq85-5cpj-mr62](https://github.com/astral-sh/uv/security/advisories/GHSA-hq85-5cpj-mr62)):** Removes trust for a compromised root CA intermediate on the Web PKI.
-- **Updated Root Certificates:** Updates bundled Mozilla root certificates via `webpki-root-certs` 1.0.10.
-- **PEP 825 Validation (Preview):** Adds validation for PEP 825 variant metadata under the `wheel-variants` preview feature, treating invalid metadata versions as unavailable.
+- **eMudhra Security Hardening**: Mitigates compromised eMudhra keys by updating standalone CPython builds (3.13.17+, 3.14.9+, 3.15.1+) to include patched `pip` and `certifi` bundles, while actively rejecting compromised chains via `rustls-webpki`.
+- **Resolution & Export Performance**: Lowers peak memory consumption during multi-environment dependency resolutions and accelerates lockfile exports containing complex transitive extras.
+- **PEP 850 Wheel Variants (Preview)**: Adds preview support for selecting and ranking platform-specific wheel variants based on PEP 850 static providers.
 
 ### Breaking Changes
-None.
+- **Discontinued Docker Images**: Official uv Docker images for Python 3.9 and 3.10 are no longer published due to unpatched upstream certificate vulnerabilities in those EOL versions.
+- **Strict Build Cache Keys**: Invalid custom build cache keys are now explicitly rejected with an error instead of silently falling back to default keys.
+- **Action Required for Existing Environments**: Run `uv python upgrade` to fetch patched CPython builds. Existing virtual environments pinned to older patch versions will not update automatically; upgrade `pip` manually inside them.
 ---
-**[wntrblm/nox 2026.10.20](https://github.com/wntrblm/nox/releases/tag/2026.10.20)**
+**[duckdb/duckdb v2.0.0](https://github.com/duckdb/duckdb/releases/tag/v2.0.0)**
 
 ### Summary
-Nox 2026.10.20 graduates parallel execution out of experimental status with `session.parallel` introspection and introduces a high-performance `rattler` backend powered by `py-rattler`. This release also enhances PEP 723 script mode, adds support for free-threaded Python builds, and expands `@nox.parametrize` capabilities.
+DuckDB v2.0.0 ("Cyanoptera") marks a major milestone featuring extensive architectural upgrades across execution, storage, and file formats. This release introduces widespread asynchronous I/O, advanced optimizations for semi-structured `VARIANT` types, native nested schema support, and completely removes external ICU dependencies for timezones.
 
 ### Highlights
-* **Stabilized Parallel Execution:** Dropped the "experimental" banner from `--parallel`, introduced ASCII header fallbacks, and exposed `session.parallel` so sessions can conditionally detect if they are running inside a parallel worker.
-* **New `rattler` Backend:** Added support for fast conda-style environments via `py-rattler` (available via `nox[rattler]`), complete with default config resolution and support inside `/// script` blocks.
-* **Modern Python & Parametrization Enhancements:** Added support for free-threaded Python builds parsed from classifiers, updated the bundled GitHub Action to default to Python 3.11–3.15, and enabled `@nox.parametrize` to accept ranges and arbitrary iterators for single arguments.
+* **End-to-End Asynchronous I/O**: Massive I/O engine rework introducing asynchronous I/O and prefetching for Parquet reads/writes, the CSV reader, and native DuckDB table scans.
+* **Optimized `VARIANT` & Semi-Structured Support**: Substantially improved JSON/Variant pipelines with shredded vector processing, direct pushdown, and `VariantIterator` traversal without requiring costly full unshredding.
+* **ICU Removal & Engine Modernization**: Built-in, high-performance calendar and timezone handling replaces the external ICU dependency, paired with an upgraded optimizer featuring CTE-based duplicate elimination and aggregate reuse.
 
 ### Breaking Changes
-None. Existing Nox configurations remain backward-compatible, though teams utilizing the official GitHub Action should verify that its updated default matrix (Python 3.11–3.15) matches their test targets.
+⚠️ **Breaking Changes & Behavioral Updates:**
+* **Integer Division by Zero**: Division by zero now throws a runtime error instead of silently returning `NULL`.
+* **C++ and C API Adjustments**: Core classes including `Value` and `LogicalType` are now immutable, and SQL identifier handling transitioned from raw strings to dedicated `Identifier` types. C-API V2 has also begun rollout.
+* **Julia Client Removal**: The in-tree Julia client has been deprecated and extracted to the standalone `duckdb/DuckDB.jl` repository.
+* **Regex Semantics**: Regular expression operators have been aligned to strictly follow PostgreSQL behavior.
