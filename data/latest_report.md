@@ -1,33 +1,29 @@
-# GitHub New Releases Report 2026-10-22
+# GitHub New Releases Report 2026-10-23
 
-**[astral-sh/uv 0.13.5](https://github.com/astral-sh/uv/releases/tag/0.13.5)**
+**[astral-sh/ruff 0.17.2](https://github.com/astral-sh/ruff/releases/tag/0.17.2)**
 
-### Summary
-uv 0.13.5 provides critical security updates addressing compromised eMudhra root certificates across standalone CPython builds and internal certificate chains. This release also introduces preview support for PEP 850 wheel variants alongside notable memory and resolution performance optimizations.
+### Ruff 0.17.2 Release Overview
 
-### Highlights
-- **eMudhra Security Hardening**: Mitigates compromised eMudhra keys by updating standalone CPython builds (3.13.17+, 3.14.9+, 3.15.1+) to include patched `pip` and `certifi` bundles, while actively rejecting compromised chains via `rustls-webpki`.
-- **Resolution & Export Performance**: Lowers peak memory consumption during multi-environment dependency resolutions and accelerates lockfile exports containing complex transitive extras.
-- **PEP 850 Wheel Variants (Preview)**: Adds preview support for selecting and ranking platform-specific wheel variants based on PEP 850 static providers.
+**Summary**  
+Ruff 0.17.2 is a maintenance release delivering targeted bug fixes, performance improvements, and rule refinements. It also introduces a configurable allowlist for magic values and enhances autofix safety around comment deletion.
 
-### Breaking Changes
-- **Discontinued Docker Images**: Official uv Docker images for Python 3.9 and 3.10 are no longer published due to unpatched upstream certificate vulnerabilities in those EOL versions.
-- **Strict Build Cache Keys**: Invalid custom build cache keys are now explicitly rejected with an error instead of silently falling back to default keys.
-- **Action Required for Existing Environments**: Run `uv python upgrade` to fetch patched CPython builds. Existing virtual environments pinned to older patch versions will not update automatically; upgrade `pip` manually inside them.
+**Highlights**  
+- **Configurable Allowlist for `PLR2004`**: Users can now configure an allowlist for `magic-value-comparison`, allowing common domain-specific constants without disabling the rule.
+- **Safer Autofixes**: Fixes that would inadvertently delete comments are now marked as unsafe across `PLR5501`, `PLW0120`, and `UP035` to prevent accidental loss of code annotations.
+- **Engine & Parser Performance**: Core performance boosts through UTF-8 byte prefiltering for bidirectional Unicode checks, shared postfix parsing, and reduced overhead during lint name resolution.
+
+**Breaking Changes**  
+None.
 ---
-**[duckdb/duckdb v2.0.0](https://github.com/duckdb/duckdb/releases/tag/v2.0.0)**
+**[pandas-dev/pandas v3.1.0](https://github.com/pandas-dev/pandas/releases/tag/v3.1.0)**
 
 ### Summary
-DuckDB v2.0.0 ("Cyanoptera") marks a major milestone featuring extensive architectural upgrades across execution, storage, and file formats. This release introduces widespread asynchronous I/O, advanced optimizations for semi-structured `VARIANT` types, native nested schema support, and completely removes external ICU dependencies for timezones.
+pandas 3.1.0 delivers key performance enhancements alongside improved DataFrame querying capabilities. This release brings faster, parallelized CSV ingestion for large datasets and introduces a new selection interface.
 
 ### Highlights
-* **End-to-End Asynchronous I/O**: Massive I/O engine rework introducing asynchronous I/O and prefetching for Parquet reads/writes, the CSV reader, and native DuckDB table scans.
-* **Optimized `VARIANT` & Semi-Structured Support**: Substantially improved JSON/Variant pipelines with shredded vector processing, direct pushdown, and `VariantIterator` traversal without requiring costly full unshredding.
-* **ICU Removal & Engine Modernization**: Built-in, high-performance calendar and timezone handling replaces the external ICU dependency, paired with an upgraded optimizer featuring CTE-based duplicate elimination and aggregate reuse.
+- **New `DataFrame.select()` & Updated `DataFrame.filter()`**: Introduces a streamlined method for selecting subset data along with behavior updates to filtering.
+- **Parallel `pd.read_csv()`**: Significantly accelerates reading large CSV files by leveraging multi-threaded parallel execution.
+- **Performance & Stability Fixes**: General performance improvements and bug fixes across core DataFrame operations.
 
 ### Breaking Changes
-⚠️ **Breaking Changes & Behavioral Updates:**
-* **Integer Division by Zero**: Division by zero now throws a runtime error instead of silently returning `NULL`.
-* **C++ and C API Adjustments**: Core classes including `Value` and `LogicalType` are now immutable, and SQL identifier handling transitioned from raw strings to dedicated `Identifier` types. C-API V2 has also begun rollout.
-* **Julia Client Removal**: The in-tree Julia client has been deprecated and extracted to the standalone `duckdb/DuckDB.jl` repository.
-* **Regex Semantics**: Regular expression operators have been aligned to strictly follow PostgreSQL behavior.
+No breaking changes are explicitly listed in this release summary. However, review the detailed release notes for any deprecated behaviors or API nuances before upgrading in production.
