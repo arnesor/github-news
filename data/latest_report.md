@@ -1,14 +1,15 @@
-# GitHub New Releases Report 2026-10-25
+# GitHub New Releases Report 2026-10-26
 
-**[unionai-oss/pandera v0.35.0](https://github.com/unionai-oss/pandera/releases/tag/v0.35.0)**
+**[pola-rs/polars py-2.1.0](https://github.com/pola-rs/polars/releases/tag/py-2.1.0)**
 
 ### Summary
-Pandera v0.35.0 introduces native schema validation support for Apache DataFusion using both `DataFrameSchema` and class-based `DataFrameModel` interfaces. This release also delivers substantial enhancements to TensorDict validation alongside numerous serialization and backend stability fixes across Polars, Pandas, and Dask.
+Polars 2.1.0 delivers significant scalability upgrades with comprehensive out-of-core (OOC) streaming memory management improvements and deep Iceberg catalog integration. The release also adds support for encrypted Parquet read/write while introducing stricter typing rules for mixed arithmetic.
 
 ### Highlights
-* **Apache DataFusion Support**: Validate DataFusion DataFrames directly using standard Pandera schema definitions or declarative models via the narwhals-datafusion integration.
-* **Expanded TensorDict Validation**: Added support for nested keys, element-level check errors, custom field checks, and compatibility with the `@check_types` decorator.
-* **Schema Serialization Improvements**: Enhanced YAML and JSON round-tripping for MultiIndex options, parametrized Polars datatypes, and default column values.
+- **Streaming & Out-of-Core (OOC) Overhaul**: Drastically lowers memory pressure via immediate OS memory return during spills, spill-aware file readers, and OOC group-by operations with shuffles.
+- **Expanded Iceberg & SQL Capabilities**: Added Iceberg catalog attachment to `SQLContext` with `CREATE`/`DROP TABLE` support, dynamic partition overwrites via `sink_iceberg`, and SQL recursive CTEs (`WITH RECURSIVE`).
+- **Encrypted Parquet & Masked NumPy**: Added native read and write support for encrypted Parquet files, experimental GeoParquet, and conversion utilities to/from masked NumPy arrays.
 
-### Breaking Changes
-No breaking API changes are introduced. However, note minor validation behavioral adjustments: `Check.str_length` now actively rejects conflicting length arguments, and `unique_values_eq` now ignores nulls across Polars and Ibis backends.
+### ⚠️ Breaking Changes
+- **Mixed Arithmetic Disallowed**: Mixed string <=> numeric arithmetic is no longer permitted in eager operations (#30071).
+- **Python 3.10 Deprecated**: Support for Python 3.10 has been officially dropped in build pipelines (#29888).
