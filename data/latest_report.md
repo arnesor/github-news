@@ -1,15 +1,27 @@
-# GitHub New Releases Report 2026-10-26
+# GitHub New Releases Report 2026-10-27
 
-**[pola-rs/polars py-2.1.0](https://github.com/pola-rs/polars/releases/tag/py-2.1.0)**
+**[astral-sh/ruff 0.17.3](https://github.com/astral-sh/ruff/releases/tag/0.17.3)**
 
 ### Summary
-Polars 2.1.0 delivers significant scalability upgrades with comprehensive out-of-core (OOC) streaming memory management improvements and deep Iceberg catalog integration. The release also adds support for encrypted Parquet read/write while introducing stricter typing rules for mixed arithmetic.
+Ruff 0.17.3 delivers core performance optimizations to the lexer and formatter alongside a bug fix for `pyupgrade` f-string conversions. The release also introduces a new preview lint rule for detecting shared clock mocking issues.
 
 ### Highlights
-- **Streaming & Out-of-Core (OOC) Overhaul**: Drastically lowers memory pressure via immediate OS memory return during spills, spill-aware file readers, and OOC group-by operations with shuffles.
-- **Expanded Iceberg & SQL Capabilities**: Added Iceberg catalog attachment to `SQLContext` with `CREATE`/`DROP TABLE` support, dynamic partition overwrites via `sink_iceberg`, and SQL recursive CTEs (`WITH RECURSIVE`).
-- **Encrypted Parquet & Masked NumPy**: Added native read and write support for encrypted Parquet files, experimental GeoParquet, and conversion utilities to/from masked NumPy arrays.
+- **Lexer & Formatter Speedups**: Optimized keyword and identifier lexing with specialized ASCII paths, alongside stdout buffering in `ruff format`.
+- **f-string Conversion Fix (`UP032`)**: Resolved an issue in `pyupgrade` that caused incorrect automatic conversions to f-strings.
+- **New Preview Rule**: Added `shared-clock-mock` under the `suspicious` ruleset to flag potentially problematic mock configurations.
 
-### ⚠️ Breaking Changes
-- **Mixed Arithmetic Disallowed**: Mixed string <=> numeric arithmetic is no longer permitted in eager operations (#30071).
-- **Python 3.10 Deprecated**: Support for Python 3.10 has been officially dropped in build pipelines (#29888).
+### Breaking Changes
+None.
+---
+**[astral-sh/uv 0.13.6](https://github.com/astral-sh/uv/releases/tag/0.13.6)**
+
+### Summary
+uv 0.13.6 delivers substantial performance and memory optimizations across workspace resolution, lockfile generation, and metadata parsing. It also introduces preview support for NVIDIA GPU capability detection and resolves an important directory cleanup issue during script execution.
+
+### Highlights
+- **Extensive Performance & Memory Reductions**: Substantially lowered peak memory usage when resolving, locking, or upgrading large workspaces, complemented by broad reductions in parsing overhead for PyPI metadata, build settings, and configuration files.
+- **NVIDIA GPU Detection (Preview)**: Added automatic detection for NVIDIA GPU capabilities to help resolve and select compatible wheel variants using `wheel-variants`.
+- **Directory Cleanup Safety Fix**: Prevented `uv run --active --script` and `uv sync --active --script` from inadvertently deleting directories that are not virtual environments.
+
+### Breaking Changes
+None.
