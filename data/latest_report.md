@@ -1,27 +1,30 @@
-# GitHub New Releases Report 2026-10-27
+# GitHub New Releases Report 2026-10-28
 
-**[astral-sh/ruff 0.17.3](https://github.com/astral-sh/ruff/releases/tag/0.17.3)**
+**[narwhals-dev/narwhals v2.28.0](https://github.com/narwhals-dev/narwhals/releases/tag/v2.28.0)**
 
 ### Summary
-Ruff 0.17.3 delivers core performance optimizations to the lexer and formatter alongside a bug fix for `pyupgrade` f-string conversions. The release also introduces a new preview lint rule for detecting shared clock mocking issues.
+Narwhals v2.28.0 expands cross-backend capabilities by introducing plugin support for IO and `from_*` constructors alongside expanded list operations for Dask. The release also brings critical compatibility adjustments for DuckDB 2.0 and refines statistical aggregations across SQL and lazy backends.
 
 ### Highlights
-- **Lexer & Formatter Speedups**: Optimized keyword and identifier lexing with specialized ASCII paths, alongside stdout buffering in `ruff format`.
-- **f-string Conversion Fix (`UP032`)**: Resolved an issue in `pyupgrade` that caused incorrect automatic conversions to f-strings.
-- **New Preview Rule**: Added `shared-clock-mock` under the `suspicious` ruleset to flag potentially problematic mock configurations.
+- **Extended Plugin System**: Adds support for custom plugins in IO methods and `from_*` constructors, unlocking deeper integration for third-party engines.
+- **Expanded Dask List Methods**: Implements a full suite of list operations on Dask Series, including `list.{len, get, min, max, mean, median, sum, sort}`.
+- **DuckDB 2.0 Readiness**: Addresses multiple compatibility gaps with DuckDB 2.0, including join typing, duration calculations (`dt.total_*`), and deprecated API removals.
 
 ### Breaking Changes
-None.
+None reported in this release.
 ---
-**[astral-sh/uv 0.13.6](https://github.com/astral-sh/uv/releases/tag/0.13.6)**
+**[pytest-dev/pytest 9.2.0](https://github.com/pytest-dev/pytest/releases/tag/9.2.0)**
 
 ### Summary
-uv 0.13.6 delivers substantial performance and memory optimizations across workspace resolution, lockfile generation, and metadata parsing. It also introduces preview support for NVIDIA GPU capability detection and resolves an important directory cleanup issue during script execution.
+pytest 9.2.0 delivers significant CI and test execution performance improvements, headlined by content-hash-based bytecode caching for rewritten test modules and lazy assertion diff formatting. This release also enforces stricter validation for test parametrization arguments, CLI options, and plugin startup failures while deprecating legacy fixture patterns ahead of pytest 10.
 
 ### Highlights
-- **Extensive Performance & Memory Reductions**: Substantially lowered peak memory usage when resolving, locking, or upgrading large workspaces, complemented by broad reductions in parsing overhead for PyPI metadata, build settings, and configuration files.
-- **NVIDIA GPU Detection (Preview)**: Added automatic detection for NVIDIA GPU capabilities to help resolve and select compatible wheel variants using `wheel-variants`.
-- **Directory Cleanup Safety Fix**: Prevented `uv run --active --script` and `uv sync --active --script` from inadvertently deleting directories that are not virtual environments.
+- **Hash-Based Rewrite Caching**: Cached rewritten modules in `__pycache__` are now invalidated by source content hash rather than file modification time (`mtime`). This prevents CI environments from constantly invalidating caches and re-rewriting all test modules on fresh checkouts.
+- **Lazy Diff & Traceback Performance**: Assertion diffs are now constructed lazily and capped to truncation budgets to avoid rendering huge diffs. Additionally, `RecursionError` tracebacks trim repetitive intermediate frames by default, and `tmp_path` avoids quadratic directory traversal.
+- **Smart Test Ordering for Parametrized Fixtures**: Tests parametrized with higher-than-function scopes are now grouped by parameter value rather than index, preventing expensive fixtures from being redundantly set up and torn down.
 
 ### Breaking Changes
-None.
+⚠️ **Breaking changes are present in this release:**
+- **Parametrize Arguments are Keyword-Only**: Passing `indirect`, `ids`, and `scope` positionally to `Metafunc.parametrize()` or `@pytest.mark.parametrize()` now raises a `TypeError` (e.g., `parametrize("x", [(1, 2)], indirect=True)` must be explicit).
+- **Stricter `-c` Configuration Checks**: Passing a non-existent path, a directory, or an unsupported file format to `-c` now raises a usage error instead of being ignored or throwing an unhandled `FileNotFoundError`.
+- **Plugin Import Exit Codes**: Plugin import failures at startup now exit with standardized `ExitCode.USAGE_ERROR` (`4`) or `INTERNAL_ERROR` (`3`) instead of raising `ImportError` with exit code `1`.
