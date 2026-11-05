@@ -1,14 +1,14 @@
-# GitHub New Releases Report 2026-11-03
+# GitHub New Releases Report 2026-11-05
 
-**[astral-sh/uv 0.13.7](https://github.com/astral-sh/uv/releases/tag/0.13.7)**
+**[pandas-dev/pandas v3.1.1](https://github.com/pandas-dev/pandas/releases/tag/v3.1.1)**
 
 ### Summary
-`uv 0.13.7` brings preview improvements to schema versioning in workspace metadata and deduplicated vulnerability reporting in `uv audit`. It also delivers several key bug fixes covering Windows handle inheritance, workspace path resolution, and TOML comment preservation.
+pandas 3.1.1 is a targeted patch release focused on addressing regressions and resolving bugs introduced in the 3.1.x release cycle. The pandas maintainers strongly recommend that all users currently on pandas 3.1.x upgrade to this release to maintain environment stability.
 
 ### Highlights
-- **Deduplicated Vulnerability Audits**: `uv audit` now collapses aliased OSV records into a single vulnerability entry, reducing noise in security scans.
-- **Improved Windows Handle Handling**: Fixed an issue where uv's Windows trampolines could inadvertently close handles they did not inherit, improving stability across sub-processes.
-- **Workspace & Project CLI Refinements**: Workspace member paths added via `uv init` or `uv add` are now treated as literal paths rather than glob patterns, alongside fixes for projects starting with numbers and inline comment preservation.
+* **Regression Fixes:** Patches unexpected behavioral regressions introduced in the recent 3.1.0 release.
+* **Bug Fixes:** Delivers general bug fixes and stability improvements across existing functionality.
+* **Drop-in Stability:** Provides a smooth, safe upgrade path for all existing 3.1.x installations via PyPI and Conda Forge.
 
 ### Breaking Changes
-None.
+* None. This is a patch release intended to be fully backwards-compatible with 3.1.0.
