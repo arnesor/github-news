@@ -1,14 +1,14 @@
-# GitHub New Releases Report 2026-11-05
+# GitHub New Releases Report 2026-11-06
 
-**[pandas-dev/pandas v3.1.1](https://github.com/pandas-dev/pandas/releases/tag/v3.1.1)**
+**[astral-sh/ruff 0.17.4](https://github.com/astral-sh/ruff/releases/tag/0.17.4)**
 
 ### Summary
-pandas 3.1.1 is a targeted patch release focused on addressing regressions and resolving bugs introduced in the 3.1.x release cycle. The pandas maintainers strongly recommend that all users currently on pandas 3.1.x upgrade to this release to maintain environment stability.
+Ruff 0.17.4 delivers substantial internal performance optimizations across the formatting and linting engines alongside several parser and diagnostic bug fixes. It also improves terminal UX by honoring standard color suppression environment variables and adds new preview lint rules.
 
 ### Highlights
-* **Regression Fixes:** Patches unexpected behavioral regressions introduced in the recent 3.1.0 release.
-* **Bug Fixes:** Delivers general bug fixes and stability improvements across existing functionality.
-* **Drop-in Stability:** Provides a smooth, safe upgrade path for all existing 3.1.x installations via PyPI and Conda Forge.
+- **Performance Optimizations**: Substantial speedups across the pipeline, including a Bloom filter for comment lookups, cached callee qualified names across lint rules, and reduced source-slice overhead during formatting.
+- **Parser & Crash Fixes**: Resolves a panic triggered by BOM-prefixed files in the diagnostic renderer and fixes syntax handling for semicolons preceding `raise` statements and `match` identifiers.
+- **CLI Color Standards**: Diagnostics now honor `CLICOLOR=0` and give proper precedence to `NO_COLOR` across Ruff tool invocations.
 
 ### Breaking Changes
-* None. This is a patch release intended to be fully backwards-compatible with 3.1.0.
+None. This is a backwards-compatible patch release.
