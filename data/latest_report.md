@@ -1,14 +1,27 @@
-# GitHub New Releases Report 2026-11-10
+# GitHub New Releases Report 2026-11-13
 
-**[unionai-oss/pandera v0.36.0](https://github.com/unionai-oss/pandera/releases/tag/v0.36.0)**
+**[astral-sh/ruff 0.17.5](https://github.com/astral-sh/ruff/releases/tag/0.17.5)**
 
 ### Summary
-Pandera v0.36.0 introduces the new `pandera.decisions` API alongside `ParsedField` and `ParsedColumn` constructs, allowing schemas to dynamically derive fields using decision models. This release also patches a critical remote code execution (RCE) vulnerability in tensordict deserialization and brings several ecosystem-wide bug fixes.
+Ruff 0.17.5 delivers a substantial batch of internal performance optimizations alongside stability improvements for syntax-aware autofixes. It also introduces new preview checks—including `PLE0211` and `ASYNC401`—and enhances tooling around renamed rule redirects.
 
 ### Highlights
-* **Derived Columns & `pandera.decisions` API**: Introduced `ParsedField` and `ParsedColumn` to automatically derive and validate fields from source columns using decision models (e.g., LLMs or open-weight models for tasks like classification and scoring).
-* **Security Fix (RCE Prevention)**: Resolved a critical Remote Code Execution vulnerability when loading `tensordict` structures ([GHSA-vpwq-239f-3cf7](https://github.com/unionai-oss/pandera/pull/2627)).
-* **Native Enum & Literal Categoricals**: Added automatic mapping of Python `Enum` and `Literal` types to dataframe categorical dtypes, complete with comparable and hashable Polars enum support.
+- **Broad Performance Improvements**: Bundles nearly twenty optimization PRs targeting core analysis and linting routines to keep Ruff blazing fast.
+- **Rule Management & Redirects**: Introduces `RUF202` (`renamed-rule`), rule redirection support, and expanded suppression comment checking via `RUF101` (preview).
+- **Autofix & CLI Stability**: Prevents crashes when writing to closed `stderr` pipes and fixes edge cases in autofixes involving parenthesized arguments (`B010`, `PYI034`, `UP031`) and variable shadowing (`ICN001`).
 
 ### Breaking Changes
-No breaking changes were introduced in this release.
+None. All rule additions and safety adjustments (such as marking `G004` fixes as unsafe) are confined to preview mode.
+---
+**[astral-sh/uv 0.13.8](https://github.com/astral-sh/uv/releases/tag/0.13.8)**
+
+### Summary
+uv 0.13.8 expands hardware-aware dependency management with deeper architecture and TPU detection for preview wheel variants, alongside support for CPython 3.16.0a2. It also introduces concurrency optimizations for CLI invocations and patches several resolver and credential permission issues.
+
+### Highlights
+- **Hardware-Aware Wheel Variants**: Preview wheel variant selection now detects x86-64 microarchitecture levels, AArch64 architecture versions, and Google TPUs, with new support for installing variants from local paths, direct URLs, and Git repos.
+- **Concurrent Environment Deduplication**: Optimized performance by preventing duplicate virtual environment builds when parallel `uvx` or `uv run --with` processes request matching environments.
+- **Resolver & Security Fixes**: Hardened Unix credential file permissions to owner-only by default and corrected edge cases around scoped overrides with recursive extras and negative extra markers.
+
+### Breaking Changes
+None.
