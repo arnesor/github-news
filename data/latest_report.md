@@ -1,14 +1,14 @@
-# GitHub New Releases Report 2026-11-20
+# GitHub New Releases Report 2026-11-21
 
-**[astral-sh/ruff 0.17.6](https://github.com/astral-sh/ruff/releases/tag/0.17.6)**
+**[duckdb/duckdb v2.0.1](https://github.com/duckdb/duckdb/releases/tag/v2.0.1)**
 
 ### Summary
-Ruff 0.17.6 is a patch release focusing on linting correctness, safer autofixes, and output performance. It resolves key false positives and syntax issues across several rules while speeding up notebook parsing and JSON diagnostic streaming.
+DuckDB v2.0.1 is a patch release addressing several bugs, stability issues, and ecosystem integration rough edges identified following the major v2.0.0 milestone. It delivers vital correctness fixes across the query planner and Parquet reader while stabilizing core extensions across WebAssembly and Windows environments.
 
 ### Highlights
-- **Safer Autofixes:** Addressed a critical bug where the autofix for `useless-finally` (`RUF072`) introduced syntax errors on inline `try` bodies, and eliminated redundant `bool` wrappers in `SIM208` fixes.
-- **Improved Rule Accuracy:** Fixed false positives in `PLR1733` and `PLR1736` when mutating collections within loops, corrected a false negative in `F823` for reassigned names, and stopped flagging `__traceback_hide__` as an unused variable (`F841`).
-- **Performance Enhancements:** Optimized execution times by short-circuiting exact qualified-name lookups, streaming JSON diagnostics directly to the output writer, and decoding in-memory Jupyter notebooks directly from source strings.
+* **Query Engine & Optimizer Corrections**: Fixes row-mapping preservation in runtime filters, improves candidate retention in greedy join ordering, and corrects evaluation semantics for `ANY` and `ALL` operations against `ARRAY(SELECT ...)` subqueries.
+* **Parquet & Type Casting Enhancements**: Adds the `parquet_can_have_nan` configuration option, preserves min/max column statistics for NULL-only row groups in Parquet files, and introduces casts from `TIMESTAMPTZ_NS` to `TIMESTAMP`.
+* **Extension & Cloud Storage Improvements**: Bumps and stabilizes key extensions (AWS, Iceberg, Glue, Azure, and DuckLake), expands Glue autoloading and Wasm support, and hardens safe mode by redacting secret `refresh_info`.
 
 ### Breaking Changes
-None. This is a non-breaking patch release.
+None. This is a backwards-compatible patch release dedicated to bug fixes, extension updates, and platform stability.
