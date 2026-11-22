@@ -1,14 +1,14 @@
-# GitHub New Releases Report 2026-11-21
+# GitHub New Releases Report 2026-11-22
 
-**[duckdb/duckdb v2.0.1](https://github.com/duckdb/duckdb/releases/tag/v2.0.1)**
+**[python-poetry/poetry 2.5.2](https://github.com/python-poetry/poetry/releases/tag/2.5.2)**
 
 ### Summary
-DuckDB v2.0.1 is a patch release addressing several bugs, stability issues, and ecosystem integration rough edges identified following the major v2.0.0 milestone. It delivers vital correctness fixes across the query planner and Parquet reader while stabilizing core extensions across WebAssembly and Windows environments.
+Poetry 2.5.2 is a maintenance release addressing key installation and dependency-handling edge cases alongside improved error reporting. Most notably, it resolves hash validation and build order issues during `poetry install` while improving path dependency cleanups.
 
 ### Highlights
-* **Query Engine & Optimizer Corrections**: Fixes row-mapping preservation in runtime filters, improves candidate retention in greedy join ordering, and corrects evaluation semantics for `ANY` and `ALL` operations against `ARRAY(SELECT ...)` subqueries.
-* **Parquet & Type Casting Enhancements**: Adds the `parquet_can_have_nan` configuration option, preserves min/max column statistics for NULL-only row groups in Parquet files, and introduces casts from `TIMESTAMPTZ_NS` to `TIMESTAMP`.
-* **Extension & Cloud Storage Improvements**: Bumps and stabilizes key extensions (AWS, Iceberg, Glue, Azure, and DuckLake), expands Glue autoloading and Wasm support, and hardens safe mode by redacting secret `refresh_info`.
+- **Sdist Hash Verification Fix**: Resolved an integrity issue where `poetry install` built a source distribution (`sdist`) before validating it against the locked hash ([#11253](https://github.com/python-poetry/poetry/pull/11253)).
+- **Distribution Hash Matching**: Fixed an issue where `poetry install` rejected valid distributions even when index-provided hashes matched the locked file ([#11131](https://github.com/python-poetry/poetry/pull/11131)).
+- **Resilient Path Dependency Removal**: Fixed uninstall failures for path dependencies whose local source directory had already been deleted ([#11093](https://github.com/python-poetry/poetry/pull/11093)).
 
 ### Breaking Changes
-None. This is a backwards-compatible patch release dedicated to bug fixes, extension updates, and platform stability.
+None. This is a non-breaking patch release.
